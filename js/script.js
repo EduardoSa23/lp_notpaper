@@ -235,10 +235,9 @@ $(document).ready(function() {
         
         setTimeout(function() {
             $ripple.remove();
-        }, 600);
+        }, 300);
     });
 
-    // Console log for debugging
-    console.log('Silo Prime Landing Page - JavaScript loaded successfully!');
+    
 });
 

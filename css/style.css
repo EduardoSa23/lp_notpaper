@@ -661,6 +661,20 @@ input:focus, textarea:focus {
     animation: loading 1.5s infinite;
 }
 
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+.carousel-diferenca {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+.card-diferanca {
+  width: 450px;
+  margin-right: 2rem;
+  flex-shrink: 0;
+}
+
 @keyframes loading {
     0% {
         left: -100%;
