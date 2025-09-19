@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel inPrint Prime</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+    .card {
+      min-width: 300px;
+      max-width: 300px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="w-[1000px]">
+    <h2 class="text-2xl font-bold mb-6 text-center">O que torna a inPrint Prime diferente?</h2>
+
+    <!-- Botões -->
+    <div class="flex justify-end gap-4 mb-4">
+      <button id="prev" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">⬅</button>
+      <button id="next" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">➡</button>
+    </div>
+
+    <!-- Carrossel -->
+    <div class="carousel-container">
+      <div class="carousel-track">
+
+        <!-- CARD 1 -->
+        <div class="card bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
+          <h3 class="font-bold text-lg mb-2">Adeus ao Papel, Olá à Eficiência</h3>
+          <p class="text-sm text-gray-600">A inPrint Prime revoluciona a gestão pública, eliminando o uso do papel...</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
+          <h3 class="font-bold text-lg mb-2">Agilidade que Transforma o Serviço</h3>
+          <p class="text-sm text-gray-600">Reduza drasticamente o tempo de tramitação dos documentos...</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
+          <h3 class="font-bold text-lg mb-2">Implantação Simples</h3>
+          <p class="text-sm text-gray-600">Nossa equipe garante uma implantação rápida e sem complicações...</p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
+          <h3 class="font-bold text-lg mb-2">Segurança e Conformidade Garantidas</h3>
+          <p class="text-sm text-gray-600">Com a inPrint Prime, a segurança dos seus dados é prioridade...</p>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="card bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
+          <h3 class="font-bold text-lg mb-2">Economia e Sustentabilidade de Mãos Dadas</h3>
+          <p class="text-sm text-gray-600">A inPrint Prime elimina o uso do papel nos processos...</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      const track = $(".carousel-track");
+      const cards = $(".card");
+      const cardWidth = $(".card").outerWidth(true);
+      let index = 0;
+
+      function moveCarousel(){
+        track.css("transform", `translateX(${-index * cardWidth}px)`);
+      }
+
+      $("#next").click(function(){
+        if(index < cards.length - 2){ // deixa 2+1 visível
+          index++;
+        } else {
+          index = 0; // volta ao início
+        }
+        moveCarousel();
+      });
+
+      $("#prev").click(function(){
+        if(index > 0){
+          index--;
+        } else {
+          index = cards.length - 2;
+        }
+        moveCarousel();
+      });
+
+      // Auto play
+      setInterval(function(){
+        $("#next").click();
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>

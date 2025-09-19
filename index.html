@@ -6,22 +6,25 @@
     <title>Silo Prime - Soluções Inteligentes</title>
     <link href="./css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body class="font-inter bg-white">
     <!-- Header -->
-    <header class="bg-white shadow-sm fixed w-full top-0 z-50">
+    <header class="bg-white fixed w-full top-0 z-50">
         <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center">
-                <div class="bg-orange-500 text-white px-3 py-1 rounded font-bold text-lg">
-                    Silo Prime
+                <div>
+                    <img src="./image/Logo_notpaper.png" alt="" class="h-10 w-auto">
                 </div>
             </div>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="text-gray-700 hover:text-orange-500 transition-colors">Home</a>
-                <a href="#services" class="text-gray-700 hover:text-orange-500 transition-colors">Serviços</a>
-                <a href="#about" class="text-gray-700 hover:text-orange-500 transition-colors">Sobre</a>
-                <a href="#contact" class="text-gray-700 hover:text-orange-500 transition-colors">Contato</a>
+                <a href="#home" class="text-gray-700 hover:text-[#0043FE] transition-colors">Home</a>
+                <a href="#services" class="text-gray-700 hover:text-[#0043FE] transition-colors">Serviços</a>
+                <a href="#about" class="text-gray-700 hover:text-[#0043FE] transition-colors">Sobre</a>
+                <a href="#contact" class="text-gray-700 hover:text-[#0043FE] transition-colors">Contato</a>
             </div>
             <button class="md:hidden">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,29 +35,31 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-20 pb-16 bg-gradient-to-br from-blue-50 to-orange-50">
+    <section id="home" class="pt-20 pb-16 bg-gradient-to-br from-blue-50 to-[#d3dbf1]">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                        Transforme seu
-                        <span class="text-orange-500">negócio</span>
-                        com soluções inteligentes
+                        Gestão pública
+                        <span class="text-[#0043FE]">Inteligente.</span>
                     </h1>
                     <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                        Oferecemos consultoria especializada e tecnologias inovadoras para impulsionar o crescimento da sua empresa no mercado digital.
-                    </p>
+                        Oferecemos tecnologia inovadora. Automatizamos e agilizamos os seus processos com sustentabilidade e eficiência                    </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
-                            Começar Agora
-                        </button>
-                        <button class="border-2 border-gray-300 hover:border-orange-500 text-gray-700 hover:text-orange-500 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
-                            Saiba Mais
-                        </button>
+                        <a href="https://api.whatsapp.com/send?phone=551146040026&text=Olá">
+                            <button class="bg-[#0043FE] hover:bg-[#0135c5] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+                                Começar Agora
+                            </button>
+                        </a>
+                         <a href="#contact">
+                            <button class="border-2 border-gray-300 hover:border-[#0043FE] text-gray-700 hover:text-[#0043FE] px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+                            Saiba mais
+                            </button>
+                        </a>
                     </div>
                 </div>
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                <div class="relative mt-12">
+                    <img src="image/Banner_Landing_Page.png" 
                          alt="Profissional trabalhando" 
                          class="rounded-2xl shadow-2xl">
                     <div class="absolute -top-4 -right-4 bg-yellow-400 text-black px-4 py-2 rounded-full font-bold">
@@ -66,29 +71,33 @@
                 </div>
             </div>
         </div>
+        <div>
+            <a href="https://api.whatsapp.com/send?phone=551146040026&text=Olá">
+            <img src="image/whatsapp.png" alt="Imagem whatsapp" class="w-16 h-auto fixed bottom-8 right-8 cursor-pointer">   
+            </a>        
+        </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Nossos Serviços</h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Recursos poderosos</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Oferecemos soluções completas para transformar sua empresa
+                    Descubra como nosso sistema pode mudar a forma como você trabalha
                 </p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                        </svg>
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Not paper</h3>
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-users text-3xl w-10 h-10 text-blue-600 flex items-center justify-center"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Consultoria Digital</h3>
                     <p class="text-gray-600 mb-6">
-                        Estratégias personalizadas para acelerar sua transformação digital e otimizar processos.
-                    </p>
+                        Conceito é facilitar a comunicação internas entre os setores, permitindo anexar diversos documentos, certificando o cumprimento de prazos para controle das tarefas.                    </p>
                     <ul class="space-y-2 text-gray-600">
                         <li class="flex items-center">
                             <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
@@ -106,40 +115,40 @@
                 </div>
 
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-                    <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Memorando</h3>
+                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-file-alt text-3xl w-10 h-10 text-orange-600 flex items-center justify-center"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Automação</h3>
                     <p class="text-gray-600 mb-6">
-                        Automatize tarefas repetitivas e aumente a produtividade da sua equipe.
+                        Permite a troca de informações entre setores através da comunicação pública ou privada entre o remetente e o destinatário, movimentando documentos e atualizações, indexando arquivos e considerações, além de prazos e controle.
                     </p>
                     <ul class="space-y-2 text-gray-600">
                         <li class="flex items-center">
-                            <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
                             Fluxos de trabalho
                         </li>
                         <li class="flex items-center">
-                            <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
                             Integração de sistemas
                         </li>
                         <li class="flex items-center">
-                            <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
                             Relatórios automáticos
                         </li>
                     </ul>
                 </div>
 
                 <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 w-full md:w-[70%]">Fluxo ou processo administrativo</h3>
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-calendar-check text-3xl w-10 h-10 text-gray-600 flex items-center justify-center"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Analytics</h3>
                     <p class="text-gray-600 mb-6">
-                        Tome decisões baseadas em dados com nossas soluções de análise avançada.
+                        Conceito é facilitar a comunicação internas entre os setores, permitindo anexar diversos documentos, certificando o cumprimento de prazos para controle das tarefas.
                     </p>
                     <ul class="space-y-2 text-gray-600">
                         <li class="flex items-center">
@@ -165,7 +174,7 @@
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <div class="text-4xl font-bold text-orange-500 mb-2">500+</div>
+                    <div class="text-4xl font-bold text-[#0043FE] mb-2">500+</div>
                     <div class="text-gray-300">Projetos Concluídos</div>
                 </div>
                 <div>
@@ -219,7 +228,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-blue-50 to-orange-50">
+    <section id="contact" class="py-20 bg-gradient-to-br from-blue-50 to-[#0043FE]">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">Entre em Contato</h2>
@@ -275,17 +284,17 @@
                     <form class="space-y-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
-                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"></textarea>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                        <button type="submit" class="w-full bg-[#0043FE] hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
                             Enviar Mensagem
                         </button>
                     </form>
@@ -299,7 +308,7 @@
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <div class="bg-orange-500 text-white px-3 py-1 rounded font-bold text-lg mb-4 inline-block">
+                    <div class="bg-[#0043FE] text-white px-3 py-1 rounded font-bold text-lg mb-4 inline-block">
                         Silo Prime
                     </div>
                     <p class="text-gray-400 mb-4">
