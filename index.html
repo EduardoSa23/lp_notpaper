@@ -75,62 +75,30 @@
         </div>
         <div>
             <a href="https://api.whatsapp.com/send?phone=551146040026&text=Olá">
-            <img src="image/whatsapp.png" alt="Imagem whatsapp" class="w-16 h-auto fixed bottom-8 right-8 cursor-pointer">   
+            <img src="image/whatsapp.png" alt="Imagem whatsapp" class="w-16 h-auto fixed bottom-8 right-8 cursor-pointer z-50">   
             </a>        
         </div>
     </section>
 
     <section id="diferenca" class="pt-20 pb-16 bg--white from-blue-50">
         <div class="">
-            <h2 class="text-2xl font-bold mb-6 text-center">O que torna a inPrint Prime diferente?</h2>
-
-            <!-- Botões -->
-            <div class="flex justify-end gap-4 mb-4">
-            <button id="prev" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">⬅</button>
-            <button id="next" class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">➡</button>
+            <div class="mx-auto grid max-w-6xl relative px-4">
+                <div class="flex justify-between items-center gap-12">
+                    <h2 class="text-4xl font-bold mb-6 text-center">O que torna a <strong class="text-[#0043FE]">inPrint Prime</strong> diferente?</h2>
+                    <div class="flex justify-end gap-2 mb-4">
+                        <button id="prev" class="p-2 bg-gray-200 text-2xl shadow-md rounded-full hover:bg-gray-300">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button id="next" class="p-2 bg-[#0043FE] text-2xl shadow-md rounded-full hover:bg-[#0135C5]">
+                            <i class="fa-solid fa-chevron-right text-white"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-
+            
             <!-- Carrossel -->
             <div class="carousel-container">
-                <div class="carousel-diferenca pl-8 md:pl-[200px]">
-
-                    <!-- CARD 1 -->
-                    <div class="card-diferanca bg-white rounded-[30px] shadow">
-                        <img src="./image/digitalizacao_documentos.png" class="mb-4">
-                        <h3 class="font-bold text-lg text-center">Adeus ao Papel, Olá à Eficiência</h3>
-                        <h4 class="text-center font-semibold my-4">Digitalização</h4>
-                        <p class="text-sm text-gray-600">A inPrint Prime revoluciona a gestão pública, eliminando o uso de papel em todos os processos da sua prefeitura. Do protocolo à assinatura, tudo é digital, organizado e acessível, otimizando o fluxo de trabalho e reduzindo a burocracia.</p>
-                    </div>
-
-                    <!-- CARD 2 -->
-                    <div class="card-diferanca bg-white rounded-2xl shadow p-4">
-                    <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Agilidade que Transforma o Serviço</h3>
-                    <p class="text-sm text-gray-600">Reduza drasticamente o tempo de tramitação dos documentos...</p>
-                    </div>
-
-                    <!-- CARD 3 -->
-                    <div class="card-diferanca bg-white rounded-2xl shadow p-4">
-                    <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Implantação Simples</h3>
-                    <p class="text-sm text-gray-600">Nossa equipe garante uma implantação rápida e sem complicações...</p>
-                    </div>
-
-                    <!-- CARD 4 -->
-                    <div class="card-diferanca bg-white rounded-2xl shadow p-4">
-                    <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Segurança e Conformidade Garantidas</h3>
-                    <p class="text-sm text-gray-600">Com a inPrint Prime, a segurança dos seus dados é prioridade...</p>
-                    </div>
-
-                    <!-- CARD 5 -->
-                    <div class="card-diferanca bg-white rounded-2xl shadow p-4">
-                    <img src="https://via.placeholder.com/300x150" class="rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Economia e Sustentabilidade de Mãos Dadas</h3>
-                    <p class="text-sm text-gray-600">A inPrint Prime elimina o uso do papel nos processos...</p>
-                    </div>
-
-                </div>
+                <div class="carousel-diferenca pl-8 my-8 ml-[20px] lg:ml-[200px]"></div>
             </div>
         </div>
     </section>
@@ -432,7 +400,7 @@
     </footer>
 
     <script src="./js/script.js"></script>
-    <script src="./js/carrousel.js"></script>
+    <script src="./js/diferenca.js"></script>
 </body>
 </html>
 
