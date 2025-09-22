@@ -10,16 +10,25 @@ $(document).ready(function() {
         }
     });
 
-    // Mobile menu toggle
-    $('.mobile-menu-toggle').on('click', function() {
-        $('.mobile-menu').toggleClass('active');
-        $(this).toggleClass('active');
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    // abre/fecha ao clicar no botão
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("hidden");
     });
 
-    // Close mobile menu when clicking on a link
-    $('.mobile-menu a').on('click', function() {
-        $('.mobile-menu').removeClass('active');
-        $('.mobile-menu-toggle').removeClass('active');
+    menu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        });
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!menu.classList.contains("hidden") && !menu.contains(e.target) && e.target !== btn) {
+        menu.classList.add("hidden");
+        }
     });
 
     // Header background on scroll
@@ -238,6 +247,24 @@ $(document).ready(function() {
         }, 300);
     });
 
-    
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll("#services .card");
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("opacity-0");
+            entry.target.classList.add("animate-fade-in-up"); // ou "animate-zoom-in"
+            observer.unobserve(entry.target); // anima apenas uma vez
+          }
+        });
+      },
+      { threshold: 0.2 } // dispara quando 20% do card estiver visível
+    );
+
+    cards.forEach(card => observer.observe(card));
+  });
 
