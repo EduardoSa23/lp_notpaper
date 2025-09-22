@@ -26,7 +26,7 @@ $(document).ready(function () {
         { img: "./image/clientes/Ouro_Preto.png", alt: "Prefeitura de Outo preto" },
         { img: "./image/clientes/Pedrinopolis.png", alt: "Prefeitura de Pedrinópolis" },
         { img: "./image/clientes/Piumhi.png", alt: "Prefeitura de Piumhi" },
-        { img: "./image/clientes/Sabara.png", alt: "Prefeitura de Sabará" },
+        { img: "./image/clientes/sabara.png", alt: "Prefeitura de Sabará" },
         { img: "./image/clientes/Sao_Gotardo.png", alt: "Prefeitura de São Gotardo" },
       ]
 

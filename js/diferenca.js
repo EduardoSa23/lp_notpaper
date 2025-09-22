@@ -41,7 +41,7 @@ $(document).ready(function () {
   const container = $(".carousel-diferenca");
   cardsDiferenca.forEach((card) => {
     container.append(`
-        <div class="card-diferanca bg-white rounded-[30px] shadow border border-gray-200 max-w-5xl">
+        <div class="card-diferanca bg-white rounded-[30px] shadow border border-gray-200 max-w-[100%] md:max-w-5xl">
           <img src="${card.img}" class="mb-4 w-full">
           <h3 class="font-bold text-lg text-center">${card.titulo}</h3>
           <h4 class="text-center font-semibold my-4">${card.subtitulo}</h4>
@@ -56,7 +56,7 @@ $(document).ready(function () {
   let index = 0;
 
   function moveCarousel() {
-    track.css("transform", `translateX(${-index * cardWidth}px)`);
+    track.css("transform", `translateX(${-index * 300}px)`);
   }
 
   $("#next").click(function () {
@@ -81,5 +81,35 @@ $(document).ready(function () {
   // Auto play
   setInterval(function () {
     $("#next").click();
-  }, 115000);
+  }, 15000);
+
+  // --- Touch para mobile ---
+  let startX = 0;
+  let isDragging = false;
+
+  track.on("touchstart", function (e) {
+    startX = e.originalEvent.touches[0].clientX;
+    isDragging = true;
+  });
+
+  track.on("touchmove", function (e) {
+    if (!isDragging) return;
+    let currentX = e.originalEvent.touches[0].clientX;
+    let diff = startX - currentX;
+
+    // deslizou para a esquerda
+    if (diff > 50) {
+      $("#next").click();
+      isDragging = false;
+    }
+    // deslizou para a direita
+    else if (diff < -50) {
+      $("#prev").click();
+      isDragging = false;
+    }
+  });
+
+  track.on("touchend", function () {
+    isDragging = false;
+  });
 });
