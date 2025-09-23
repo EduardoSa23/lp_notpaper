@@ -268,3 +268,36 @@ document.addEventListener("DOMContentLoaded", () => {
     cards.forEach(card => observer.observe(card));
   });
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll("#stats [data-target]");
+    const speed = 100; // quanto maior, mais devagar
+
+    const animateCount = (el) => {
+        const target = +el.getAttribute("data-target");
+        let count = 0;
+
+        const update = () => {
+            const increment = target / speed;
+            count += increment;
+            if (count < target) {
+                el.textContent = Math.floor(count) + (el.textContent.includes('+') ? '+' : el.textContent.includes('%') ? '%' : '');
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = target + (el.textContent.includes('+') ? '+' : el.textContent.includes('%') ? '%' : '');
+            }
+        };
+        update();
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCount(entry.target);
+                observer.unobserve(entry.target); // anima apenas uma vez
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+});
+
