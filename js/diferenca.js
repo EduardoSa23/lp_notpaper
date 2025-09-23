@@ -54,18 +54,20 @@ $(document).ready(function () {
   const cards = $(".card-diferanca");
   let index = 0;
 
-  // --- Movimento centralizado ---
-  function moveCarousel() {
-    const cardWidth = $(".card-diferanca").outerWidth(true);
-    track.css("transform", `translateX(${-index * cardWidth}px)`);
+  function isDesktop() {
+    return $(window).width() > 768;
   }
 
   function moveCarouselDesktop() {
-    track.css("transform", `translateX(${-index * 350}px)`);
+    if (isDesktop()) {
+      track.css("transform", `translateX(${-index * 350}px)`);
+    } else {
+      track.css("transform", "none");
+    }
   }
 
-  // --- Navegação desktop (mantém como estava) ---
   $("#next").click(function () {
+    if (!isDesktop()) return;
     if (index < cards.length - 2) {
       index++;
     } else {
@@ -76,6 +78,7 @@ $(document).ready(function () {
   });
 
   $("#prev").click(function () {
+    if (!isDesktop()) return;
     if (index > 0) {
       index--;
     } else {
@@ -85,10 +88,15 @@ $(document).ready(function () {
     moveCarouselDesktop();
   });
 
-  // Auto play apenas no desktop
-  if ($(window).width() > 768) {
+  if (isDesktop()) {
     setInterval(function () {
       $("#next").click();
     }, 15000);
   }
+
+  $(window).resize(function () {
+    moveCarouselDesktop();
+  });
+
+  moveCarouselDesktop();
 });
