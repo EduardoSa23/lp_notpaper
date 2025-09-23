@@ -113,7 +113,7 @@ $(document).ready(function() {
         
         // Simulate form submission (replace with actual form handling)
         setTimeout(function() {
-            $submitBtn.text('Mensagem Enviada!').removeClass('bg-orange-500').addClass('bg-green-500');
+            $submitBtn.text('Mensagem Enviada!').removeClass('bg-[#0043FE]').addClass('bg-green-500');
             
             // Reset form
             $form[0].reset();
