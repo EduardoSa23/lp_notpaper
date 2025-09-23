@@ -79,37 +79,44 @@ $(document).ready(function () {
   });
 
   // Auto play
+ if ($(window).width() > 768) {
   setInterval(function () {
     $("#next").click();
   }, 15000);
+}
 
-  // --- Touch para mobile ---
+  // --- Swipe no mobile ---
   let startX = 0;
+  let currentX = 0;
   let isDragging = false;
 
   track.on("touchstart", function (e) {
     startX = e.originalEvent.touches[0].clientX;
     isDragging = true;
+    track.css("transition", "none"); // tira animação enquanto arrasta
   });
 
   track.on("touchmove", function (e) {
     if (!isDragging) return;
-    let currentX = e.originalEvent.touches[0].clientX;
-    let diff = startX - currentX;
+    currentX = e.originalEvent.touches[0].clientX;
+    let diff = currentX - startX;
 
-    // deslizou para a esquerda
-    if (diff > 50) {
-      $("#next").click();
-      isDragging = false;
-    }
-    // deslizou para a direita
-    else if (diff < -50) {
-      $("#prev").click();
-      isDragging = false;
-    }
+    // arrasta junto com o dedo
+    track.css("transform", `translateX(${ -index * cardWidth + diff }px)`);
   });
 
   track.on("touchend", function () {
     isDragging = false;
+    track.css("transition", "transform 0.6s ease"); // volta transição suave
+
+    let diff = currentX - startX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0 && index < cards.length - 1) {
+        index++; // swipe left
+      } else if (diff > 0 && index > 0) {
+        index--; // swipe right
+      }
+    }
+    moveCarousel();
   });
 });
