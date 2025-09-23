@@ -120,7 +120,7 @@ $(document).ready(function() {
             
             // Reset button after 3 seconds
             setTimeout(function() {
-                $submitBtn.text(originalText).prop('disabled', false).removeClass('bg-green-500').addClass('bg-orange-500');
+                $submitBtn.text(originalText).prop('disabled', false).removeClass('bg-green-500').addClass('bg-[#0043FE]');
             }, 3000);
         }, 2000);
     });
