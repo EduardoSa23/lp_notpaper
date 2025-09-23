@@ -41,32 +41,38 @@ $(document).ready(function () {
   const container = $(".carousel-diferenca");
   cardsDiferenca.forEach((card) => {
     container.append(`
-        <div class="card-diferanca bg-white rounded-[30px] shadow border border-gray-200 max-w-[100%] md:max-w-5xl">
-          <img src="${card.img}" class="mb-4 w-full">
-          <h3 class="font-bold text-lg text-center">${card.titulo}</h3>
-          <h4 class="text-center font-semibold my-4">${card.subtitulo}</h4>
-          <p class="text-sm text-gray-600 p-6">${card.descricao}</p>
-        </div>
-      `);
+      <div class="card-diferanca bg-white rounded-[30px] shadow border border-gray-200 max-w-[100%] md:max-w-5xl">
+        <img src="${card.img}" class="mb-4 w-full">
+        <h3 class="font-bold text-lg text-center">${card.titulo}</h3>
+        <h4 class="text-center font-semibold my-4">${card.subtitulo}</h4>
+        <p class="text-sm text-gray-600 p-6">${card.descricao}</p>
+      </div>
+    `);
   });
 
   const track = $(".carousel-diferenca");
   const cards = $(".card-diferanca");
-  const cardWidth = $(".card-diferanca").outerWidth(true);
   let index = 0;
 
+  // --- Movimento centralizado ---
   function moveCarousel() {
-    track.css("transform", `translateX(${-index * 300}px)`);
+    const cardWidth = $(".card-diferanca").outerWidth(true);
+    track.css("transform", `translateX(${-index * cardWidth}px)`);
   }
 
+  function moveCarouselDesktop() {
+    track.css("transform", `translateX(${-index * 350}px)`);
+  }
+
+  // --- Navegação desktop (mantém como estava) ---
   $("#next").click(function () {
     if (index < cards.length - 2) {
-      // deixa 2+1 visível
       index++;
     } else {
-      index = 0; // volta ao início
+      index = 0;
     }
-    moveCarousel();
+    track.css("transition", "transform 0.6s ease");
+    moveCarouselDesktop();
   });
 
   $("#prev").click(function () {
@@ -75,41 +81,54 @@ $(document).ready(function () {
     } else {
       index = cards.length - 2;
     }
-    moveCarousel();
+    track.css("transition", "transform 0.6s ease");
+    moveCarouselDesktop();
   });
 
-  // Auto play
-  setInterval(function () {
-    $("#next").click();
-  }, 15000);
-
-  // --- Touch para mobile ---
-  let startX = 0;
-  let isDragging = false;
-
-  track.on("touchstart", function (e) {
-    startX = e.originalEvent.touches[0].clientX;
-    isDragging = true;
-  });
-
-  track.on("touchmove", function (e) {
-    if (!isDragging) return;
-    let currentX = e.originalEvent.touches[0].clientX;
-    let diff = startX - currentX;
-
-    // deslizou para a esquerda
-    if (diff > 50) {
+  // Auto play apenas no desktop
+  if ($(window).width() > 768) {
+    setInterval(function () {
       $("#next").click();
-      isDragging = false;
-    }
-    // deslizou para a direita
-    else if (diff < -50) {
-      $("#prev").click();
-      isDragging = false;
-    }
-  });
+    }, 15000);
+  }
 
-  track.on("touchend", function () {
-    isDragging = false;
-  });
+  // --- Swipe no mobile ---
+  if ($(window).width() <= 768) {
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    track.on("touchstart", function (e) {
+      startX = e.originalEvent.touches[0].clientX;
+      isDragging = true;
+      track.css("transition", "none");
+    });
+
+    track.on("touchmove", function (e) {
+      if (!isDragging) return;
+      currentX = e.originalEvent.touches[0].clientX;
+      let diff = currentX - startX;
+
+      const cardWidth = $(".card-diferanca").outerWidth(true);
+      track.css("transform", `translateX(${-index * cardWidth + diff}px)`);
+    });
+
+    track.on("touchend", function () {
+      isDragging = false;
+      track.css("transition", "transform 0.5s ease");
+
+      let diff = currentX - startX;
+      const cardWidth = $(".card-diferanca").outerWidth(true);
+
+      // só troca de card se arrastar mais de 1/4 do tamanho
+      if (Math.abs(diff) > cardWidth / 4) {
+        if (diff < 0 && index < cards.length - 1) {
+          index++;
+        } else if (diff > 0 && index > 0) {
+          index--;
+        }
+      }
+      moveCarousel();
+    });
+  }
 });
