@@ -92,55 +92,59 @@ $(document).ready(function () {
     }, 15000);
   }
 
-  // --- Swipe no mobile ---
+  // ...existing code...
   // ...existing code...
   if ($(window).width() <= 768) {
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let isDragging = false;
 
-    track.on("touchstart", function (e) {
-      startX = e.originalEvent.touches[0].clientX;
-      currentX = startX;
-      isDragging = true;
-      track.css("transition", "none");
-    });
+      track.on("touchstart", function (e) {
+          startX = e.originalEvent.touches[0].clientX;
+          startY = e.originalEvent.touches[0].clientY;
+          currentX = startX;
+          currentY = startY;
+          isDragging = true;
+          track.css("transition", "none");
+      });
 
-    track.on("touchmove", function (e) {
-      if (!isDragging) return;
-      currentX = e.originalEvent.touches[0].clientX;
-      let diff = currentX - startX;
+      track.on("touchmove", function (e) {
+          if (!isDragging) return;
+          currentX = e.originalEvent.touches[0].clientX;
+          currentY = e.originalEvent.touches[0].clientY;
+          let diffX = currentX - startX;
+          let diffY = currentY - startY;
 
-      // Só previne o scroll se o movimento for mais horizontal que vertical
-      let deltaY = Math.abs(
-        e.originalEvent.touches[0].clientY -
-          (e.originalEvent.touches[0].clientY || 0)
-      );
-      if (Math.abs(diff) > deltaY) {
-        e.preventDefault();
-      }
+          // Só previne o scroll se o movimento for mais horizontal que vertical
+          if (Math.abs(diffX) > Math.abs(diffY)) {
+              e.preventDefault();
+              const cardWidth = $(".card-diferanca").outerWidth(true);
+              track.css("transform", `translateX(${-index * cardWidth + diffX}px)`);
+          }
+          // Se for mais vertical, não faz nada (deixa o scroll da página acontecer)
+      });
 
-      const cardWidth = $(".card-diferanca").outerWidth(true);
-      track.css("transform", `translateX(${-index * cardWidth + diff}px)`);
-    });
+      track.on("touchend", function () {
+          isDragging = false;
+          track.css("transition", "transform 0.5s ease");
 
-    track.on("touchend", function () {
-      isDragging = false;
-      track.css("transition", "transform 0.5s ease");
+          let diffX = currentX - startX;
+          let diffY = currentY - startY;
+          const cardWidth = $(".card-diferanca").outerWidth(true);
 
-      let diff = currentX - startX;
-      const cardWidth = $(".card-diferanca").outerWidth(true);
-
-      // só troca de card se arrastar mais de 1/4 do tamanho
-      if (Math.abs(diff) > cardWidth / 4) {
-        if (diff < 0 && index < cards.length - 1) {
-          index++;
-        } else if (diff > 0 && index > 0) {
-          index--;
-        }
-      }
-      moveCarousel();
-    });
+          // só troca de card se arrastar mais de 1/4 do tamanho e for swipe horizontal
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > cardWidth / 4) {
+              if (diffX < 0 && index < cards.length - 1) {
+                  index++;
+              } else if (diffX > 0 && index > 0) {
+                  index--;
+              }
+          }
+          moveCarousel();
+      });
   }
+// ...existing code...
   // ...existing code...
 });
