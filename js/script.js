@@ -100,30 +100,6 @@ $(document).ready(function() {
         }
     });
 
-    // Form submission
-    $('form').on('submit', function(e) {
-        e.preventDefault();
-        
-        var $form = $(this);
-        var $submitBtn = $form.find('button[type="submit"]');
-        var originalText = $submitBtn.text();
-        
-        // Show loading state
-        $submitBtn.text('Enviando...').prop('disabled', true);
-        
-        // Simulate form submission (replace with actual form handling)
-        setTimeout(function() {
-            $submitBtn.text('Mensagem Enviada!').removeClass('bg-[#0043FE]').addClass('bg-green-500');
-            
-            // Reset form
-            $form[0].reset();
-            
-            // Reset button after 3 seconds
-            setTimeout(function() {
-                $submitBtn.text(originalText).prop('disabled', false).removeClass('bg-green-500').addClass('bg-[#0043FE]');
-            }, 3000);
-        }, 2000);
-    });
 
     // Parallax effect for hero section
     $(window).scroll(function() {
@@ -247,6 +223,61 @@ $(document).ready(function() {
         }, 300);
     });
 
+});
+
+document.getElementById('meu-form').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    // Mostra o Swal de carregando
+    Swal.fire({
+        title: "Enviando...",
+        text: "Aguarde enquanto enviamos seus dados.",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch('https://formspree.io/f/mkgqnjlb', {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        Swal.close(); // Fecha o Swal de carregando
+        if(data.ok || data.success || data.status === 200){
+            Swal.fire({
+                title: "Dados enviados com sucesso!",
+                icon: "success",
+                draggable: true
+            });
+            form.reset(); // limpa o formulário
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Erro ao enviar o formulário",
+                footer: '<a href="#contato">Voltar ao formulário</a>'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.close(); // Fecha o Swal de carregando
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro ao enviar o formulário",
+            footer: '<a href="#contato">Voltar ao formulário</a>'
+        });
+        console.error(error);
+    });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
