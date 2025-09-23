@@ -93,6 +93,7 @@ $(document).ready(function () {
   }
 
   // --- Swipe no mobile ---
+  // ...existing code...
   if ($(window).width() <= 768) {
     let startX = 0;
     let currentX = 0;
@@ -100,6 +101,7 @@ $(document).ready(function () {
 
     track.on("touchstart", function (e) {
       startX = e.originalEvent.touches[0].clientX;
+      currentX = startX;
       isDragging = true;
       track.css("transition", "none");
     });
@@ -108,6 +110,15 @@ $(document).ready(function () {
       if (!isDragging) return;
       currentX = e.originalEvent.touches[0].clientX;
       let diff = currentX - startX;
+
+      // Só previne o scroll se o movimento for mais horizontal que vertical
+      let deltaY = Math.abs(
+        e.originalEvent.touches[0].clientY -
+          (e.originalEvent.touches[0].clientY || 0)
+      );
+      if (Math.abs(diff) > deltaY) {
+        e.preventDefault();
+      }
 
       const cardWidth = $(".card-diferanca").outerWidth(true);
       track.css("transform", `translateX(${-index * cardWidth + diff}px)`);
@@ -131,4 +142,5 @@ $(document).ready(function () {
       moveCarousel();
     });
   }
+  // ...existing code...
 });

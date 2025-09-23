@@ -145,6 +145,8 @@ textarea:focus {
 .carousel-diferenca {
   display: flex;
   transition: transform 0.6s ease;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
 }
 
 .card-diferanca {
