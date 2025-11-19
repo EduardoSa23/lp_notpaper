@@ -156,16 +156,31 @@ textarea:focus {
 }
 
 @media (max-width: 768px) {
+<<<<<<< Updated upstream
   .carousel-diferenca {
+=======
+  .carousel-diferenca-mobile {
+>>>>>>> Stashed changes
     display: block;
     transition: transform 0.6s ease;
   }
 
+<<<<<<< Updated upstream
   .card-diferanca {
+=======
+  .card-diferanca-mobile {
+>>>>>>> Stashed changes
     width: 450px;
     margin-bottom: 2rem;
     flex-shrink: 0;
   }
+<<<<<<< Updated upstream
+=======
+
+  .carousel-diferenca {
+    display: none;
+  }
+>>>>>>> Stashed changes
 }
 
 .logo-slider {

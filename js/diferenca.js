@@ -50,14 +50,29 @@ $(document).ready(function () {
     `);
   });
 
+  const containerMobile = $(".carousel-diferenca-mobile");
+  cardsDiferenca.forEach((card) => {
+    containerMobile.append(`
+      <div class="card-diferanca-mobile bg-white rounded-[30px] shadow border border-gray-200 max-w-[100%] md:max-w-5xl">
+        <img src="${card.img}" class="mb-4 w-full">
+        <h3 class="font-bold text-lg text-center">${card.titulo}</h3>
+        <h4 class="text-center font-semibold my-4">${card.subtitulo}</h4>
+        <p class="text-sm text-gray-600 p-6">${card.descricao}</p>
+      </div>
+    `);
+  });
+
   const track = $(".carousel-diferenca");
   const cards = $(".card-diferanca");
   let index = 0;
 
+<<<<<<< Updated upstream
   function isDesktop() {
     return $(window).width() > 768;
   }
 
+=======
+>>>>>>> Stashed changes
   function moveCarouselDesktop() {
     if (isDesktop()) {
       track.css("transform", `translateX(${-index * 350}px)`);
@@ -93,6 +108,7 @@ $(document).ready(function () {
       $("#next").click();
     }, 15000);
   }
+<<<<<<< Updated upstream
 
   $(window).resize(function () {
     moveCarouselDesktop();
@@ -100,3 +116,6 @@ $(document).ready(function () {
 
   moveCarouselDesktop();
 });
+=======
+});
+>>>>>>> Stashed changes
