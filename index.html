@@ -1,469 +1,497 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>notPaper - Soluções Inteligentes</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="./css/style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
-<body class="font-inter bg-white">
+  </head>
+  <body class="font-inter bg-white">
     <!-- Header -->
-    <header class="bg-white fixed w-full top-0 z-50 ">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center">
-            <img src="./image/Logo_notpaper.png" alt="Logo" class="h-10 w-auto">
-            </div>
-
-            <!-- Menu desktop -->
-            <div class="hidden md:flex items-center space-x-8">
-            <a href="#home" class="text-gray-700 hover:text-[#0043FE] transition-colors">Home</a>
-            <a href="#diferenca" class="text-gray-700 hover:text-[#0043FE] transition-colors">Diferença</a>
-            <a href="#services" class="text-gray-700 hover:text-[#0043FE] transition-colors">Serviços</a>
-            <a href="#sobre" class="text-gray-700 hover:text-[#0043FE] transition-colors">Sobre</a>
-            <a href="#contato" class="text-gray-700 hover:text-[#0043FE] transition-colors">Contato</a>
-            </div>
-
-            <button id="menu-btn" class="md:hidden focus:outline-none">
-            <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            </button>
-        </nav>
-
-        <div id="mobile-menu" class="hidden md:hidden flex-col bg-white shadow-lg px-6 py-4 space-y-1">
-            <a href="#home" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Home</a>
-            <a href="#diferenca" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Diferença</a>
-            <a href="#services" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Serviços</a>
-            <a href="#sobre" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Sobre</a>
-            <a href="#contato" class="block py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Contato</a>
+    <header class="bg-white fixed w-full top-0 z-50">
+      <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="./image/Logo_notpaper.png" alt="Logo" class="h-10 w-auto" />
         </div>
+
+        <!-- Menu desktop -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-gray-700 hover:text-[#0043FE] transition-colors">Home</a>
+          <a href="#diferenca" class="text-gray-700 hover:text-[#0043FE] transition-colors">Diferença</a>
+          <a href="#services" class="text-gray-700 hover:text-[#0043FE] transition-colors">Serviços</a>
+          <a href="#sobre" class="text-gray-700 hover:text-[#0043FE] transition-colors">Sobre</a>
+          <a href="#contato" class="text-gray-700 hover:text-[#0043FE] transition-colors">Contato</a>
+        </div>
+
+        <div class="hidden md:block">
+          <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá" target="_blank">
+            <button class="bg-[#0043FE] hover:bg-[#0135c5] text-white px-3 md:px-4 py-1 rounded-3xl font-semibold transition-colors">
+              Começar Agora
+            </button>
+          </a>
+        </div>
+
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+          <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </nav>
+
+      <div id="mobile-menu" class="hidden md:hidden flex-col bg-white shadow-lg px-6 py-4 space-y-1">
+        <a href="#home" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Home</a>
+        <a href="#diferenca" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Diferença</a>
+        <a href="#services" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Serviços</a>
+        <a href="#sobre" class="block border-b py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Sobre</a>
+        <a href="#contato" class="block py-2 text-gray-700 hover:text-[#0043FE] transition-colors">Contato</a>
+      </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="pt-20 pb-16 bg-gradient-to-br from-blue-50 to-[#d3dbf1]">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-            
-            <!-- Texto -->
-            <div class="opacity-0 translate-y-10 transition-all duration-1000 ease-out animate-fade-in-up">
-                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 md:text-left text-center mb-6">
-                Gestão pública
-                <span class="text-[#0043FE]">Inteligente.</span>
-                </h1>
-                <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                Oferecemos tecnologia inovadora. Automatizamos e agilizamos os seus processos com sustentabilidade e eficiência.
-                </p>
-                <div class="flex sm:flex-row gap-4 md:justify-start justify-between">
-                <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá">
-                    <button class="bg-[#0043FE] hover:bg-[#0135c5] text-white px-8 py-4 rounded-lg font-semibold md:text-lg transition-colors">
-                    Começar Agora
-                    </button>
-                </a>
-                <a href="#contato">
-                    <button class="border-2 border-gray-300 hover:border-[#0043FE] text-gray-700 hover:text-[#0043FE] px-8 py-4 rounded-lg font-semibold md:text-lg transition-colors">
-                    Saiba mais
-                    </button>
-                </a>
-                </div>
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Texto -->
+          <div class="opacity-0 translate-y-10 transition-all duration-1000 ease-out animate-fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 md:text-left text-center mb-6">
+              Gestão pública
+              <span class="text-[#0043FE]">Inteligente.</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+              Oferecemos tecnologia inovadora. Automatizamos e agilizamos os seus processos com sustentabilidade e eficiência.
+            </p>
+            <div class="flex sm:flex-row gap-4 md:justify-start justify-between">
+              <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá" target="_blank">
+                <button class="bg-[#0043FE] hover:bg-[#0135c5] text-white px-8 py-4 rounded-lg font-semibold md:text-lg transition-colors">
+                  Começar Agora
+                </button>
+              </a>
+              <a href="#contato">
+                <button
+                  class="border-2 border-gray-300 hover:border-[#0043FE] text-gray-700 hover:text-[#0043FE] px-8 py-4 rounded-lg font-semibold md:text-lg transition-colors"
+                >
+                  Saiba mais
+                </button>
+              </a>
             </div>
+          </div>
 
-            <!-- Imagem -->
-            <div class="relative mt-12 opacity-0 scale-90 transition-all duration-1000 ease-out delay-300 animate-zoom-in">
-                <img src="image/Banner_Landing_Page.png" 
-                    alt="Profissional trabalhando" 
-                    class="rounded-2xl shadow-2xl">
-                <div class="absolute -top-4 md:-right-4 -right-2 bg-yellow-400 text-black px-4 py-2 rounded-full font-bold animate-bounce">
-                ✨ Inovação
-                </div>
-                <div class="absolute -bottom-4 md:-left-4 -left-2 bg-blue-500 text-white px-4 py-2 rounded-full font-bold animate-bounce delay-200">
-                🚀 Resultados
-                </div>
+          <!-- Imagem -->
+          <div class="relative mt-12 opacity-0 scale-90 transition-all duration-1000 ease-out delay-300 animate-zoom-in">
+            <img src="image/secaoHero.png" alt="Profissional trabalhando" class="rounded-2xl shadow-2xl" />
+            <div class="absolute -top-4 md:-right-4 -right-2 bg-yellow-400 text-black px-4 py-2 rounded-full font-bold animate-bounce">
+              ✨ Inovação
             </div>
+            <div
+              class="absolute -bottom-4 md:-left-4 -left-2 bg-blue-500 text-white px-4 py-2 rounded-full font-bold animate-bounce delay-200"
+            >
+              🚀 Resultados
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Botão WhatsApp fixo -->
-        <div>
-            <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá">
-            <img src="image/whatsapp.png" alt="Imagem whatsapp" class="w-16 h-auto fixed bottom-8 md:right-8 right-2 cursor-pointer z-50 hover:scale-110 transition-transform duration-300">   
-            </a>        
-        </div>
+      <!-- Botão WhatsApp fixo -->
+      <div>
+        <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá">
+          <img
+            src="image/whatsapp.png"
+            alt="Imagem whatsapp"
+            class="w-16 h-auto fixed bottom-8 md:right-8 right-2 cursor-pointer z-50 hover:scale-110 transition-transform duration-300"
+          />
+        </a>
+      </div>
     </section>
 
     <section id="diferenca" class="pt-12 md:pt-20 pb-12 md:pb-16 bg--white from-blue-50">
-        <div class="">
-            <div class="mx-auto grid max-w-6xl relative px-4">
-                <div class="flex justify-between items-center gap-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">O que torna a <strong class="text-3xl md:text-4xl text-[#0043FE]">notPaper</strong> diferente?</h2>
-                    <div class="hidden md:flex justify-end gap-2 mb-4">
-                        <button id="prev" class="p-2 bg-gray-200 text-2xl shadow-md rounded-full hover:bg-gray-300">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button id="next" class="p-2 bg-[#0043FE] text-2xl shadow-md rounded-full hover:bg-[#0135C5]">
-                            <i class="fa-solid fa-chevron-right text-white"></i>
-                        </button>
-                    </div>
-                </div>
+      <div class="">
+        <div class="mx-auto grid max-w-6xl relative px-4">
+          <div class="flex justify-between items-center gap-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">
+              O que torna a <strong class="text-3xl md:text-4xl text-[#0043FE]">notPaper</strong> diferente?
+            </h2>
+            <div class="hidden md:flex justify-end gap-2 mb-4">
+              <button id="prev" class="p-2 bg-gray-200 text-2xl shadow-md rounded-full hover:bg-gray-300">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button id="next" class="p-2 bg-[#0043FE] text-2xl shadow-md rounded-full hover:bg-[#0135C5]">
+                <i class="fa-solid fa-chevron-right text-white"></i>
+              </button>
             </div>
-            
-            <!-- Carrossel -->
-            <div class="carousel-container">
-                <div class="hidden md:flex carousel-diferenca px-5 md:pl-8 my-8 lg:ml-[200px]"></div>
-                <div class="block md:hidden carousel-diferenca-mobile px-5 md:pl-8 my-8 lg:ml-[200px]"></div>
-            </div>
+          </div>
         </div>
+
+        <!-- Carrossel -->
+        <div class="carousel-container">
+          <div class="hidden md:flex carousel-diferenca px-5 md:pl-8 my-8 lg:ml-[200px]"></div>
+          <div class="block md:hidden carousel-diferenca-mobile px-5 md:pl-8 my-8 lg:ml-[200px]"></div>
+        </div>
+      </div>
     </section>
 
     <section id="services" class="pt-12 md:pt-20 pb-12 md:pb-16 bg-gradient-to-br from-blue-50 to-[#d3dbf1]">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8 md:mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Recursos <strong class="text-3xl md:text-4xl text-[#0043FE]">Poderosos</strong></h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Descubra como nosso sistema pode mudar a forma como você trabalha
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">GED</h3>
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
-                            <i class="fa-solid fa-file-invoice-dollar text-3xl w-10 h-10 text-blue-600 flex items-center justify-center"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Nosso <strong>GED</strong> (Gerenciamento Eletrônico de Documentos) garante a transição do papel para o digital com total segurança, oferecendo validade jurídica e um sistema de busca inteligente.                    <ul class="space-y-2 text-gray-600">
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                            Digitalização com validade jurídica.
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                            ⁠Assinatura digital e eletrônica.
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                            ⁠Busca rápida e inteligente.
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Automação</h3>
-                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
-                            <i class="fa-solid fa-robot text-3xl w-10 h-10 text-orange-600 flex items-center justify-center"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Com a <strong>Automação</strong>, seus processos se tornam mais ágeis e eficientes. Nossa plataforma utiliza <strong>Workflow, BPMN, ECM e Inteligência Artificial</strong> para eliminar o uso de papel, reduzindo custos e otimizando o tempo da sua equipe.
-                    </p>
-                    <ul class="space-y-2 text-gray-600">
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
-                            Workflow
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
-                            BPMN
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
-                            ECM
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
-                            IA (Inteligência Artificial)
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 w-full md:w-[70%]">APP Sua cidade</h3>
-                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                            <i class="fa-solid fa-city text-3xl w-10 h-10 text-purple-600 flex items-center justify-center"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Além disso, nosso <strong>APP</strong> aproxima você do cidadão e promove o desenvolvimento local. Ele funciona como um verdadeiro Marketplace da cidade, oferecendo uma bolsa de empregos, carta de serviços e um canal direto de comunicação com o munícipe.                    <ul class="space-y-2 text-gray-600">
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                            Marketplace da cidade
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                            Bolsa de empregos
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                            Carta de serviços
-                        </li>
-                        <li class="flex items-center">
-                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                            Comunicação Social, aproximando a gestão do munícipe
-                        </li>
-                    </ul>
-                </div>
-            </div>
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-8 md:mb-16">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            Recursos <strong class="text-3xl md:text-4xl text-[#0043FE]">Poderosos</strong>
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
+            <div class="flex justify-between items-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">GED</h3>
+              <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                <i class="fa-solid fa-file-invoice-dollar text-3xl w-10 h-10 text-blue-600 flex items-center justify-center"></i>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              Nosso <strong>GED</strong> (Gerenciamento Eletrônico de Documentos) garante a transição do papel para o digital com total
+              segurança, oferecendo validade jurídica e um sistema de busca inteligente.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                Digitalização com validade jurídica.
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                ⁠Assinatura digital e eletrônica.
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                ⁠Busca rápida e inteligente.
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
+            <div class="flex justify-between items-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Automação</h3>
+              <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                <i class="fa-solid fa-robot text-3xl w-10 h-10 text-orange-600 flex items-center justify-center"></i>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              Com a <strong>Automação</strong>, seus processos se tornam mais ágeis e eficientes. Nossa plataforma utiliza
+              <strong>Workflow, BPMN, ECM e Inteligência Artificial</strong> para eliminar o uso de papel, reduzindo custos e otimizando o
+              tempo da sua equipe.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
+                Workflow
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
+                BPMN
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
+                ECM
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-[#0043FE] rounded-full mr-3"></span>
+                IA (Inteligência Artificial)
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 opacity-0 card">
+            <div class="flex justify-between items-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4 w-full md:w-[70%]">APP Sua cidade</h3>
+              <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                <i class="fa-solid fa-city text-3xl w-10 h-10 text-purple-600 flex items-center justify-center"></i>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              Além disso, nosso <strong>APP</strong> aproxima você do cidadão e promove o desenvolvimento local. Ele funciona como um
+              verdadeiro Marketplace da cidade, oferecendo uma bolsa de empregos, carta de serviços e um canal direto de comunicação com o
+              munícipe.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                Marketplace da cidade
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                Bolsa de empregos
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                Carta de serviços
+              </li>
+              <li class="flex items-center">
+                <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                Comunicação Social, aproximando a gestão do munícipe
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="clientes" class="pt-12 md:pt-20 pb-12 md:pb-16 w-hull">
-        <h2 class="text-center text-2xl md:text-3xl font-bold mb-16">
-        <span class="text-[#0043FE] text-2xl md:text-4xl">Prefeituras e empresas</span> 
+      <h2 class="text-center text-2xl md:text-3xl font-bold mb-16">
+        <span class="text-[#0043FE] text-2xl md:text-4xl">Prefeituras e empresas</span>
         <span>que já confiaram em nossa solução</span>
-        </h2>
+      </h2>
 
-        <!-- Empresas -->
-        <div class="logo-row mb-8">
+      <!-- Empresas -->
+      <div class="logo-row mb-8">
         <div class="logo-slider" id="logos-empresas"></div>
-        </div>
+      </div>
 
-        <!-- Prefeituras -->
-        <div class="logo-row">
+      <!-- Prefeituras -->
+      <div class="logo-row">
         <div class="logo-slider" id="logos-prefeituras"></div>
-        </div>
+      </div>
     </section>
 
     <section id="sobre" class="pt-12 md:pt-20 pb-12 md:pb-16 bg-gradient-to-br from-blue-50 to-[#d3dbf1]">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center">
-                <div>   
-                    <img src="./image/bg_sobre.jpg" 
-                         alt="Equipe trabalhando" 
-                         class="rounded-2xl shadow-2xl">
-                </div>
-                <div>
-                    <h2 class="text-2xl md:text-3xl text-center md:text-left font-bold mb-6">
-                        Sobre a <strong class="text-3xl md:text-4xl text-[#0043FE]">notPaper</strong>
-                    </h2>
-                    <p class="md:text-xl text-gray-600 mb-6 leading-relaxed">
-                        Somos uma empresa especializada em transformação digital, com mais de 20 anos de experiência ajudando empresas a crescer e se adaptar ao mundo digital.
-                    </p>
-                    <p class="md:text-lg text-gray-600 mb-8 leading-relaxed">
-                        Nossa missão é fornecer soluções inovadoras e personalizadas que impulsionem o sucesso dos nossos clientes, combinando tecnologia de ponta com estratégias comprovadas.
-                    </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div>
-                            <h3 class="font-bold text-xl text-gray-900 mb-2">Missão</h3>
-                            <p class="md:text-lg text-gray-600">Transformar negócios através da tecnologia</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-xl text-gray-900 mb-2">Visão</h3>
-                            <p class="md:text-lg text-gray-600">Ser referência em inovação digital</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <img src="./image/bg_sobre.jpg" alt="Equipe trabalhando" class="rounded-2xl shadow-2xl" />
+          </div>
+          <div>
+            <h2 class="text-2xl md:text-3xl text-center md:text-left font-bold mb-6">
+              Sobre a <strong class="text-3xl md:text-4xl text-[#0043FE]">notPaper</strong>
+            </h2>
+            <p class="md:text-xl text-gray-600 mb-6 leading-relaxed">
+              Somos uma empresa especializada em transformação digital, com mais de 20 anos de experiência ajudando empresas a crescer e se
+              adaptar ao mundo digital.
+            </p>
+            <p class="md:text-lg text-gray-600 mb-8 leading-relaxed">
+              Nossa missão é fornecer soluções inovadoras e personalizadas que impulsionem o sucesso dos nossos clientes, combinando
+              tecnologia de ponta com estratégias comprovadas.
+            </p>
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Missão</h3>
+                <p class="md:text-lg text-gray-600">Transformar negócios através da tecnologia</p>
+              </div>
+              <div>
+                <h3 class="font-bold text-xl text-gray-900 mb-2">Visão</h3>
+                <p class="md:text-lg text-gray-600">Ser referência em inovação digital</p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section class="py-20 bg-gray-900 text-white" id="stats">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-[#0043FE] mb-2" data-target="500">0+</div>
-                    <div class="text-gray-300">Projetos Concluídos</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-blue-500 mb-2" data-target="98">0%</div>
-                    <div class="text-gray-300">Satisfação do Cliente</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-purple-500 mb-2" data-target="50">0+</div>
-                    <div class="text-gray-300">Especialistas</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-yellow-500 mb-2" data-target="20">0+</div>
-                    <div class="text-gray-300">Cidades atendidas</div>
-                </div>
-            </div>
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl font-bold text-[#0043FE] mb-2" data-target="500">0+</div>
+            <div class="text-gray-300">Projetos Concluídos</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-blue-500 mb-2" data-target="98">0%</div>
+            <div class="text-gray-300">Satisfação do Cliente</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-purple-500 mb-2" data-target="50">0+</div>
+            <div class="text-gray-300">Especialistas</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-yellow-500 mb-2" data-target="20">0+</div>
+            <div class="text-gray-300">Cidades atendidas</div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="contato" class="pt-12 md:pt-20 pb-12 md:pb-16 bg-gradient-to-br from-blue-50 to-[#0043FE]">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8 md:mb-16">
-                <h2 class="md:text-3xl text-2xl font-bold text-gray-900 mb-4">Entre em <strong class="text-3xl md:text-4xl text-[#0043FE]">Contato</strong></h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Pronto para transformar seu negócio? Vamos conversar!
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-white p-8 rounded-2xl shadow-lg">
-                    <form id="meu-form" class="space-y-6" action="https://formspree.io/f/mkgqnjlb" method="POST">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
-                            <input type="text" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
-                            <input type="telefone" name="telefone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent">
-                        </div>
-                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
-                            <textarea rows="4" name="mensagem" required class="resize-none w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-[#0043FE] hover:bg-[#0135c5] text-white py-3 px-6 rounded-lg font-semibold transition-colors">
-                            Enviar Mensagem
-                        </button>
-                    </form>
-                </div>
-
-                <div class="bg-blue-200 border border-[#0043FE] p-8 rounded-2xl shadow-lg opacity-80">
-                    <h3 class="text-2xl font-bold text-center mb-6">Fale Conosco</h3>
-                    <div>
-                        <!-- Telefone 1 -->
-                        <a href="tel:+5511999999999" >
-                            <div class="animacao-faleConosco flex items-center mb-4">
-                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fa-solid fa-phone text-orange-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Telefone</div>
-                                    <p class="text-gray-600">
-                                        (11) 4604-0000
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- WhatsApp -->
-                         <a href="https://wa.me/5511941398031" target="_blank">
-                            <div class="animacao-faleConosco flex items-center mb-4">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">WhatsApp</div>
-                                    <p class="text-gray-600 transition">
-                                        (11) 94139-8031
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Email -->
-                         <a href="mailto:contato@notpaper.com.br">
-                            <div class="animacao-faleConosco flex items-center mb-4">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fa-solid fa-envelope text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Email</div>
-                                    <p class="text-gray-600 transition">
-                                        contato@notpaper.com.br
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Endereço -->
-                         <a href="https://www.google.com/maps?q=São+Paulo,+SP" target="_blank" >
-                            <div class="animacao-faleConosco flex items-center mb-4">
-                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fa-solid fa-location-dot text-purple-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-900">Endereço</div>
-                                    <p class="text-gray-600 transition">
-                                        São Paulo, SP
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-8 md:mb-16">
+          <h2 class="md:text-3xl text-2xl font-bold text-gray-900 mb-4">
+            Entre em <strong class="text-3xl md:text-4xl text-[#0043FE]">Contato</strong>
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">Pronto para transformar seu negócio? Vamos conversar!</p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <form id="meu-form" class="space-y-6" action="https://formspree.io/f/mkgqnjlb" method="POST">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+                <input
+                  type="text"
+                  name="nome"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+                <input
+                  type="telefone"
+                  name="telefone"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                <textarea
+                  rows="4"
+                  name="mensagem"
+                  required
+                  class="resize-none w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0043FE] focus:border-transparent"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-[#0043FE] hover:bg-[#0135c5] text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+              >
+                Enviar Mensagem
+              </button>
+            </form>
+          </div>
+
+          <div class="bg-blue-200 border border-[#0043FE] p-8 rounded-2xl shadow-lg opacity-80">
+            <h3 class="text-2xl font-bold text-center mb-6">Fale Conosco</h3>
+            <div>
+              <!-- Telefone 1 -->
+              <a href="tel:+5511999999999">
+                <div class="animacao-faleConosco flex items-center mb-4">
+                  <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-phone text-orange-600 text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Telefone</div>
+                    <p class="text-gray-600">(11) 4604-0000</p>
+                  </div>
+                </div>
+              </a>
+
+              <!-- WhatsApp -->
+              <a href="https://wa.me/5511941398031" target="_blank">
+                <div class="animacao-faleConosco flex items-center mb-4">
+                  <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">WhatsApp</div>
+                    <p class="text-gray-600 transition">(11) 94139-8031</p>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Email -->
+              <a href="mailto:contato@notpaper.com.br">
+                <div class="animacao-faleConosco flex items-center mb-4">
+                  <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-envelope text-blue-600 text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Email</div>
+                    <p class="text-gray-600 transition">contato@notpaper.com.br</p>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Endereço -->
+              <a href="https://www.google.com/maps?q=São+Paulo,+SP" target="_blank">
+                <div class="animacao-faleConosco flex items-center mb-4">
+                  <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-location-dot text-purple-600 text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900">Endereço</div>
+                    <p class="text-gray-600 transition">São Paulo, SP</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="w-[50%] bg-white rounded-3xl px-4 py-1 mb-4 mx-auto md:mx-0">
-                        <img src="./image/Logo_notpaper.png" alt="">
-                    </div>
-                    <p class="text-gray-400 mb-4 md:text-left text-center">
-                        Transformando negócios através da tecnologia e inovação.
-                    </p>
-                    <div class="flex space-x-4 justify-center md:justify-start">
-                        <a href="https://www.linkedin.com/company/silo-tecnologia/" class="text-gray-400 hover:text-white transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold text-white mb-4">Navegação</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Diferença</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Serviços</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold text-white mb-4">Empresa</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#sobre" class="hover:text-white transition-colors">Sobre Nós</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold text-white mb-4">Contato</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>
-                            <a href="tel:+5511999999999" class="hover:text-white">
-                                (11) 4604-0000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://wa.me/5511941398031" target="_blank" class="hover:text-white">
-                                (11) 94139-8031
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailto:contato@notpaper.com.br" class="hover:text-white">
-                            contato@notpaper.com.br
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.google.com/maps?q=São+Paulo,+SP" target="_blank" class="hover:text-white" >
-                            São Paulo, SP
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <div class="w-[50%] bg-white rounded-3xl px-4 py-1 mb-4 mx-auto md:mx-0">
+              <img src="./image/Logo_notpaper.png" alt="" />
             </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 notPaper. Todos os direitos reservados.</p>
+            <p class="text-gray-400 mb-4 md:text-left text-center">Transformando negócios através da tecnologia e inovação.</p>
+            <div class="flex space-x-4 justify-center md:justify-start">
+              <a href="https://www.linkedin.com/company/silo-tecnologia/" class="text-gray-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
             </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-4">Navegação</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Diferença</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Serviços</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-4">Empresa</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="#sobre" class="hover:text-white transition-colors">Sobre Nós</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-4">Contato</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="tel:+5511999999999" class="hover:text-white"> (11) 4604-0000 </a>
+              </li>
+              <li>
+                <a href="https://wa.me/5511941398031" target="_blank" class="hover:text-white"> (11) 94139-8031 </a>
+              </li>
+              <li>
+                <a href="mailto:contato@notpaper.com.br" class="hover:text-white"> contato@notpaper.com.br </a>
+              </li>
+              <li>
+                <a href="https://www.google.com/maps?q=São+Paulo,+SP" target="_blank" class="hover:text-white"> São Paulo, SP </a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p>&copy; 2024 notPaper. Todos os direitos reservados.</p>
+        </div>
+      </div>
     </footer>
 
     <script src="./js/script.js"></script>
     <script src="./js/diferenca.js"></script>
     <script src="./js/clientes.js"></script>
-</body>
+  </body>
 </html>
-
