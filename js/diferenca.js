@@ -66,23 +66,12 @@ $(document).ready(function () {
   const cards = $(".card-diferanca");
   let index = 0;
 
-<<<<<<< Updated upstream
-  function isDesktop() {
-    return $(window).width() > 768;
-  }
-
-=======
->>>>>>> Stashed changes
   function moveCarouselDesktop() {
-    if (isDesktop()) {
-      track.css("transform", `translateX(${-index * 350}px)`);
-    } else {
-      track.css("transform", "none");
-    }
+    track.css("transform", `translateX(${-index * 350}px)`);
   }
 
+  // --- Navegação desktop (mantém como estava) ---
   $("#next").click(function () {
-    if (!isDesktop()) return;
     if (index < cards.length - 2) {
       index++;
     } else {
@@ -93,7 +82,6 @@ $(document).ready(function () {
   });
 
   $("#prev").click(function () {
-    if (!isDesktop()) return;
     if (index > 0) {
       index--;
     } else {
@@ -103,19 +91,10 @@ $(document).ready(function () {
     moveCarouselDesktop();
   });
 
-  if (isDesktop()) {
+  // Auto play apenas no desktop
+  if ($(window).width() > 768) {
     setInterval(function () {
       $("#next").click();
     }, 15000);
   }
-<<<<<<< Updated upstream
-
-  $(window).resize(function () {
-    moveCarouselDesktop();
-  });
-
-  moveCarouselDesktop();
 });
-=======
-});
->>>>>>> Stashed changes
