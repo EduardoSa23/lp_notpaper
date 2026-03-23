@@ -1,0 +1,134 @@
+﻿.ctaWapper {
+  background: #eceff6;
+  padding: 4rem 0;
+
+  &__container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 1rem;
+  }
+}
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(45, 212, 191, 0.18), transparent 35%),
+    radial-gradient(circle at 82% 84%, rgba(30, 64, 175, 0.4), transparent 42%),
+    linear-gradient(125deg, #020617 0%, #0f172a 45%, #111827 100%);
+  padding: 1.5rem;
+  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.4);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(14, 165, 233, 0.07), rgba(45, 212, 191, 0.05));
+    pointer-events: none;
+  }
+
+  &__content,
+  &__metrics {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__content {
+    max-width: 620px;
+  }
+
+  &__title {
+    font-size: 2.35rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  &__description {
+    margin: 1.25rem 0 2rem;
+    font-size: 1.07rem;
+    line-height: 1.75rem;
+    color: #cbd5e1;
+  }
+
+  &__button {
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #2dd4bf, #5eead4);
+    padding: 0.95rem 1.35rem;
+    font-weight: 700;
+    color: #052e2b;
+    transition: transform 0.25s ease, filter 0.25s ease;
+  }
+
+  &__button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  &__metrics {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  &__metricCard {
+    border-radius: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(15, 23, 42, 0.58);
+    padding: 1rem;
+    backdrop-filter: blur(6px);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+
+  &__metricCard:hover {
+    transform: translateY(-2px);
+    border-color: rgba(45, 212, 191, 0.55);
+  }
+
+  &__metricValue {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #5eead4;
+  }
+
+  &__metricLabel {
+    margin-top: 0.25rem;
+    color: #cbd5e1;
+  }
+}
+
+@media (min-width: 768px) {
+  .ctaWrapper {
+    padding: 5rem 0;
+  }
+
+  .cta {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cta {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+
+    &__title {
+      font-size: 3.4rem;
+    }
+
+    &__metrics {
+      margin-top: 0;
+      gap: 1rem;
+    }
+
+    &__metricCard {
+      padding: 1.25rem;
+    }
+  }
+}

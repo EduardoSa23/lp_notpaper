@@ -9,7 +9,7 @@ const heroData = {
   heroImageAlt: "Profissional trabalhando",
 };
 
-export default function HeroSection() {
+export default function HeroHome() {
   return (
     <section id="home" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-16 pt-20 section-anchor">
       <div className="container mx-auto px-4">

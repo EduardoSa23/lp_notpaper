@@ -1,59 +1,4 @@
-﻿"use client";
-
-import { useEffect, useState } from "react";
-import { FaCity, FaFileInvoiceDollar, FaRobot } from "react-icons/fa6";
-
-const serviceCards = [
-  {
-    id: "ged",
-    title: "GED",
-    color: "bg-blue-100 text-blue-600",
-    icon: FaFileInvoiceDollar,
-    text: "Nosso GED (Gerenciamento Eletrônico de Documentos) garante a transição do papel para o digital com total segurança, oferecendo validade jurídica e um sistema de busca inteligente.",
-    bullets: ["Digitalização com validade jurídica.", "Assinatura digital e eletrônica.", "Busca rápida e inteligente."],
-    dot: "bg-blue-500",
-  },
-  {
-    id: "automacao",
-    title: "Automação",
-    color: "bg-orange-100 text-orange-600",
-    icon: FaRobot,
-    text: "Com a Automação, seus processos se tornam mais ágeis e eficientes. Nossa plataforma utiliza Workflow, BPMN, ECM e Inteligência Artificial para eliminar o uso de papel, reduzindo custos e otimizando o tempo da sua equipe.",
-    bullets: ["Workflow", "BPMN", "ECM", "IA (Inteligência Artificial)"],
-    dot: "bg-[#0043FE]",
-  },
-  {
-    id: "app",
-    title: "APP Sua cidade",
-    color: "bg-purple-100 text-purple-600",
-    icon: FaCity,
-    text: "Além disso, nosso APP aproxima você do cidadão e promove o desenvolvimento local. Ele funciona como um verdadeiro Marketplace da cidade, oferecendo uma bolsa de empregos, carta de serviços e um canal direto de comunicação com o munícipe.",
-    bullets: ["Marketplace da cidade", "Bolsa de empregos", "Carta de serviços", "Comunicação Social, aproximando a gestão do munícipe"],
-    dot: "bg-purple-500",
-  },
-];
-
-export default function ServicosSection() {
-  const [animatedCards, setAnimatedCards] = useState([]);
-
-  useEffect(() => {
-    const cards = Array.from(document.querySelectorAll("#services .card"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setAnimatedCards((prev) => [...new Set([...prev, entry.target.id])]);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
-
+﻿export default function ServicosSection() {
   return (
     <section id="services" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
       <div className="container mx-auto px-4">
@@ -63,36 +8,72 @@ export default function ServicosSection() {
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
         </div>
-
-        <div className="grid gap-8 md:grid-cols-3">
-          {serviceCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <article
-                id={card.id}
-                key={card.id}
-                className={`card rounded-2xl border border-gray-100 bg-white p-8 shadow-lg transition-shadow hover:shadow-xl ${
-                  animatedCards.includes(card.id) ? "animate-fade-in-up" : "opacity-0"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="mb-4 text-2xl font-bold text-gray-900">{card.title}</h3>
-                  <div className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl ${card.color}`}>
-                    <Icon className="h-10 w-10" />
-                  </div>
-                </div>
-                <p className="mb-6 text-gray-600">{card.text}</p>
-                <ul className="space-y-2 text-gray-600">
-                  {card.bullets.map((item) => (
-                    <li key={item} className="flex items-center">
-                      <span className={`mr-3 h-2 w-2 rounded-full ${card.dot}`} />
-                      {item}
-                    </li>
-                  ))}
+        <div className="flex flex-col gap-[100px]">
+          <div className="flex bg-gradient-to-r from-white to-[#E0E7F7] rounded-2xl max-w-[1000px]">
+            <img className="rounded-l-2xl max-h-[500px]" src="/image/ged.png" alt="" />
+            <div className="border-2 border-[#EDF4FD] border-l-0 border-b-0 rounded-r-2xl flex flex-col justify-between">
+              <div className="p-8">
+                <h2 className="text-2xl text-center mb-8">GED</h2>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt error consequatur libero, dolor, enim porro placeat,
+                  laborum temporibus quam eos id repellat fugit? Autem soluta ab eaque libero alias quis!
+                </p>
+              </div>
+              <div>
+                <h3>Antes</h3>
+                <ul>
+                  <li>Teste</li>
                 </ul>
-              </article>
-            );
-          })}
+              </div>
+              <div className="px-8 py-4 flex gap-6 justify-center bg-gradient-to-r from-[#DFE7F7] to-[#A8C9F8] rounded-br-2xl">
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex ml-auto bg-gradient-to-l from-white to-[#FFFEFE] rounded-2xl max-w-[1000px]">
+            <div className="border-2 border-[#FBEEEA] border-r-0 border-b-0 rounded-l-2xl flex flex-col justify-between">
+              <div className="p-8">
+                <h2 className="text-2xl text-center mb-8">AUTOMAÇÃO</h2>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt error consequatur libero, dolor, enim porro placeat,
+                  laborum temporibus quam eos id repellat fugit? Autem soluta ab eaque libero alias quis!
+                </p>
+              </div>
+              <div className="px-8 py-4 flex gap-6 justify-center bg-gradient-to-l from-[#FEFCFB] to-[#F7DFD7] rounded-bl-2xl">
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+              </div>
+            </div>
+            <img className="rounded-r-2xl max-h-[500px]" src="/image/automacao.png" alt="" />
+          </div>
+
+          <div className="flex bg-gradient-to-r from-white to-[#E0E7F7] rounded-2xl max-w-[1000px]">
+            <img className="rounded-l-2xl max-h-[500px]" src="/image/app.png" alt="" />
+            <div className="border-2 border-[#D6D8F8] border-l-0 border-b-0 rounded-r-2xl flex flex-col justify-between">
+              <div className="p-8">
+                <h2 className="text-2xl text-center mb-8">APP SUA CIDADE</h2>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt error consequatur libero, dolor, enim porro placeat,
+                  laborum temporibus quam eos id repellat fugit? Autem soluta ab eaque libero alias quis!
+                </p>
+              </div>
+              <div className="px-8 py-4 flex gap-6 justify-center bg-gradient-to-r from-[#DFE7F7] to-[#AF92FD] rounded-br-2xl">
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+                <span className="p-2 bg-white rounded-2xl">Tag</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
