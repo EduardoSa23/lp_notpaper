@@ -24,7 +24,7 @@ export default function QuemSomosCtaSection() {
           <div className={styles.cta__metrics}>
             {metrics.map((item) => (
               <article key={item.label} className={styles.cta__metricCard}>
-                <p className={styles.cta__metricCalue}>{item.value}</p>
+                <p className={styles.cta__metricValue}>{item.value}</p>
                 <p className={styles.cta__metricLabel}>{item.label}</p>
               </article>
             ))}

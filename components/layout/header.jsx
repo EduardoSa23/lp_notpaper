@@ -12,7 +12,7 @@ export default function SiteHeader() {
         <div className="hidden items-center space-x-8 md:flex">
           <Link href="/" className="text-gray-700 transition-colors hover:text-[#0043FE]">Home</Link>
           <Link href="/comparacao" className="text-gray-700 transition-colors hover:text-[#0043FE]">Comparação</Link>
-          <Link href="/servicos" className="text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
+          <Link href="/solucoes" className="text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
           <Link href="/quem-somos" className="text-gray-700 transition-colors hover:text-[#0043FE]">Quem Somos</Link>
           <Link href="/contato" className="text-gray-700 transition-colors hover:text-[#0043FE]">Contato</Link>
         </div>
@@ -35,7 +35,7 @@ export default function SiteHeader() {
           <div className="absolute right-0 mt-3 flex w-56 flex-col space-y-1 rounded-lg bg-white px-6 py-4 shadow-lg">
             <Link href="/" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Home</Link>
             <Link href="/comparacao" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Comparação</Link>
-            <Link href="/servicos" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
+            <Link href="/solucoes" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
             <Link href="/quem-somos" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Quem Somos</Link>
             <Link href="/contato" className="block py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Contato</Link>
           </div>
@@ -44,3 +44,4 @@ export default function SiteHeader() {
     </header>
   );
 }
+

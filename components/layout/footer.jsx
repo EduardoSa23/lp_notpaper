@@ -24,7 +24,7 @@ export default function SiteFooter() {
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/" className="transition-colors hover:text-white">Home</Link></li>
               <li><Link href="/comparacao" className="transition-colors hover:text-white">Comparação</Link></li>
-              <li><Link href="/servicos" className="transition-colors hover:text-white">Serviços</Link></li>
+              <li><Link href="/solucoes" className="transition-colors hover:text-white">Serviços</Link></li>
             </ul>
           </div>
 
@@ -54,3 +54,4 @@ export default function SiteFooter() {
     </footer>
   );
 }
+
