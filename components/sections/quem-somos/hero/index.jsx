@@ -8,20 +8,20 @@ export default function QuemSomosHeroSection() {
       <div className={styles.hero__container}>
         <div className={styles.hero__grid}>
           <div className={styles.hero__content}>
-            <span className={styles.hero__badge}>NOSSA HISTORIA</span>
+            <span className={styles.hero__badge}>NOSSA HISTÓRIA</span>
 
             <h1 className={styles.hero__title}>
-              Nossa Evolucao <span className={styles.hero__titleHighlight}>Digital</span>
+              Nossa Evolução <span className={styles.hero__titleHighlight}>Digital</span>
             </h1>
 
             <p className={styles.hero__text}>
-              Nascemos no coracao da era fisica, transformando a eficiencia operacional por meio de solucoes inteligentes. Mas o mundo acelerou, e nos tambem.
+              Nascemos no coração da era física, transformando a eficiência operacional por meio de soluções inteligentes. Mas o mundo acelerou, e nos também.
             </p>
             <p className={styles.hero__text}>
-              Hoje, a notPaper atua com visao de Gestao 4.0, conectando ecossistemas de ECM, automacao de workflow e digitalizacao inteligente em uma jornada continua de evolucao.
+              Hoje, a notPaper atua com visão de Gestão 4.0, conectando ecossistemas de ECM, automação de workflow e digitalização inteligente em uma jornada contínua de evolução.
             </p>
 
-            <Link href="/" className={styles.hero__button}>Explorar Solucoes</Link>
+            <Link href="/" className={styles.hero__button}>Explorar Soluções</Link>
           </div>
 
           <div className={styles.hero__media}>
@@ -29,9 +29,9 @@ export default function QuemSomosHeroSection() {
             <div className={styles.hero__floatingCard}>
               <div className={styles.hero__floatingTitle}>
                 <FaChartLine />
-                <span>INOVACAO</span>
+                <span>INOVAÇÃO</span>
               </div>
-              <p className={styles.hero__floatingText}>Eficiencia 4.0 integrada ao seu fluxo de trabalho.</p>
+              <p className={styles.hero__floatingText}>Eficiência 4.0 integrada ao seu fluxo de trabalho.</p>
             </div>
           </div>
         </div>

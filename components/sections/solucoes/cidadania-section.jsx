@@ -1,6 +1,6 @@
 ﻿import { FaMobileScreenButton } from "react-icons/fa6";
 
-const citizenBadges = ["Alertas em tempo real", "Validacao via QR code"];
+const citizenBadges = ["Alertas em tempo real", "Validacão via QR code"];
 
 export default function SolucoesCidadaniaSection() {
   return (
@@ -17,9 +17,9 @@ export default function SolucoesCidadaniaSection() {
 
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Cidadania digital</p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Governo no bolso do cidadao</h2>
+        <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Governo no bolso do cidadão</h2>
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
-          Aproximamos a gestao publica das pessoas com mobilidade digital. O cidadao solicita servicos, acompanha processos e recebe
+          Aproximamos a gestão pública das pessoas com mobilidade digital. O cidadão solicita serviços, acompanha processos e recebe
           comunicados em tempo real.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">

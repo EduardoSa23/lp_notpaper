@@ -58,8 +58,8 @@ export default function RecursosPoderosos() {
     <section id="services" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center md:mb-16">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 md:text-3xl">
-            Recursos <strong className="text-3xl text-[#0043FE] md:text-4xl">Poderosos</strong>
+          <h2 className="mb-4 text-3xl md:text-5xl font-bold text-gray-900">
+            Recursos <strong className="text-[#0043FE]">Poderosos</strong>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
         </div>

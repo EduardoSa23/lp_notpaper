@@ -36,7 +36,7 @@ const contatoData = {
     {
       href: "https://www.google.com/maps/place/Av.+Dep.+Castro+de+Carvalho,+941+-+Vila+J%C3%BAlia,+Po%C3%A1+-+SP,+08551-035/@-23.5204327,-46.3569128,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce7b25ec81d259:0x14c7d1f34875f531!8m2!3d-23.5204377!4d-46.3520419!16s%2Fg%2F11h4zprh16?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D",
       title: "Endereço",
-      text: "Av. Deputado Castro de Carvalho, 941, Poá, SP",
+      text: "Av. Deputado Castro de Carvalho, 941, Poá - SP",
       icon: FaLocationDot,
       wrapperColor: "bg-purple-100",
       iconColor: "text-purple-600",
@@ -78,7 +78,7 @@ export default function ContatoSection() {
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
               Inovação digital
             </span>
-            <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+            <h1 className="mt-5 max-w-3xl text-4xl md:text-6xl font-bold leading-tight">
               Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-900">

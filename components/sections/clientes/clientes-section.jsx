@@ -32,8 +32,8 @@ const logosPrefeituras = [
 export default function ClientesSection() {
   return (
     <section id="clientes" className="w-full pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
-      <h2 className="mb-16 text-center text-2xl font-bold md:text-3xl">
-        <span className="text-2xl text-[#0043FE] md:text-4xl">Prefeituras e empresas </span>
+      <h2 className="mb-16 text-center max-w-4xl mx-auto text-3xl md:text-5xl font-bold">
+        <span className="text-[#0043FE]">Prefeituras e empresas </span>
         <span>que já confiaram em nossa solução</span>
       </h2>
       <div className="mb-8">

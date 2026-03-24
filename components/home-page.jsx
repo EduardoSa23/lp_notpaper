@@ -5,7 +5,7 @@ import HeroHome from "@/components/sections/hero/hero-home";
 import DiferencaSection from "@/components/sections/diferenca/diferenca-section";
 import RecursosPoderosos from "@/components/sections/recursos-poderosos/index";
 import ClientesSection from "@/components/sections/clientes/clientes-section";
-import SobreSection from "@/components/sections/sobre/sobre-section";
+import FundamentosValorSection from "@/components/sections/quem-somos/fundamentos";
 import StatsSection from "@/components/sections/stats/stats-section";
 import ContatoSection from "@/components/sections/contato/contato-section";
 
@@ -20,7 +20,7 @@ export default function HomePage() {
         <DiferencaSection />
         <RecursosPoderosos />
         <ClientesSection />
-        <SobreSection />
+        <FundamentosValorSection />
         <StatsSection />
         <ContatoSection />
       </main>

@@ -20,7 +20,7 @@ export default function SolucoesWorkflowSection() {
         <img className="rounded-2xl" src="/image/automacao.png" alt="" />
       </div>
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Modulo 02</p>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 02</p>
         <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Automação & Workflow (BPMN 2.0)</h2>
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
           Modele processos complexos com facilidade visual. Transforme fluxos manuais em sequências digitais seguras, sem erros e com

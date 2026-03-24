@@ -19,6 +19,10 @@
     font-size: 2.35rem;
     font-weight: 700;
     color: #0f172a;
+
+    span {
+      color: #0043fe;
+    }
   }
 
   &__subtitle {
@@ -40,7 +44,9 @@
     background: #f8fafc;
     padding: 1.75rem;
     box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   &__card:hover {
