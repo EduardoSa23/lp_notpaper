@@ -11,7 +11,7 @@ const heroData = {
 
 export default function HeroHome() {
   return (
-    <section id="home" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-16 pt-20 section-anchor">
+    <section id="home" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-16 pt-20 lg:pt-32 section-anchor">
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="animate-fade-in-up">
@@ -35,7 +35,7 @@ export default function HeroHome() {
 
           <div className="relative mt-12 animate-zoom-in md:mt-0">
             <Image src={heroData.heroImage} alt={heroData.heroImageAlt} width={640} height={500} className="rounded-2xl shadow-2xl" priority />
-            <div className="absolute -right-2 -top-4 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black md:-right-4">Inovação</div>
+            <div className="absolute -right-2 -top-4 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black md:-right-[-4rem]">Inovação</div>
             <div className="absolute -bottom-4 -left-2 rounded-full bg-blue-500 px-4 py-2 font-bold text-white md:-left-4">Resultados</div>
           </div>
         </div>

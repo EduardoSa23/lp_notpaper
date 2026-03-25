@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
@@ -43,36 +43,88 @@ const diferencas = [
 ];
 
 export default function DiferencaSection() {
-  const [cardIndex, setCardIndex] = useState(0);
-  const maxDesktopIndex = useMemo(() => Math.max(diferencas.length - 2, 0), []);
+  const carouselRef = useRef(null);
+  const dragState = useRef({ isDragging: false, startX: 0, scrollLeft: 0 });
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 769px)");
-    if (!media.matches) return undefined;
+    const endDrag = () => {
+      if (!dragState.current.isDragging) return;
+      dragState.current.isDragging = false;
+      setIsDragging(false);
+    };
 
-    const id = setInterval(() => {
-      setCardIndex((prev) => (prev >= maxDesktopIndex ? 0 : prev + 1));
-    }, 15000);
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
 
-    return () => clearInterval(id);
-  }, [maxDesktopIndex]);
+    return () => {
+      window.removeEventListener("pointerup", endDrag);
+      window.removeEventListener("pointercancel", endDrag);
+    };
+  }, []);
 
-  const next = () => setCardIndex((prev) => (prev < maxDesktopIndex ? prev + 1 : 0));
-  const prev = () => setCardIndex((prevValue) => (prevValue > 0 ? prevValue - 1 : maxDesktopIndex));
-  const desktopTranslate = { transform: `translateX(${-cardIndex * 350}px)` };
+  const getStep = () => {
+    const track = carouselRef.current;
+    if (!track) return 360;
+
+    const firstCard = track.querySelector(".card-diferanca");
+    if (!firstCard) return 360;
+
+    const styles = window.getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "0") || 0;
+    return firstCard.getBoundingClientRect().width + gap;
+  };
+
+  const scrollByStep = (direction) => {
+    const track = carouselRef.current;
+    if (!track) return;
+
+    track.scrollBy({
+      left: getStep() * direction,
+      behavior: "smooth",
+    });
+  };
+
+  const onPointerDown = (event) => {
+    const track = carouselRef.current;
+    if (!track) return;
+
+    dragState.current.isDragging = true;
+    dragState.current.startX = event.clientX;
+    dragState.current.scrollLeft = track.scrollLeft;
+    setIsDragging(true);
+  };
+
+  const onPointerMove = (event) => {
+    const track = carouselRef.current;
+    if (!track || !dragState.current.isDragging) return;
+
+    const deltaX = event.clientX - dragState.current.startX;
+    track.scrollLeft = dragState.current.scrollLeft - deltaX;
+  };
 
   return (
     <section id="diferenca" className="bg-white pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
       <div className="mx-auto grid max-w-6xl px-4">
-        <div className="flex items-center justify-between gap-12">
-          <h2 className="mb-6 text-center text-2xl font-bold md:text-3xl">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:gap-12">
+          <h2 className="mb-2 text-center text-2xl font-bold md:mb-6 md:text-3xl">
             O que torna a <strong className="text-3xl text-[#0043FE] md:text-4xl">notPaper</strong> diferente?
           </h2>
-          <div className="mb-4 hidden justify-end gap-2 md:flex">
-            <button className="rounded-full bg-gray-200 p-2 text-2xl shadow-md hover:bg-gray-300" onClick={prev} aria-label="Anterior">
+          <div className="mb-2 flex justify-end gap-2 md:mb-4">
+            <button
+              className="rounded-full bg-gray-200 p-2 text-2xl shadow-md transition hover:bg-gray-300"
+              onClick={() => scrollByStep(-1)}
+              aria-label="Anterior"
+              type="button"
+            >
               <FaChevronLeft />
             </button>
-            <button className="rounded-full bg-[#0043FE] p-2 text-2xl shadow-md hover:bg-[#0135C5]" onClick={next} aria-label="Próximo">
+            <button
+              className="rounded-full bg-[#0043FE] p-2 text-2xl shadow-md transition hover:bg-[#0135C5]"
+              onClick={() => scrollByStep(1)}
+              aria-label="Próximo"
+              type="button"
+            >
               <FaChevronRight className="text-white" />
             </button>
           </div>
@@ -80,21 +132,15 @@ export default function DiferencaSection() {
       </div>
 
       <div className="carousel-container">
-        <div className="carousel-diferenca my-8 hidden px-5 md:flex md:pl-8 lg:ml-[200px]" style={desktopTranslate}>
+        <div
+          ref={carouselRef}
+          className={`carousel-diferenca my-8 px-5 md:pl-8 ml-2 lg:ml-[150px] ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+        >
           {diferencas.map((card) => (
             <article key={card.titulo} className="card-diferanca max-w-[100%] rounded-[30px] border border-gray-200 bg-white shadow md:max-w-5xl">
-              <Image src={card.img} alt={card.titulo} width={500} height={250} className="mb-4 w-full" />
-              <h3 className="text-center text-lg font-bold">{card.titulo}</h3>
-              <h4 className="my-4 text-center font-semibold">{card.subtitulo}</h4>
-              <p className="p-6 text-sm text-gray-600">{card.descricao}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="carousel-diferenca-mobile my-8 block px-5 md:hidden md:pl-8 lg:ml-[200px]">
-          {diferencas.map((card) => (
-            <article key={`mobile-${card.titulo}`} className="card-diferanca-mobile mb-8 max-w-[100%] rounded-[30px] border border-gray-200 bg-white shadow md:max-w-5xl">
-              <Image src={card.img} alt={card.titulo} width={500} height={250} className="mb-4 w-full" />
+              <Image src={card.img} alt={card.titulo} width={500} height={250} className="mb-4 w-full" draggable={false} />
               <h3 className="text-center text-lg font-bold">{card.titulo}</h3>
               <h4 className="my-4 text-center font-semibold">{card.subtitulo}</h4>
               <p className="p-6 text-sm text-gray-600">{card.descricao}</p>

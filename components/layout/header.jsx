@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SiteHeader() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-white shadow-lg">
+    <header className="fixed top-0 z-50 w-full bg-white/90 shadow-lg">
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center" aria-label="Ir para a Home">
           <Image src="/image/Logo_notpaper.png" alt="Logo da notPaper" width={180} height={48} className="h-10 w-auto" priority />

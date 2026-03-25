@@ -11,7 +11,13 @@ html {
 }
 
 .font-inter {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 @keyframes fade-in-up {
@@ -51,15 +57,23 @@ html {
 
 .carousel-diferenca {
   display: flex;
-  transition: transform 0.6s ease;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.carousel-diferenca::-webkit-scrollbar {
+  display: none;
 }
 
 .card-diferanca {
-  width: 450px;
-  margin-right: 2rem;
+  width: min(450px, 85vw);
   flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 @media (max-width: 768px) {
@@ -80,6 +94,9 @@ html {
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
+}
+
+.logo-row {
   position: relative;
   isolation: isolate;
   --tunnel-fade: clamp(56px, 9vw, 170px);
@@ -91,13 +108,7 @@ html {
     #000 calc(100% - var(--tunnel-fade)),
     transparent 100%
   );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 var(--tunnel-fade),
-    #000 calc(100% - var(--tunnel-fade)),
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--tunnel-fade), #000 calc(100% - var(--tunnel-fade)), transparent 100%);
   box-shadow:
     inset 72px 0 85px -78px var(--tunnel-shadow),
     inset -72px 0 85px -78px var(--tunnel-shadow);
@@ -152,7 +163,7 @@ html {
 }
 
 @media (min-width: 768px) and (max-width: 1400px) {
-  .carousel-diferenca {
+  .card-diferenca {
     margin-left: 50px;
   }
 }
