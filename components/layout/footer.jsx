@@ -42,7 +42,7 @@ export default function SiteFooter() {
               <li><a href="tel:+551146040000" className="hover:text-white">(11) 4604-0000</a></li>
               <li><a href="https://wa.me/5511941398031" className="hover:text-white" target="_blank" rel="noreferrer">(11) 94139-8031</a></li>
               <li><a href="mailto:contato@notpaper.com.br" className="hover:text-white">contato@notpaper.com.br</a></li>
-              <li><a href="https://www.google.com/maps?q=São+Paulo,+SP" className="hover:text-white" target="_blank" rel="noreferrer">São Paulo, SP</a></li>
+              <li><a href="https://www.google.com/maps/place/Av.+Dep.+Castro+de+Carvalho,+941+-+Vila+J%C3%BAlia,+Po%C3%A1+-+SP,+08551-035/@-23.5204327,-46.3569128,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce7b25ec81d259:0x14c7d1f34875f531!8m2!3d-23.5204377!4d-46.3520419!16s%2Fg%2F11h4zprh16?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D" className="hover:text-white" target="_blank" rel="noreferrer">Av. Deputado Castro de Carvalho, 941, Poá - SP</a></li>
             </ul>
           </div>
         </div>

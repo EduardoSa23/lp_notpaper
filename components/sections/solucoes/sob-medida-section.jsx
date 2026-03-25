@@ -18,34 +18,46 @@ const customSolutions = [
 export default function SolucoesSobMedidaSection() {
   return (
     <section className="container mx-auto px-4 py-12 md:py-16">
-      <div className="rounded-[2rem] bg-[#e8edf8] p-6 md:p-10 border-2 border-[#fff] shadow-lg">
-        <header className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-bold leading-tight md:text-5xl">Soluções sob medida</h2>
-          <p className="mt-4 text-lg text-slate-600">Desenvolvemos módulos específicos para atender as necessidades de cada setor com segurança e agilidade.</p>
-        </header>
+      <div className="relative rounded-[2rem] p-6 md:p-10 shadow-lg">
+        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover rounded-[2rem]">
+          <source src="/videos/bg_recursos_poderosos.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40 -z-10" />
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {customSolutions.map((item) => {
-            const Icon = item.icon;
-            return (
-              <article key={item.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
-                  <Icon />
-                </div>
-                <h3 className="mt-5 text-2xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-slate-600">{item.text}</p>
+        <div className="relative">
+          <header className="mx-auto max-w-3xl text-white text-center">
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl">Soluções sob medida</h2>
+            <p className="mt-4 text-lg">
+              Desenvolvemos módulos específicos para atender as necessidades de cada setor com segurança e agilidade.
+            </p>
+          </header>
 
-                <ul className="mt-5 space-y-2">
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-center gap-2 text-sm text-slate-700">
-                      <span className="h-2 w-2 rounded-full bg-teal-400" />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-          })}
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {customSolutions.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
+                    <Icon />
+                  </div>
+                  <h3 className="mt-5 text-2xl font-bold">{item.title}</h3>
+                  <p className="mt-3 text-slate-600">{item.text}</p>
+
+                  <ul className="mt-5 space-y-2">
+                    {item.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-center gap-2 text-sm text-slate-700">
+                        <span className="h-2 w-2 rounded-full bg-teal-400" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

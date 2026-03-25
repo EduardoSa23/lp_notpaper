@@ -47,7 +47,7 @@ export default function RecursosPoderosos() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -55,13 +55,18 @@ export default function RecursosPoderosos() {
   }, []);
 
   return (
-    <section id="services" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
-      <div className="container mx-auto px-4">
+    <section id="services" className="relative pb-12 pt-12 md:pb-16 md:pt-20 section-anchor overflow-hidden">
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+        <source src="/videos/bg_recursos_poderosos.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/40 -z-10" />
+
+      <div className="relative container mx-auto px-4">
         <div className="mb-8 text-center md:mb-16">
-          <h2 className="mb-4 text-3xl md:text-5xl font-bold text-gray-900">
+          <h2 className="mb-4 text-3xl md:text-5xl font-bold text-white">
             Recursos <strong className="text-[#0043FE]">Poderosos</strong>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
+          <p className="mx-auto max-w-2xl text-lg text-gray-100">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">

@@ -14,9 +14,9 @@ export default function QuemSomosCtaSection() {
       <div className={styles.ctaWapper__container}>
         <div className={styles.cta}>
           <div className={styles.cta__content}>
-            <h2 className={styles.cta__title}>Pronto para a Proxima Fase?</h2>
+            <h2 className={styles.cta__title}>Pronto para a Próxima Fase?</h2>
             <p className={styles.cta__description}>
-              A transformacao digital nao e um destino, mas uma evolucao continua. Vamos desenhar juntos o futuro da sua infraestrutura.
+              A transformação digital não é um destino, mas uma evolução contiínua. Vamos desenhar juntos o futuro da sua infraestrutura.
             </p>
             <Link href="/contato" className={styles.cta__button}>Falar com um Especialista</Link>
           </div>

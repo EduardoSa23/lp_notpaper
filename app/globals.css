@@ -136,13 +136,8 @@ html {
 }
 
 #contato {
-  background-image: url("/image/bg_contato.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 100%;
   min-height: 90vh;
-  overflow-x: hidden;
 }
 
 .animacao-faleConosco {

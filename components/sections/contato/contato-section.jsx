@@ -71,8 +71,13 @@ export default function ContatoSection() {
   };
 
   return (
-    <section id="contato" className="bg-gradient-to-br from-blue-50 to-[#0043FE] pb-12 pt-24 md:pb-16 md:pt-28 section-anchor">
-      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-10">
+    <section id="contato" className="relative pb-12 pt-24 md:pb-16 md:pt-28 section-anchor">
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+        <source src="/videos/bg_contato.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/40 -z-10" />
+
+      <div className="relative container items-center mx-auto px-4 grid md:grid-cols-2 gap-10">
         <div>
           <div className="mb-6">
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
@@ -81,7 +86,7 @@ export default function ContatoSection() {
             <h1 className="mt-5 max-w-3xl text-4xl md:text-6xl font-bold leading-tight">
               Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-900">
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed bg-white opacity-90 border border-blue-700 rounded-xl p-4">
               Descubra como a notPaper integra tecnologias de ponta para eliminar burocracia, aumentar produtividade e acelerar a
               transformação digital de ponta a ponta.
             </p>
