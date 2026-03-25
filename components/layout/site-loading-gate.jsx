@@ -2,37 +2,67 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const MAX_WAIT_MS = 5000;
-const APP_ROUTES = ["/", "/comparacao", "/contato", "/quem-somos", "/servicos", "/solucoes"];
+const HOME_ROUTE = "/";
+const CACHE_KEY = "notpaper-home-preloaded-v1";
+const SECONDARY_ROUTES = ["/comparacao", "/contato", "/quem-somos", "/servicos", "/solucoes"];
+const RESOURCE_TIMEOUT_MS = 8000;
+
+function withTimeout(promise, timeoutMs = RESOURCE_TIMEOUT_MS) {
+  return Promise.race([
+    promise,
+    new Promise((resolve) => {
+      window.setTimeout(resolve, timeoutMs);
+    }),
+  ]);
+}
 
 function waitForImage(image) {
-  if (image.complete) return Promise.resolve();
+  const isLazyImage = image.loading === "lazy";
+  if (isLazyImage || image.complete) return Promise.resolve();
 
-  return new Promise((resolve) => {
-    const done = () => {
-      image.removeEventListener("load", done);
-      image.removeEventListener("error", done);
-      resolve();
-    };
+  return withTimeout(
+    new Promise((resolve) => {
+      const done = () => {
+        image.removeEventListener("load", done);
+        image.removeEventListener("error", done);
+        resolve();
+      };
 
-    image.addEventListener("load", done, { once: true });
-    image.addEventListener("error", done, { once: true });
-  });
+      image.addEventListener("load", done, { once: true });
+      image.addEventListener("error", done, { once: true });
+    }),
+  );
 }
 
 function waitForVideo(video) {
+  const preloadMode = (video.getAttribute("preload") || "").toLowerCase();
+  if (preloadMode === "none") return Promise.resolve();
+  if (!video.getAttribute("src") && video.querySelectorAll("source").length === 0) return Promise.resolve();
   if (video.readyState >= 2) return Promise.resolve();
 
-  return new Promise((resolve) => {
-    const done = () => {
-      video.removeEventListener("loadeddata", done);
-      video.removeEventListener("error", done);
-      resolve();
-    };
+  return withTimeout(
+    new Promise((resolve) => {
+      const done = () => {
+        video.removeEventListener("loadeddata", done);
+        video.removeEventListener("error", done);
+        resolve();
+      };
 
-    video.addEventListener("loadeddata", done, { once: true });
-    video.addEventListener("error", done, { once: true });
-  });
+      video.addEventListener("loadeddata", done, { once: true });
+      video.addEventListener("error", done, { once: true });
+    }),
+  );
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = RESOURCE_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timer);
+  }
 }
 
 function toAbsoluteUrl(rawUrl) {
@@ -77,15 +107,15 @@ function extractAssetUrlsFromHtml(html) {
 
 async function warmRouteAndAssets(route) {
   try {
-    const response = await fetch(route, { credentials: "same-origin" });
-    if (!response.ok) return;
+    const response = await fetchWithTimeout(route, { credentials: "same-origin" });
+    if (!response || !response.ok) return;
 
     const html = await response.text();
     const assetUrls = extractAssetUrlsFromHtml(html);
 
     await Promise.allSettled(
       assetUrls.map((url) =>
-        fetch(url, {
+        fetchWithTimeout(url, {
           credentials: "same-origin",
         }),
       ),
@@ -95,50 +125,70 @@ async function warmRouteAndAssets(route) {
   }
 }
 
+function runInBackground(task) {
+  if (typeof window === "undefined") return;
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => {
+      task();
+    });
+    return;
+  }
+
+  window.setTimeout(task, 0);
+}
+
 export default function SiteLoadingGate({ children }) {
   const [ready, setReady] = useState(false);
-  const timeoutRef = useRef(null);
+  const isMountedRef = useRef(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("site-ready") === "1") {
-      setReady(true);
-      return undefined;
-    }
+    isMountedRef.current = true;
 
-    let cancelled = false;
-
-    const finish = () => {
-      if (cancelled) return;
-
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      sessionStorage.setItem("site-ready", "1");
-      setReady(true);
+    const warmSecondaryRoutesInBackground = () => {
+      runInBackground(async () => {
+        await Promise.allSettled(SECONDARY_ROUTES.map((route) => warmRouteAndAssets(route)));
+      });
     };
 
-    timeoutRef.current = setTimeout(finish, MAX_WAIT_MS);
-
-    const preloadEverything = async () => {
+    const preloadHomeFirst = async () => {
       const images = Array.from(document.querySelectorAll("img"));
       const videos = Array.from(document.querySelectorAll("video"));
       const fontReady = document.fonts?.ready ?? Promise.resolve();
+      const homeAssets = warmRouteAndAssets(HOME_ROUTE);
 
-      const currentPageAssets = [...images.map(waitForImage), ...videos.map(waitForVideo), fontReady];
-      const routeWarmups = APP_ROUTES.map((route) => warmRouteAndAssets(route));
+      await Promise.allSettled([...images.map(waitForImage), ...videos.map(waitForVideo), fontReady, homeAssets]);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
 
-      await Promise.allSettled([...currentPageAssets, ...routeWarmups]);
-      finish();
+      if (isMountedRef.current) {
+        try {
+          localStorage.setItem(CACHE_KEY, "1");
+        } catch {
+          // Ignore storage errors.
+        }
+        setReady(true);
+      }
+
+      warmSecondaryRoutesInBackground();
     };
 
-    preloadEverything();
+    let hasCachedHome = false;
+    try {
+      hasCachedHome = localStorage.getItem(CACHE_KEY) === "1";
+    } catch {
+      hasCachedHome = false;
+    }
+
+    if (hasCachedHome) {
+      setReady(true);
+      warmSecondaryRoutesInBackground();
+    } else {
+      preloadHomeFirst();
+    }
 
     return () => {
-      cancelled = true;
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      isMountedRef.current = false;
     };
   }, []);
 
