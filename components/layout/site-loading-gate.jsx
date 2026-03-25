@@ -6,6 +6,8 @@ const HOME_ROUTE = "/";
 const CACHE_KEY = "notpaper-home-preloaded-v1";
 const SECONDARY_ROUTES = ["/comparacao", "/contato", "/quem-somos", "/servicos", "/solucoes"];
 const RESOURCE_TIMEOUT_MS = 8000;
+const VIDEO_TIMEOUT_MS = 45000;
+const CRITICAL_HOME_VIDEOS = ["/videos/bg_hero.mp4", "/videos/bg_recursos_poderosos.mp4", "/videos/bg_contato.mp4"];
 
 function withTimeout(promise, timeoutMs = RESOURCE_TIMEOUT_MS) {
   return Promise.race([
@@ -62,6 +64,16 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = RESOURCE_TIMEOUT_
     return await fetch(url, { ...options, signal: controller.signal });
   } finally {
     window.clearTimeout(timer);
+  }
+}
+
+async function preloadVideoFile(url) {
+  try {
+    const response = await fetchWithTimeout(url, { credentials: "same-origin" }, VIDEO_TIMEOUT_MS);
+    if (!response || !response.ok) return;
+    await response.arrayBuffer();
+  } catch {
+    // Ignore preload errors and continue.
   }
 }
 
@@ -156,8 +168,9 @@ export default function SiteLoadingGate({ children }) {
       const videos = Array.from(document.querySelectorAll("video"));
       const fontReady = document.fonts?.ready ?? Promise.resolve();
       const homeAssets = warmRouteAndAssets(HOME_ROUTE);
+      const criticalVideos = CRITICAL_HOME_VIDEOS.map((videoUrl) => preloadVideoFile(videoUrl));
 
-      await Promise.allSettled([...images.map(waitForImage), ...videos.map(waitForVideo), fontReady, homeAssets]);
+      await Promise.allSettled([...images.map(waitForImage), ...videos.map(waitForVideo), fontReady, homeAssets, ...criticalVideos]);
       await new Promise((resolve) => requestAnimationFrame(() => resolve()));
       await new Promise((resolve) => requestAnimationFrame(() => resolve()));
 
@@ -173,19 +186,7 @@ export default function SiteLoadingGate({ children }) {
       warmSecondaryRoutesInBackground();
     };
 
-    let hasCachedHome = false;
-    try {
-      hasCachedHome = localStorage.getItem(CACHE_KEY) === "1";
-    } catch {
-      hasCachedHome = false;
-    }
-
-    if (hasCachedHome) {
-      setReady(true);
-      warmSecondaryRoutesInBackground();
-    } else {
-      preloadHomeFirst();
-    }
+    preloadHomeFirst();
 
     return () => {
       isMountedRef.current = false;
