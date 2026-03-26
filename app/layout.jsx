@@ -1,6 +1,6 @@
 ﻿import "./globals.css";
 import { Inter } from "next/font/google";
-import SiteLoadingGate from "@/components/layout/site-loading-gate";
+import SiteLoading from "../components/layout/site-loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className={inter.className} suppressHydrationWarning>
-        <SiteLoadingGate>{children}</SiteLoadingGate>
+        <SiteLoading>{children}</SiteLoading>
       </body>
     </html>
   );
