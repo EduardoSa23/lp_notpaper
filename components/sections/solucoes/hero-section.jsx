@@ -10,7 +10,7 @@
         <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
           Inovação digital
         </span>
-        <h1 className="mt-5 max-w-3xl text-4xl text-white font-bold leading-tight md:text-6xl">
+        <h1 className="mt-5 max-w-3xl text-3xl text-white font-bold leading-tight md:text-5xl">
           Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white">

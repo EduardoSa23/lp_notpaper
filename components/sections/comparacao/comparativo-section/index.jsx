@@ -51,7 +51,7 @@ const featureRows = [
     id: "dashboards",
     feature: "Dashboards ao vivo",
     detail: "Visualizacao em tempo real para toda a operacao",
-    notpaper: "Sim",
+    sistema: "Sim",
     competitors: {
       "concorrente-1": "Sim",
       "concorrente-2": "Sim",
@@ -63,7 +63,7 @@ const featureRows = [
     id: "ia",
     feature: "Assistente de IA",
     detail: "Sugestoes de automacao e apoio em processos",
-    notpaper: "Nativo",
+    sistema: "Nativo",
     competitors: {
       "concorrente-1": "Módulo extra",
       "concorrente-2": "Parcial",
@@ -75,7 +75,7 @@ const featureRows = [
     id: "multicliente",
     feature: "Ambiente multicliente",
     detail: "Gestao centralizada para orgaos e equipes",
-    notpaper: "Ilimitado",
+    sistema: "Ilimitado",
     competitors: {
       "concorrente-1": "Limitado",
       "concorrente-2": "Limitado",
@@ -87,7 +87,7 @@ const featureRows = [
     id: "setup",
     feature: "Tempo de implantacao",
     detail: "Inicio da operacao com onboarding guiado",
-    notpaper: "Setup rapido",
+    sistema: "Setup rapido",
     competitors: {
       "concorrente-1": "45-60 dias",
       "concorrente-2": "30-45 dias",
@@ -99,7 +99,7 @@ const featureRows = [
     id: "suporte",
     feature: "Suporte especializado",
     detail: "Atendimento consultivo para operacao publica",
-    notpaper: "Time dedicado",
+    sistema: "Time dedicado",
     competitors: {
       "concorrente-1": "Fila padrao",
       "concorrente-2": "Fila padrao",

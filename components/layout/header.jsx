@@ -22,7 +22,7 @@ export default function SiteHeader() {
             Quem Somos
           </Link>
           <Link href="/comparacao" className="text-gray-700 transition-colors hover:text-[#0043FE]">
-            Comparação
+            Comparar Soluções
           </Link>
           <Link href="/contato" className="text-gray-700 transition-colors hover:text-[#0043FE]">
             Contato

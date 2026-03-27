@@ -83,7 +83,7 @@ export default function ContatoSection() {
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
               Inovação digital
             </span>
-            <h1 className="mt-5 max-w-3xl text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="mt-5 max-w-3xl text-3xl md:text-5xl font-bold leading-tight">
               Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed bg-white opacity-90 border border-blue-700 rounded-xl p-4">

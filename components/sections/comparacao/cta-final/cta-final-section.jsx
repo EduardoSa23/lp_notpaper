@@ -4,8 +4,8 @@ export default function ComparacaoCtaFinalSection() {
   return (
     <section className="bg-[#F6F8FC]">
       <div className="max-w-[1200px] mx-auto px-4 md:pb-24 pb-6 md:pb-20">
-        <div className="rounded-2xl p-6 text-center shadow-2xl md:py-24 bg-[radial-gradient(circle,_#0132B4_0%,_#020617_100%)]">
-          <h3 className="text-4xl font-bold text-white md:text-6xl mx-auto max-w-[800px]">
+        <div className="rounded-2xl p-6 text-center shadow-2xl md:py-16 bg-[radial-gradient(circle,_#0132B4_0%,_#020617_100%)]">
+          <h3 className="text-2xl font-bold text-white md:text-4xl mx-auto max-w-[580px]">
             A escolha não é entre sistemas. É entre o ontem e o amanhã.
           </h3>
           <p className="mx-auto mt-3 md:mt-8 max-w-2xl text-gray-200">

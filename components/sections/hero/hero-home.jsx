@@ -20,7 +20,7 @@ export default function HeroHome() {
       <div className="container mx-auto px-4">
         <div className="md:grid items-center lg:grid-cols-[auto_auto] md:justify-between">
           <div className="animate-fade-in-up lg:max-w-[700px]">
-            <h1 className="mb-6 text-center text-4xl font-bold text-white md:text-left md:text-6xl">
+            <h1 className="mb-6 text-center text-3xl font-bold text-white md:text-left md:text-5xl">
               {heroData.title} <span className="text-[#0043FE]">{heroData.titleHighlight}</span>
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-white">{heroData.description}</p>
