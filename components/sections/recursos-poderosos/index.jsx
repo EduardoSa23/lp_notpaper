@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { FaCity, FaFileInvoiceDollar, FaRobot } from "react-icons/fa6";
 
+import { BtnWhatsapp } from "../../ui/btn-whatsapp";
+
 const serviceCards = [
   {
     id: "ged",
@@ -98,6 +100,10 @@ export default function RecursosPoderosos() {
               </article>
             );
           })}
+        </div>
+
+        <div className="flex justify-center mt-8 md:mt-16">
+          <BtnWhatsapp>Falar com um especialista</BtnWhatsapp>
         </div>
       </div>
     </section>

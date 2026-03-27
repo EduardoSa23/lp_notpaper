@@ -1,5 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
+import { BackToTop } from "../ui/back-to-top";
+import { BtnWhatsapp } from "../ui/btn-whatsapp";
 
 export default function SiteHeader() {
   return (
@@ -10,19 +12,27 @@ export default function SiteHeader() {
         </Link>
 
         <div className="hidden items-center space-x-8 md:flex">
-          <Link href="/" className="text-gray-700 transition-colors hover:text-[#0043FE]">Home</Link>
-          <Link href="/comparacao" className="text-gray-700 transition-colors hover:text-[#0043FE]">Comparação</Link>
-          <Link href="/solucoes" className="text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
-          <Link href="/quem-somos" className="text-gray-700 transition-colors hover:text-[#0043FE]">Quem Somos</Link>
-          <Link href="/contato" className="text-gray-700 transition-colors hover:text-[#0043FE]">Contato</Link>
+          <Link href="/" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            Home
+          </Link>
+          <Link href="/solucoes" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            Soluções
+          </Link>
+          <Link href="/quem-somos" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            Quem Somos
+          </Link>
+          <Link href="/comparacao" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            Comparação
+          </Link>
+          <Link href="/contato" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            Contato
+          </Link>
         </div>
 
         <div className="hidden md:block">
-          <a href="https://api.whatsapp.com/send?phone=5511941398031&text=Olá" target="_blank" rel="noreferrer">
-            <button className="rounded-3xl bg-[#0043FE] px-3 py-1 font-semibold text-white transition-colors hover:bg-[#0135c5] md:px-4">
-              Começar Agora
-            </button>
-          </a>
+          <BtnWhatsapp>
+            Começar Agora
+          </BtnWhatsapp>
         </div>
 
         <details className="relative md:hidden">
@@ -33,15 +43,26 @@ export default function SiteHeader() {
           </summary>
 
           <div className="absolute right-0 mt-3 flex w-56 flex-col space-y-1 rounded-lg bg-white px-6 py-4 shadow-lg">
-            <Link href="/" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Home</Link>
-            <Link href="/comparacao" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Comparação</Link>
-            <Link href="/solucoes" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Serviços</Link>
-            <Link href="/quem-somos" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Quem Somos</Link>
-            <Link href="/contato" className="block py-2 text-gray-700 transition-colors hover:text-[#0043FE]">Contato</Link>
+            <Link href="/" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+              Home
+            </Link>
+            <Link href="/comparacao" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+              Comparação
+            </Link>
+            <Link href="/solucoes" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+              Soluções
+            </Link>
+            <Link href="/quem-somos" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+              Quem Somos
+            </Link>
+            <Link href="/contato" className="block py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+              Contato
+            </Link>
           </div>
         </details>
       </nav>
+
+      <BackToTop />
     </header>
   );
 }
-

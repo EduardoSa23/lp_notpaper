@@ -65,7 +65,7 @@ const featureRows = [
     detail: "Sugestoes de automacao e apoio em processos",
     notpaper: "Nativo",
     competitors: {
-      "concorrente-1": "Modulo extra",
+      "concorrente-1": "Módulo extra",
       "concorrente-2": "Parcial",
       "concorrente-3": "Nao possui",
       "concorrente-4": "Parcial",

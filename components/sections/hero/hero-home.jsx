@@ -5,7 +5,6 @@ const heroData = {
   title: "Gestão pública",
   titleHighlight: "Inteligente.",
   description: "Oferecemos tecnologia inovadora. Automatizamos e agilizamos os seus processos com sustentabilidade e eficiência.",
-  ctaWhatsapp: "https://api.whatsapp.com/send?phone=5511941398031&text=Olá",
   heroImage: "/image/secaoHero.png",
   heroImageAlt: "Profissional trabalhando",
 };
@@ -13,7 +12,7 @@ const heroData = {
 export default function HeroHome() {
   return (
     <section id="home" className="pb-16 pt-20 lg:pt-32 section-anchor">
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full max-h-[626px] object-cover">
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full lg:max-h-[626px] object-cover">
         <source src="/videos/bg_hero.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/40 -z-10" />
@@ -51,16 +50,6 @@ export default function HeroHome() {
           </div>
         </div>
       </div>
-
-      <a href={heroData.ctaWhatsapp} target="_blank" rel="noreferrer">
-        <Image
-          src="/image/whatsapp.png"
-          alt="Botão de WhatsApp"
-          width={64}
-          height={64}
-          className="fixed bottom-8 right-2 z-50 h-auto w-16 cursor-pointer transition-transform duration-300 hover:scale-110 md:right-8"
-        />
-      </a>
     </section>
   );
 }

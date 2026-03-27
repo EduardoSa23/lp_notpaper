@@ -22,7 +22,7 @@ export default function SolucoesGedSection() {
   return (
     <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 01</p>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 03</p>
         <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Gestão Eletrônica de Documentos (GED)</h2>
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
           Solução completa de armazenamento inteligente, indexação automática e governança documental para operações de alta performance.
