@@ -35,7 +35,7 @@ const competitors = [
   {
     id: "concorrente-4",
     name: "Concorrente 4",
-    logo: "concorrente3.png",
+    logo: "concorrente4.png",
     score: 7.4,
     overview: { usabilidade: 68, integracoes: 63, automacao: 56, custo: 60 },
   },
@@ -109,6 +109,88 @@ const featureRows = [
   },
 ];
 
+const appFeatureRows = [
+  {
+    id: "fluxos",
+    feature: "Fluxos visuais de aprovacao",
+    detail: "Construtor drag-and-drop para processos internos do time",
+    app: "Nativo",
+    competitors: {
+      "concorrente-1": "Limitado",
+      "concorrente-2": "Parcial",
+      "concorrente-3": "Nao possui",
+      "concorrente-4": "Parcial",
+    },
+  },
+  {
+    id: "mobile",
+    feature: "Aplicativo mobile completo",
+    detail: "Aprovacoes, notificacoes e consultas em tempo real",
+    app: "iOS e Android",
+    competitors: {
+      "concorrente-1": "Somente consulta",
+      "concorrente-2": "Android",
+      "concorrente-3": "Nao possui",
+      "concorrente-4": "Parcial",
+    },
+  },
+  {
+    id: "relatorios",
+    feature: "Relatorios personalizados",
+    detail: "Filtros salvos, exportacao e agendamento automatizado",
+    app: "Ilimitado",
+    competitors: {
+      "concorrente-1": "5 modelos",
+      "concorrente-2": "10 modelos",
+      "concorrente-3": "Basico",
+      "concorrente-4": "Parcial",
+    },
+  },
+  {
+    id: "api",
+    feature: "API para integracoes",
+    detail: "Endpoints com autenticacao para conectar sistemas legados",
+    app: "Completa",
+    competitors: {
+      "concorrente-1": "Restrita",
+      "concorrente-2": "Restrita",
+      "concorrente-3": "Nao possui",
+      "concorrente-4": "Parcial",
+    },
+  },
+  {
+    id: "onboarding",
+    feature: "Onboarding guiado",
+    detail: "Treinamentos, checklists e playbooks prontos",
+    app: "Incluso",
+    competitors: {
+      "concorrente-1": "Pago",
+      "concorrente-2": "Pago",
+      "concorrente-3": "Nao incluso",
+      "concorrente-4": "Parcial",
+    },
+  },
+];
+
+const compareModes = {
+  notpaper: {
+    id: "notpaper",
+    label: "Sistema WEB",
+    title: "Comparacao individual: notPaper x",
+    description: "Considere os pontos que impactam diretamente produtividade, custo e velocidade de entrega.",
+    rows: featureRows,
+    valueKey: "sistema",
+  },
+  app: {
+    id: "app",
+    label: "APP Mobile",
+    title: "Comparacao individual: notPaper x",
+    description: "Veja recursos voltados para operacao diaria, mobilidade e evolucao rapida do seu time.",
+    rows: appFeatureRows,
+    valueKey: "app",
+  },
+};
+
 function MetricBar({ label, value }) {
   return (
     <div className={styles.metricRow}>
@@ -134,19 +216,21 @@ function OverviewCard({ logo, score, metrics, spotlight = false }) {
         {overviewMetrics.map((metric) => (
           <MetricBar key={metric.key} label={metric.label} value={metrics[metric.key]} />
         ))}
+        <p className={styles.overviewScore}>{score.toFixed(1)} / 10</p>
       </div>
-      <p className={styles.overviewScore}>{score.toFixed(1)} / 10</p>
     </article>
   );
 }
 
 export default function ComparativoSection() {
   const [selectedCompetitor, setSelectedCompetitor] = useState(competitors[0].id);
+  const [selectedMode, setSelectedMode] = useState("notpaper");
 
   const selectedName = useMemo(
     () => competitors.find((item) => item.id === selectedCompetitor)?.name ?? "Concorrente",
     [selectedCompetitor],
   );
+  const activeMode = compareModes[selectedMode];
 
   return (
     <section className={styles.comparativo}>
@@ -190,9 +274,25 @@ export default function ComparativoSection() {
         </div>
 
         <article className={styles.detailCard}>
+          <div className={styles.productPicker} role="tablist" aria-label="Tipo de comparativo">
+            {Object.values(compareModes).map((mode) => (
+              <button
+                key={mode.id}
+                type="button"
+                role="tab"
+                aria-selected={selectedMode === mode.id}
+                className={`${styles.productButton} ${selectedMode === mode.id ? styles.productButtonActive : ""}`}
+                onClick={() => setSelectedMode(mode.id)}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
           <header className={styles.detailHeader}>
-            <h3>Comparacao individual: notPaper x {selectedName}</h3>
-            <p>Considere os pontos que impactam diretamente produtividade, custo e velocidade de entrega.</p>
+            <h3>
+              {activeMode.title} {selectedName}
+            </h3>
+            <p>{activeMode.description}</p>
           </header>
 
           <div className={styles.tableWrap}>
@@ -200,18 +300,18 @@ export default function ComparativoSection() {
               <thead>
                 <tr>
                   <th className="rounded-l-xl">Recursos</th>
-                  <th>notPaper</th>
+                  <th>{activeMode.label}</th>
                   <th className="rounded-r-xl">{selectedName}</th>
                 </tr>
               </thead>
               <tbody>
-                {featureRows.map((row) => (
+                {activeMode.rows.map((row) => (
                   <tr key={row.id}>
                     <td>
                       <strong>{row.feature}</strong>
                       <span>{row.detail}</span>
                     </td>
-                    <td className={styles.valueHighlight}>{row.notpaper}</td>
+                    <td className={styles.valueHighlight}>{row[activeMode.valueKey]}</td>
                     <td>{row.competitors[selectedCompetitor]}</td>
                   </tr>
                 ))}

@@ -7,7 +7,7 @@ export default function SolucoesCtaFinalSection() {
         <h3 className="text-3xl font-bold text-white md:text-4xl">Pronto para modernizar sua operação?</h3>
         <p className="mx-auto mt-3 max-w-2xl text-gray-200">Combinamos arquitetura robusta, automação e experiência para acelerar resultados reais.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/contato" className="rounded-xl bg-blue-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-800">
+          <Link href="https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F" className="rounded-xl bg-blue-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-800">
             Falar com especialista
           </Link>
           <Link href="/comparacao" className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 transition-colors hover:border-blue-700 hover:text-blue-700">

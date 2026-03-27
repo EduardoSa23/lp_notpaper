@@ -21,7 +21,7 @@ export default function QuemSomosHeroSection() {
               Hoje, a notPaper atua com visão de Gestão 4.0, conectando ecossistemas de ECM, automação de workflow e digitalização inteligente em uma jornada contínua de evolução.
             </p>
 
-            <Link href="/" className={styles.hero__button}>Explorar Soluções</Link>
+            <Link href="/solucoes" className={styles.hero__button}>Explorar Soluções</Link>
           </div>
 
           <div className={styles.hero__media}>

@@ -18,7 +18,7 @@ export default function QuemSomosCtaSection() {
             <p className={styles.cta__description}>
               A transformação digital não é um destino, mas uma evolução contiínua. Vamos desenhar juntos o futuro da sua infraestrutura.
             </p>
-            <Link href="/contato" className={styles.cta__button}>Falar com um Especialista</Link>
+            <Link href= "https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F" target="_blank" className={styles.cta__button}>Falar com um Especialista</Link>
           </div>
 
           <div className={styles.cta__metrics}>

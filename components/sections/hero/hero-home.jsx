@@ -1,10 +1,11 @@
 ﻿import Image from "next/image";
+import Link from "next/link";
 import { FaRocket, FaLightbulb } from "react-icons/fa6";
 
 const heroData = {
   title: "Gestão pública",
-  titleHighlight: "Inteligente.",
-  description: "Oferecemos tecnologia inovadora. Automatizamos e agilizamos os seus processos com sustentabilidade e eficiência.",
+  titleHighlight: "Digital de verdade.",
+  description: "Automatize processos, elimine o papel e tenha controle total da sua prefeitura em um só sistema.",
   heroImage: "/image/secaoHero.png",
   heroImageAlt: "Profissional trabalhando",
 };
@@ -24,21 +25,30 @@ export default function HeroHome() {
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-white">{heroData.description}</p>
             <div className="flex justify-between gap-4 sm:flex-row md:justify-start">
-              <a href={heroData.ctaWhatsapp} target="_blank" rel="noreferrer">
-                <button className="rounded-lg bg-[#0043FE] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#0135c5] md:text-lg">
-                  Começar Agora
+              <Link
+                href="https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F"
+                target="_blank"
+                className="rounded-lg bg-[#0043FE] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#0135c5] md:text-lg"
+              >
+                Transformar minha gestão
+              </Link>
+              <Link href="/solucoes">
+                <button className="rounded-lg border-2 border-gray-300 px-8 py-4 font-semibold text-white transition-colors hover:border-[#ccc] hover:text-[#ccc] md:text-lg">
+                  Conhecer nossa solução
                 </button>
-              </a>
-              <a href="#contato">
-                <button className="rounded-lg border-2 border-gray-300 px-8 py-4 font-semibold text-white transition-colors hover:border-[#0043FE] hover:text-[#0043FE] md:text-lg">
-                  Saiba mais
-                </button>
-              </a>
+              </Link>
             </div>
           </div>
 
           <div className="mt-12 animate-zoom-in lg:mt-0">
-            <Image src={heroData.heroImage} alt={heroData.heroImageAlt} width={640} height={500} className="rounded-2xl shadow-2xl relative" priority />
+            <Image
+              src={heroData.heroImage}
+              alt={heroData.heroImageAlt}
+              width={640}
+              height={500}
+              className="rounded-2xl shadow-2xl relative"
+              priority
+            />
             <div className="absolute -right-2 -top-4 flex animate-bounce items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black [animation-duration:1.8s] md:-right-4">
               <FaLightbulb />
               <span>Inovação</span>

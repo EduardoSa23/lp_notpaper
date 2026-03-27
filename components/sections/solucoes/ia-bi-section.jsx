@@ -1,4 +1,5 @@
 ﻿import { FaBrain, FaCircleCheck } from "react-icons/fa6";
+import { BtnWhatsapp } from "../../ui/btn-whatsapp";
 
 export default function SolucoesIaBiSection() {
   return (
@@ -30,6 +31,7 @@ export default function SolucoesIaBiSection() {
               </div>
             </article>
           </div>
+          <BtnWhatsapp className="mt-7">Falar com um especialista</BtnWhatsapp>
         </div>
         <div className="rounded-2xl p-4 bg-gray-600 shadow-2xl">
           <img className="max-h-[500px] rounded-2xl" src="/image/dados_ia.png" alt="" />

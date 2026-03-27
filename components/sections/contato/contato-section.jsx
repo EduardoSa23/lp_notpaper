@@ -17,7 +17,7 @@ const contatoData = {
       iconColor: "text-orange-600",
     },
     {
-      href: "https://wa.me/5511941398031",
+      href: "https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F",
       title: "WhatsApp",
       text: "(11) 94139-8031",
       icon: FaWhatsapp,

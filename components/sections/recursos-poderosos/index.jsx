@@ -101,10 +101,6 @@ export default function RecursosPoderosos() {
             );
           })}
         </div>
-
-        <div className="flex justify-center mt-8 md:mt-16">
-          <BtnWhatsapp>Falar com um especialista</BtnWhatsapp>
-        </div>
       </div>
     </section>
   );

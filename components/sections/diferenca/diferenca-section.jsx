@@ -107,8 +107,8 @@ export default function DiferencaSection() {
     <section id="diferenca" className="bg-white pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
       <div className="mx-auto grid max-w-6xl px-4">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:gap-12">
-          <h2 className="mb-2 text-center text-2xl font-bold md:mb-6 md:text-3xl">
-            O que torna a <strong className="text-3xl text-[#0043FE] md:text-4xl">notPaper</strong> diferente?
+          <h2 className="mb-2 text-center text-3xl md:text-5xl font-bold md:mb-6">
+            O que torna a <strong className="text-[#0043FE]">notPaper</strong> diferente?
           </h2>
           <div className="mb-2 flex justify-end gap-2 md:mb-4">
             <button
@@ -139,7 +139,10 @@ export default function DiferencaSection() {
           onPointerMove={onPointerMove}
         >
           {diferencas.map((card) => (
-            <article key={card.titulo} className="card-diferanca max-w-[100%] rounded-[30px] border border-gray-200 bg-white shadow md:max-w-5xl">
+            <article
+              key={card.titulo}
+              className="card-diferanca max-w-[100%] rounded-[30px] border border-gray-200 bg-white shadow md:max-w-5xl"
+            >
               <Image src={card.img} alt={card.titulo} width={500} height={250} className="mb-4 w-full" draggable={false} />
               <h3 className="text-center text-lg font-bold">{card.titulo}</h3>
               <h4 className="my-4 text-center font-semibold">{card.subtitulo}</h4>

@@ -2,6 +2,7 @@
 import SiteFooter from "@/components/layout/footer";
 import StatsSection from "@/components/sections/stats/stats-section";
 import ComparativoSection from "@/components/sections/comparacao/comparativo-section";
+import ComparacaoCtaFinalSection from "@/components/sections/comparacao/cta-final/cta-final-section"
 
 export const metadata = {
   title: "Comparação | notPaper",
@@ -17,7 +18,7 @@ export default function ComparacaoPage() {
       <SiteHeader />
       <main className="font-inter bg-white">
         <ComparativoSection />
-        <StatsSection />
+        <ComparacaoCtaFinalSection />
       </main>
       <SiteFooter />
     </>

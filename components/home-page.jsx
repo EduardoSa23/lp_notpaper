@@ -5,9 +5,9 @@ import HeroHome from "@/components/sections/hero/hero-home";
 import DiferencaSection from "@/components/sections/diferenca/diferenca-section";
 import RecursosPoderosos from "@/components/sections/recursos-poderosos/index";
 import ClientesSection from "@/components/sections/clientes/clientes-section";
-import FundamentosValorSection from "@/components/sections/quem-somos/fundamentos";
 import StatsSection from "@/components/sections/stats/stats-section";
 import ContatoSection from "@/components/sections/contato/contato-section";
+import CtaFinalSection from "@/components/sections/cta/cta-section"
 
 export default function HomePage() {
   return (
@@ -18,9 +18,9 @@ export default function HomePage() {
       <main className="font-inter bg-white">
         <HeroHome />
         <DiferencaSection />
+        <CtaFinalSection />
         <RecursosPoderosos />
         <ClientesSection />
-        <FundamentosValorSection />
         <StatsSection />
         <ContatoSection />
       </main>
