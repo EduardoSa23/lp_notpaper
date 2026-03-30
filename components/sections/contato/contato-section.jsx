@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { FaEnvelope, FaLocationDot, FaPhone, FaWhatsapp } from "react-icons/fa6";
 
+import { useInView } from "@/hooks/useInView";
+
 const contatoData = {
   title: "Entre em",
   highlight: "Contato",
@@ -46,6 +48,8 @@ const contatoData = {
 };
 
 export default function ContatoSection() {
+  const { ref, isVisible } = useInView();
+
   const [formState, setFormState] = useState({ loading: false, message: "", error: false });
 
   const handleSubmit = async (event) => {
@@ -77,7 +81,12 @@ export default function ContatoSection() {
       </video>
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
-      <div className="relative container items-center mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <div
+        ref={ref}
+        className={`relative container items-center mx-auto px-4 grid md:grid-cols-2 gap-10 transition-all duration-1000
+          ${isVisible ? "animate-blur-in-up" : "opacity-0 translate-y-16 blur-md"}
+        `}
+        >
         <div>
           <div className="mb-6">
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
@@ -118,7 +127,6 @@ export default function ContatoSection() {
             </div>
           </div>
         </div>
-
         <div>
           <div className="rounded-2xl bg-white p-8 shadow-lg">
             <h2 className="text-center text-2xl font-semibold">Solicitar Demonstração</h2>

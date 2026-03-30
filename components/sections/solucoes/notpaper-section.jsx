@@ -1,8 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
+import { useInView } from "@/hooks/useInView";
 
 export default function SolucoesNotpaperSection() {
+  const { ref, isVisible } = useInView();
+
   const items = useMemo(
     () => [
       {
@@ -206,16 +210,29 @@ export default function SolucoesNotpaperSection() {
   return (
     <section className="w-full">
       <div className="container mx-auto py-24 px-4 md:px-6 flex flex-col justify-center">
-        <header className="max-w-[780px] mb-14">
+        <header className="max-w-[780px] mb-6">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 01</p>
-          <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">notPaper - Gestão de processos e protocolos digitais</h2>
+          <SplitText
+            text="notPaper - Gestão de processos e protocolos digitais"
+            className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
+            delay={50}
+            duration={1}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="start"
+          />
           <p className="mt-5 text-lg leading-relaxed text-slate-600">
             Tudo que sua gestão precisa para operar com eficiência, controle e transformação digital real.
           </p>
         </header>
 
         <div className="grid md:grid lg:grid-cols-2 gap-8 items-center">
-          <aside className="">
+          <aside ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"}`}>
+            {" "}
             <h3 className="pb-5 text-center text-lg md:text-2xl font-semibold text-slate-600">Confira todas as nossas funcionalidades.</h3>
             <nav aria-label="Passos">
               <ul className="flex flex-wrap w-full border-2 border-white bg-gradient-to-br from-slate-800 to-slate-700 p-4 rounded-2xl shadow-2xl gap-4 items-center md:items-start">
@@ -249,9 +266,10 @@ export default function SolucoesNotpaperSection() {
           </aside>
 
           <div
-            className="w-full h-full flex flex-col lg:min-h-[610px] justify-between rounded-2xl shadow-2xl overflow-hidden
-            bg-[radial-gradient(circle,_#2b2eed_0%,_#424750_70%)]
-          "
+            className={`${
+              isVisible ? "animate-blur-in-right" : "opacity-0"
+            } w-full h-full flex flex-col lg:min-h-[610px] justify-between rounded-2xl shadow-2xl overflow-hidden
+            bg-[radial-gradient(circle,_#2b2eed_0%,_#424750_70%)]`}
           >
             <div className="px-6 py-8 md:px-10 md:py-12">
               <h4 className="text-xl md:text-2xl text-center text-white mb-4 font-semibold">{active.title}</h4>

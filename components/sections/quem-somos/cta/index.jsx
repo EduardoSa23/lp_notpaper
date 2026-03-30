@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import styles from "./cta.module.scss";
+import BorderGlow from "../../../animate/Components/BorderGlow/BorderGlow";
 
 const metrics = [
   { value: "+500", label: "Empresas Transformadas" },
@@ -11,6 +12,17 @@ const metrics = [
 export default function QuemSomosCtaSection() {
   return (
     <section className={styles.ctaWapper}>
+      <BorderGlow
+        edgeSensitivity={30}
+        glowColor="30 58 138"
+        backgroundColor="#060010"
+        borderRadius={25}
+        glowRadius={40}
+        glowIntensity={5}
+        coneSpread={25}
+        animated={false}
+        colors={["#02010f", "#1d1250", "#101baf"]}
+      >
       <div className={styles.ctaWapper__container}>
         <div className={styles.cta}>
           <div className={styles.cta__content}>
@@ -31,6 +43,7 @@ export default function QuemSomosCtaSection() {
           </div>
         </div>
       </div>
+      </BorderGlow>
     </section>
   );
 }

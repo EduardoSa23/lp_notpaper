@@ -29,7 +29,8 @@ export function BackToTop() {
         fixed bottom-8 right-2 md:right-8 z-50
         w-14 h-14 rounded-full
         flex items-center justify-center
-        bg-[#0043FE] text-white
+        border border-white
+        bg-[radial-gradient(circle,_#020617_0%,_#0132B4_100%)] text-white
         shadow-lg hover:shadow-xl
         transition-all duration-300
         hover:scale-110

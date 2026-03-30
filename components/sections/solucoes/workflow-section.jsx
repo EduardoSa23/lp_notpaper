@@ -1,4 +1,8 @@
-﻿import { FaDiagramProject, FaWaveSquare } from "react-icons/fa6";
+﻿'use client';
+
+import { FaDiagramProject, FaWaveSquare } from "react-icons/fa6";
+import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
+import { useInView } from "@/hooks/useInView";
 
 const workflowFeatures = [
   {
@@ -14,14 +18,28 @@ const workflowFeatures = [
 ];
 
 export default function SolucoesWorkflowSection() {
+  const { ref, isVisible } = useInView();
+
   return (
     <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
-      <div className="p-4 shadow-xl bg-white rounded-2xl">
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} p-4 shadow-xl bg-white rounded-2xl`}>
         <img className="rounded-2xl" src="/image/automacao.png" alt="" />
       </div>
-      <div>
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"}`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 02</p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Automação & Workflow (BPMN 2.0)</h2>
+        <SplitText
+          text="Automação & Workflow (BPMN 2.0)"
+          className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
+          delay={50}
+          duration={1}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="start"
+        />
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
           Modele processos complexos com facilidade visual. Transforme fluxos manuais em sequências digitais seguras, sem erros e com
           aprovações rastreaveis.

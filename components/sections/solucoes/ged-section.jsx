@@ -1,4 +1,8 @@
-﻿import { FaFileSignature, FaMagnifyingGlass, FaShieldHalved } from "react-icons/fa6";
+﻿"use client";
+
+import { FaFileSignature, FaMagnifyingGlass, FaShieldHalved } from "react-icons/fa6";
+import { useInView } from "@/hooks/useInView";
+import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
 
 const gedFeatures = [
   {
@@ -19,11 +23,25 @@ const gedFeatures = [
 ];
 
 export default function SolucoesGedSection() {
+  const { ref, isVisible } = useInView();
+
   return (
     <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
-      <div>
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"}`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 03</p>
-        <h2 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">Gestão Eletrônica de Documentos (GED)</h2>
+        <SplitText
+          text="Gestão Eletrônica de Documentos (GED)"
+          className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
+          delay={50}
+          duration={1}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="start"
+        />
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
           Solução completa de armazenamento inteligente, indexação automática e governança documental para operações de alta performance.
         </p>
@@ -49,9 +67,10 @@ export default function SolucoesGedSection() {
         </div>
       </div>
 
-      <div className="p-4 shadow-xl bg-white rounded-2xl">
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} p-4 shadow-xl bg-white rounded-2xl`}>
         <img className="rounded-2xl" src="/image/ged.png" alt="" />
       </div>
     </section>
   );
 }
+

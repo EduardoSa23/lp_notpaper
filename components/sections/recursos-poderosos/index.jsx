@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FaCity, FaFileInvoiceDollar, FaRobot } from "react-icons/fa6";
-
-import { BtnWhatsapp } from "../../ui/btn-whatsapp";
+import RotatingText from "../../animate/TextAnimations/RotatingText/RotatingText";
 
 const serviceCards = [
   {
@@ -65,8 +64,20 @@ export default function RecursosPoderosos() {
 
       <div className="relative container mx-auto px-4">
         <div className="mb-8 text-center md:mb-16">
-          <h2 className="mb-4 text-3xl md:text-5xl font-bold text-white">
-            Recursos <strong className="text-[#0043FE]">Poderosos</strong>
+          <h2 className="flex items-center justify-center gap-4 mb-4 text-3xl md:text-5xl font-bold text-white">
+            Recursos
+            <RotatingText
+              texts={["Poderosos", "Inteligentes", "Robustos", "Completos"]}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-[#0348FC] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-100">Descubra como nosso sistema pode mudar a forma como você trabalha</p>
         </div>

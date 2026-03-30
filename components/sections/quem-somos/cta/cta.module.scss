@@ -1,13 +1,9 @@
 ﻿.ctaWapper {
   background: #eceff6;
   padding: 4rem 0;
-
-  &__container {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1280px;
-    padding: 0 1rem;
-  }
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
 }
 
 .cta {
@@ -19,7 +15,6 @@
     radial-gradient(circle at 82% 84%, rgba(30, 64, 175, 0.4), transparent 42%),
     linear-gradient(125deg, #020617 0%, #0f172a 45%, #111827 100%);
   padding: 1.5rem;
-  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.4);
 
   &::before {
     content: "";
@@ -59,7 +54,9 @@
     padding: 0.95rem 1.35rem;
     font-weight: 700;
     color: #052e2b;
-    transition: transform 0.25s ease, filter 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      filter 0.25s ease;
   }
 
   &__button:hover {
@@ -80,7 +77,9 @@
     background: rgba(15, 23, 42, 0.58);
     padding: 1rem;
     backdrop-filter: blur(6px);
-    transition: border-color 0.25s ease, transform 0.25s ease;
+    transition:
+      border-color 0.25s ease,
+      transform 0.25s ease;
   }
 
   &__metricCard:hover {

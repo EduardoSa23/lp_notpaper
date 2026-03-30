@@ -183,3 +183,56 @@ html {
     --tunnel-fade: clamp(34px, 12vw, 64px);
   }
 }
+
+/* animação de blur-in-left */
+@keyframes blur-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes blur-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+.animate-blur-in-left {
+  animation: blur-in-left 1.2s ease-out forwards;
+}
+
+.animate-blur-in-right {
+  animation: blur-in-right 1.2s ease-out forwards;
+}
+
+/* animação de blur-in-up */
+@keyframes blur-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-blur-in-up {
+  animation: blur-in-up 1.2s ease-out forwards;
+}
