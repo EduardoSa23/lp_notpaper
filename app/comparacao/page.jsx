@@ -1,7 +1,7 @@
 ﻿import SiteHeader from "@/components/layout/header";
 import SiteFooter from "@/components/layout/footer";
-import StatsSection from "@/components/sections/stats/stats-section";
 import ComparativoSection from "@/components/sections/comparacao/comparativo-section";
+import ComparativoSEI from "@/components/sections/comparacao/comparativo-sei-section/comparativo-sei-section";
 import ComparacaoCtaFinalSection from "@/components/sections/comparacao/cta-final/cta-final-section"
 
 export const metadata = {
@@ -18,6 +18,7 @@ export default function ComparacaoPage() {
       <SiteHeader />
       <main className="font-inter bg-white">
         <ComparativoSection />
+        <ComparativoSEI />
         <ComparacaoCtaFinalSection />
       </main>
       <SiteFooter />

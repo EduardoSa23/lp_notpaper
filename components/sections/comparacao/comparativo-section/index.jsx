@@ -176,7 +176,7 @@ const compareModes = {
   notpaper: {
     id: "notpaper",
     label: "Sistema WEB",
-    title: "Comparacao individual: notPaper x",
+    title: "Comparação individual: notPaper x",
     description: "Considere os pontos que impactam diretamente produtividade, custo e velocidade de entrega.",
     rows: featureRows,
     valueKey: "sistema",
@@ -184,7 +184,7 @@ const compareModes = {
   app: {
     id: "app",
     label: "APP Mobile",
-    title: "Comparacao individual: notPaper x",
+    title: "Comparação individual: notPaper x",
     description: "Veja recursos voltados para operacao diaria, mobilidade e evolucao rapida do seu time.",
     rows: appFeatureRows,
     valueKey: "app",

@@ -49,11 +49,11 @@ export default function HeroHome() {
               className="rounded-2xl shadow-2xl relative"
               priority
             />
-            <div className="absolute -right-2 -top-4 flex animate-bounce items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black [animation-duration:1.8s] md:-right-4">
+            <div className="absolute -right-2 -top-4 flex animate-bounce items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black [animation-duration:1.2s] md:-right-4">
               <FaLightbulb />
               <span>Inovação</span>
             </div>
-            <div className="absolute -bottom-4 -left-2 flex animate-bounce items-center gap-2 rounded-full bg-blue-500 px-4 py-2 font-bold text-white [animation-delay:0.35s] [animation-duration:1.9s] md:-left-4">
+            <div className="absolute -bottom-4 -left-2 flex animate-bounce items-center gap-2 rounded-full bg-blue-500 px-4 py-2 font-bold text-white [animation-delay:0.35s] [animation-duration:1.3s] md:-left-4">
               <FaRocket />
               <span>Resultado</span>
             </div>
