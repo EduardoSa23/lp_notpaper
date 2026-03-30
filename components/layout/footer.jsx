@@ -33,6 +33,7 @@ export default function SiteFooter() {
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/quem-somos" className="transition-colors hover:text-white">Quem Somos</Link></li>
               <li><Link href="/contato" className="transition-colors hover:text-white">Contato</Link></li>
+              <li><Link href="/diretoria/login" className="transition-colors hover:text-white">Login</Link></li>
             </ul>
           </div>
 
