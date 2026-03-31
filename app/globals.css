@@ -4,6 +4,14 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .section-anchor {
@@ -49,7 +57,6 @@ html {
 .animate-zoom-in {
   animation: zoom-in 0.9s ease-out forwards;
 }
-
 
 .carousel-container {
   overflow: hidden;
@@ -101,7 +108,7 @@ html {
   position: relative;
   isolation: isolate;
   --tunnel-fade: clamp(56px, 9vw, 170px);
-  --tunnel-shadow: rgba(0, 32, 115, 0.10);
+  --tunnel-shadow: rgba(0, 32, 115, 0.1);
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
@@ -235,4 +242,11 @@ html {
 
 .animate-blur-in-up {
   animation: blur-in-up 1.2s ease-out forwards;
+}
+
+@media (max-width: 1280px) {
+  .ajuste-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+  }
 }

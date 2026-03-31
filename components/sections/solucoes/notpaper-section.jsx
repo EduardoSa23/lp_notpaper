@@ -16,7 +16,7 @@ export default function SolucoesNotpaperSection() {
         description:
           "Centralize a comunicação institucional com envio, registro e acompanhamento de memorandos em um ambiente digital seguro, garantindo rastreabilidade e organização das informações.",
         to: "/",
-        image: "/image/memorando.png",
+        image: "/image/modelo_teste_site.png",
         imageAlt: "Comunicação Interna",
       },
       {
@@ -230,7 +230,7 @@ export default function SolucoesNotpaperSection() {
           </p>
         </header>
 
-        <div className="grid md:grid lg:grid-cols-2 gap-8 items-center">
+        <div className="ajuste-grid grid lg:grid-cols-2 gap-8 items-center">
           <aside ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"}`}>
             {" "}
             <h3 className="pb-5 text-center text-lg md:text-2xl font-semibold text-slate-600">Confira todas as nossas funcionalidades.</h3>
@@ -277,7 +277,13 @@ export default function SolucoesNotpaperSection() {
               <p className="text-sm md:text-base text-gray-200 text-center leading-relaxed">{active.description}</p>
             </div>
 
+            <div className="relative">
             <img src={active.image} alt={active.imageAlt} className="w-full h-auto object-cover" />
+            <p className="absolute z-10 top-[-20px] md:-top-4 left-2 text-[7px] md:text-[12px] p-2 max-w-[250px] bg-white shadow-3xl rounded-lg"><strong>1. Controle de numeração de protocolo:</strong> Possibilidade de controlar e rastrear cada documento enviado ou recebido com um número único de protocolo.</p>
+            <p className="absolute z-10 top-[35px] md:top-[30px] right-4 text-[7px] md:text-[12px] p-2 max-w-[250px] bg-white shadow-3xl rounded-lg"><strong>2. Registro de criação:</strong> Registro das informações sobre a data e o autor do memorando, permitindo o acompanhamento do histórico e a identificação do responsável.</p>
+            <p className="absolute z-10 top-[90px] md:top-[150px] left-[30px] md:left-[20px] text-[7px] md:text-[12px] p-2 max-w-[250px] bg-white shadow-3xl rounded-lg"><strong>3. Destaque de assuntos:</strong> Opção de destacar um assunto específico em um memorando e enviá-lo para usuários, departamentos e secretarias selecionados, garantindo uma comunicação direcionada.</p>
+            <p className="absolute z-10 bottom-[3px] md:bottom-[30px] right-[20px] text-[7px] md:text-[12px] p-2 max-w-[250px] bg-white shadow-3xl rounded-lg"><strong>4. Anexo de documentos:</strong> Capacidade de anexar múltiplos documentos em um memorando, facilitando o compartilhamento de informações relevantes.</p>
+             </div>
           </div>
         </div>
       </div>

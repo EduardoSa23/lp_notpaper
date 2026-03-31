@@ -5,7 +5,7 @@ import { BtnWhatsapp } from "../ui/btn-whatsapp";
 
 export default function SiteHeader() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-white/90 shadow-lg">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/90 shadow-lg">
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center" aria-label="Ir para a Home">
           <Image src="/image/Logo_notpaper.png" alt="Logo da notPaper" width={180} height={48} className="h-10 w-auto" priority />
@@ -42,7 +42,7 @@ export default function SiteHeader() {
             </svg>
           </summary>
 
-          <div className="absolute right-0 mt-3 flex w-56 flex-col space-y-1 rounded-lg bg-white px-6 py-4 shadow-lg">
+          <div className="absolute right-0 z-50 mt-3 flex w-56 max-w-[calc(100vw-2rem)] flex-col space-y-1 rounded-lg bg-white px-6 py-4 shadow-lg">
             <Link href="/" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
               Home
             </Link>
