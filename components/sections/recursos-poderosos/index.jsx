@@ -64,7 +64,7 @@ export default function RecursosPoderosos() {
 
       <div className="relative container mx-auto px-4">
         <div className="mb-8 text-center md:mb-16">
-          <h2 className="flex items-center justify-center gap-4 mb-4 text-3xl md:text-5xl font-bold text-white">
+          <h2 className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4 text-3xl md:text-5xl font-bold text-white">
             Recursos
             <RotatingText
               texts={["Poderosos", "Inteligentes", "Robustos", "Completos"]}

@@ -32,7 +32,7 @@ html {
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.9s ease-out forwards;
+  animation: fade-in-up 1.5s ease-out forwards;
 }
 
 @keyframes zoom-in {

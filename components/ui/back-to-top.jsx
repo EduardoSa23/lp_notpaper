@@ -27,7 +27,7 @@ export function BackToTop() {
       onClick={scrollToTop}
       className={`
         fixed bottom-8 right-2 md:right-8 z-50
-        w-14 h-14 rounded-full
+        md:w-14 md:h-14 w-10 h-10 rounded-full
         flex items-center justify-center
         border border-white
         bg-[radial-gradient(circle,_#020617_0%,_#0132B4_100%)] text-white

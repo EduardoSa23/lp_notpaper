@@ -10,7 +10,7 @@ export default function SolucoesCidadaniaSection() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
+    <section className="container mx-auto grid gap-10 px-4 py-8 md:grid-cols-2 md:items-center md:py-16">
       <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} grid grid-cols-2 gap-2`}>
         <div className="grid gap-2">
           <img className="w-full rounded-3xl max-h-[275px]" src="/image/servicos_app.jpg" alt="" />

@@ -1,4 +1,5 @@
 ﻿import { FaBrain, FaBuildingColumns } from "react-icons/fa6";
+import RotatingText from "../../animate/TextAnimations/RotatingText/RotatingText";
 
 const customSolutions = [
   {
@@ -26,7 +27,21 @@ export default function SolucoesSobMedidaSection() {
 
         <div className="relative">
           <header className="mx-auto max-w-3xl text-white text-center">
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl">Soluções sob medida</h2>
+            <h2 className="flex flex-col md:flex-row items-center justify-center gap-4 text-4xl font-bold leading-tight md:text-5xl">Soluções 
+              <RotatingText
+              texts={["Sob medida", "Escaláveis", "Modernas", "Digitais"]}
+              mainClassName="px-2 sm:px-2 md:px-3 bg-[#0348FC] text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
+              
+              </h2>
             <p className="mt-4 text-lg">
               Desenvolvemos módulos específicos para atender as necessidades de cada setor com segurança e agilidade.
             </p>

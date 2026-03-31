@@ -12,7 +12,7 @@ export default function ComparacaoCtaFinalSection() {
     <section className="bg-[#F6F8FC]">
       <div
         ref={ref}
-        className={`max-w-[1200px] mx-auto px-4 md:py-24 py-6} >
+        className={`max-w-[1200px] mx-auto px-4 md:py-24 py-6
           ${isVisible ? "animate-blur-in-up" : "opacity-0 translate-y-16 blur-md"}`}
       >
         <BorderGlow

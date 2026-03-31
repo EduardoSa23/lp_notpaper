@@ -21,7 +21,7 @@ export default function SolucoesWorkflowSection() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
+    <section className="container mx-auto grid gap-10 px-4 py-8 md:grid-cols-2 md:items-center md:py-16">
       <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} p-4 shadow-xl bg-white rounded-2xl`}>
         <img className="rounded-2xl" src="/image/automacao.png" alt="" />
       </div>

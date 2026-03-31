@@ -26,8 +26,8 @@ export default function SolucoesGedSection() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 md:items-center md:py-16">
-      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"}`}>
+    <section className="container mx-auto grid gap-10 px-4 py-8 md:grid-cols-2 md:items-center md:py-16">
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} order-2 md:order-1`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 03</p>
         <SplitText
           text="Gestão Eletrônica de Documentos (GED)"
@@ -67,7 +67,7 @@ export default function SolucoesGedSection() {
         </div>
       </div>
 
-      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} p-4 shadow-xl bg-white rounded-2xl`}>
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} order-1 md:order-2 p-4 shadow-xl bg-white rounded-2xl`}>
         <img className="rounded-2xl" src="/image/ged.png" alt="" />
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaEnvelope, FaLocationDot, FaPhone, FaWhatsapp } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 import { useInView } from "@/hooks/useInView";
 
@@ -58,7 +59,8 @@ export default function ContatoSection() {
     const data = new FormData(form);
 
     try {
-      setFormState({ loading: true, message: "Enviando dados...", error: false });
+      setFormState({ loading: true, message: "", error: false });
+
       const response = await fetch("https://formspree.io/f/mkgqnjlb", {
         method: "POST",
         body: data,
@@ -68,9 +70,26 @@ export default function ContatoSection() {
       if (!response.ok) throw new Error("Falha no envio");
 
       form.reset();
-      setFormState({ loading: false, message: "Dados enviados com sucesso!", error: false });
-    } catch {
-      setFormState({ loading: false, message: "Erro ao enviar o formulário.", error: true });
+
+      Swal.fire({
+        icon: "success",
+        title: "Mensagem enviada!",
+        text: "Nossa equipe entrará em contato em breve.",
+        confirmButtonColor: "#0043FE",
+        confirmButtonText: "Perfeito!",
+      });
+
+      setFormState({ loading: false, message: "", error: false });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao enviar",
+        text: "Tente novamente ou fale conosco pelo WhatsApp.",
+        confirmButtonColor: "#0043FE",
+        confirmButtonText: "Entendi",
+      });
+
+      setFormState({ loading: false, message: "", error: true });
     }
   };
 
@@ -86,7 +105,7 @@ export default function ContatoSection() {
         className={`relative container items-center mx-auto px-4 grid md:grid-cols-2 gap-10 transition-all duration-1000
           ${isVisible ? "animate-blur-in-up" : "opacity-0 translate-y-16 blur-md"}
         `}
-        >
+      >
         <div>
           <div className="mb-6">
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
@@ -174,7 +193,6 @@ export default function ContatoSection() {
               >
                 {formState.loading ? "Enviando..." : "Enviar Mensagem"}
               </button>
-              {formState.message && <p className={`text-sm ${formState.error ? "text-red-600" : "text-green-600"}`}>{formState.message}</p>}
             </form>
           </div>
         </div>

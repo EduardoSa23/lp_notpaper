@@ -16,7 +16,7 @@ export default function SolucoesNotpaperSection() {
         description:
           "Centralize a comunicação institucional com envio, registro e acompanhamento de memorandos em um ambiente digital seguro, garantindo rastreabilidade e organização das informações.",
         to: "/",
-        image: "/image/modelo_teste_site.png",
+        image: "/image/memorando.png",
         imageAlt: "Comunicação Interna",
       },
       {
@@ -209,7 +209,7 @@ export default function SolucoesNotpaperSection() {
 
   return (
     <section className="w-full">
-      <div className="container mx-auto py-24 px-4 md:px-6 flex flex-col justify-center">
+      <div className="container mx-auto py-4 md:py-24 px-4 md:px-6 flex flex-col justify-center">
         <header className="max-w-[780px] mb-6">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 01</p>
           <SplitText
