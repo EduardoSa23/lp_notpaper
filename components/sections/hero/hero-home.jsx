@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import { FaRocket, FaLightbulb } from "react-icons/fa6";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const heroData = {
   title: "Gestão pública",
@@ -12,13 +13,13 @@ const heroData = {
 
 export default function HeroHome() {
   return (
-    <section id="home" className="pb-16 pt-20 lg:pt-32 section-anchor">
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full lg:max-h-[626px] object-cover">
+    <section id="home" className="section-anchor pb-16 pt-20 lg:pt-32">
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full max-h-[850px] lg:max-h-[626px] object-cover">
         <source src="/videos/bg_hero.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-black/40 -z-10" />
+      <div className="absolute inset-0 -z-10 bg-black/40" />
       <div className="container mx-auto px-4">
-        <div className="md:grid items-center lg:grid-cols-[auto_auto] md:justify-between">
+        <div className="items-center md:grid md:justify-between lg:grid-cols-[auto_auto]">
           <div className="animate-fade-in-up lg:max-w-[700px]">
             <h1 className="mb-6 text-center text-3xl font-bold text-white md:text-left md:text-5xl">
               {heroData.title} <span className="text-[#0043FE]">{heroData.titleHighlight}</span>
@@ -28,12 +29,12 @@ export default function HeroHome() {
               <Link
                 href="https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F"
                 target="_blank"
-                className="rounded-lg text-center bg-[#0043FE] px-4 md:px-8 py-2 md:py-4 font-semibold text-white transition-colors hover:bg-[#0135c5] md:text-lg"
+                className="rounded-lg bg-[#0043FE] px-4 py-2 text-center font-semibold text-white transition-colors hover:bg-[#0135c5] md:px-8 md:py-4 md:text-lg"
               >
                 Transformar minha gestão
               </Link>
               <Link href="/solucoes">
-                <button className="rounded-lg text-center border-2 border-gray-300 px-4 md:px-8 py-2 md:py-4 font-semibold text-white transition-colors hover:border-[#ccc] hover:text-[#ccc] md:text-lg">
+                <button className="rounded-lg border-2 border-gray-300 px-4 py-2 text-center font-semibold text-white transition-colors hover:border-[#ccc] hover:text-[#ccc] md:px-8 md:py-4 md:text-lg">
                   Conhecer nossa solução
                 </button>
               </Link>
@@ -41,10 +42,14 @@ export default function HeroHome() {
           </div>
 
           <div className="mt-12 animate-zoom-in lg:mt-0">
-            <img
+            <Image
               src={heroData.heroImage}
               alt={heroData.heroImageAlt}
-              className="relative h-auto w-full max-w-[640px] rounded-2xl shadow-2xl"
+              width={640}
+              height={550}
+              className="relative md:max-w-[640px] max-w-[340px] rounded-2xl shadow-2xl"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
             />
             <div className="absolute -right-2 -top-4 flex animate-bounce items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black [animation-duration:1.2s] md:-right-4">
               <FaLightbulb />

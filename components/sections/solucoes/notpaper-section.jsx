@@ -1,9 +1,11 @@
-"use client";
+﻿"use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
 import { useInView } from "@/hooks/useInView";
 import { notpaperItems } from "@/data/notpaper-items";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 export default function SolucoesNotpaperSection() {
   const { ref, isVisible } = useInView();
@@ -25,12 +27,12 @@ export default function SolucoesNotpaperSection() {
 
   return (
     <section className="w-full">
-      <div className="container mx-auto py-4 md:py-24 px-4 md:px-6 flex flex-col justify-center">
-        <header className="max-w-[780px] mb-6">
+      <div className="container mx-auto flex flex-col justify-center px-4 py-4 md:px-6 md:py-24">
+        <header className="mb-6 max-w-[780px]">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 01</p>
           <SplitText
             text="notPaper - Gestão de processos e protocolos digitais"
-            className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
+            className="mt-3 text-4xl font-bold leading-tight md:min-h-[105px] md:text-5xl"
             delay={50}
             duration={1}
             ease="power3.out"
@@ -46,12 +48,11 @@ export default function SolucoesNotpaperSection() {
           </p>
         </header>
 
-        <div className="ajuste-grid grid lg:grid-cols-2 gap-8 items-center">
+        <div className="ajuste-grid grid items-center gap-8 lg:grid-cols-2">
           <aside ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"}`}>
-            {" "}
-            <h3 className="pb-5 text-center text-lg md:text-2xl font-semibold text-slate-600">Confira todas as nossas funcionalidades.</h3>
+            <h3 className="pb-5 text-center text-lg font-semibold text-slate-600 md:text-2xl">Confira todas as nossas funcionalidades.</h3>
             <nav aria-label="Passos">
-              <ul className="flex flex-wrap w-full border-2 border-white bg-gradient-to-br from-slate-800 to-slate-700 p-4 rounded-2xl shadow-2xl gap-4 items-center md:items-start">
+              <ul className="flex w-full flex-wrap items-center gap-4 rounded-2xl border-2 border-white bg-gradient-to-br from-slate-800 to-slate-700 p-4 shadow-2xl md:items-start">
                 {items.map((item, index) => {
                   const isActive = index === activeIndex;
 
@@ -76,9 +77,8 @@ export default function SolucoesNotpaperSection() {
                           setActiveIndex(index);
                         }
                       }}
-                      className={`flex items-center px-4 py-2 border border-white rounded-xl cursor-pointer transition-all duration-300
-                        
-                        ${isActive ? "bg-white shadow-2xl text-[#36415e]" : "bg-transparent text-white hover:-translate-y-1 hover:shadow-2xl"}
+                      className={`flex cursor-pointer items-center rounded-xl border border-white px-4 py-2 transition-all duration-300
+                        ${isActive ? "bg-white text-[#36415e] shadow-2xl" : "bg-transparent text-white hover:-translate-y-1 hover:shadow-2xl"}
                       `}
                     >
                       <p className="text-sm md:text-base">{item.menuTitle}</p>
@@ -91,19 +91,25 @@ export default function SolucoesNotpaperSection() {
 
           <div
             ref={contentRef}
-            className={`${
-              isVisible ? "animate-blur-in-right" : "opacity-0"
-            } w-full h-full flex flex-col lg:min-h-[610px] justify-between rounded-2xl shadow-2xl overflow-hidden
-            bg-[radial-gradient(circle,_#2b2eed_0%,_#424750_70%)]`}
+            className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} flex max-h-full flex-col justify-between overflow-hidden rounded-2xl bg-[radial-gradient(circle,_#2b2eed_0%,_#424750_70%)] shadow-2xl lg:min-h-[610px]`}
           >
             <div className="px-6 py-8 md:px-10 md:py-12">
-              <h4 className="text-xl md:text-2xl text-center text-white mb-4 font-semibold">{active.title}</h4>
+              <h4 className="mb-4 text-center text-xl font-semibold text-white md:text-2xl">{active.title}</h4>
 
-              <p className="text-sm md:text-base text-gray-200 text-center leading-relaxed">{active.description}</p>
+              <p className="text-center text-sm leading-relaxed text-gray-200 md:text-base">{active.description}</p>
             </div>
 
             <div className="relative">
-              <img src="/image/modelo_teste_site.png" alt="Preview sistema" className="w-full h-auto object-cover" />
+              <Image
+                src="/image/modelo_teste_site.png"
+                alt="Preview sistema"
+                width={1400}
+                height={820}
+                className="max-w-full object-cover"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                style={{ width: "100%", height: "auto" }}
+              />
 
               {active.highlights.map((item, index) => {
                 const positions = [
@@ -116,10 +122,7 @@ export default function SolucoesNotpaperSection() {
                 return (
                   <div
                     key={index}
-                    className={`absolute z-10 ${positions[index]} 
-                    text-[7px] md:text-[12px] p-2 max-w-[320px] md:max-w-[300px] 
-                    bg-white shadow-2xl rounded-lg
-                    transition-all duration-500 animate-fade-in-up`}
+                    className={`absolute z-10 ${positions[index]} rounded-lg bg-white p-2 text-[7px] shadow-2xl transition-all duration-500 animate-fade-in-up md:max-w-[300px] md:text-[12px] max-w-[320px]`}
                     style={{ animationDelay: `${index * 0.2}s` }}
                   >
                     <strong>
@@ -136,5 +139,3 @@ export default function SolucoesNotpaperSection() {
     </section>
   );
 }
-
-

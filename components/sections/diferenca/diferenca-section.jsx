@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const diferencas = [
   {
@@ -152,8 +153,11 @@ export default function DiferencaSection() {
                 alt={card.titulo}
                 width={500}
                 height={250}
-                className="mb-4 h-auto w-full"
+                className="mb-4 max-w-full"
                 priority={index === 0}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                style={{ width: "100%", height: "auto" }}
                 draggable={false}
               />
               <h3 className="text-center text-lg font-bold">{card.titulo}</h3>

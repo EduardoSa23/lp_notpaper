@@ -1,5 +1,7 @@
-﻿import { FaChartLine } from "react-icons/fa6";
+﻿import Image from "next/image";
+import { FaChartLine } from "react-icons/fa6";
 import Link from "next/link";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 export default function QuemSomosHeroSection() {
   return (
@@ -28,11 +30,16 @@ export default function QuemSomosHeroSection() {
             </Link>
           </div>
 
-          <div className="relative min-h-[340px] w-full md:min-h-[450px] lg:min-h-[500px]">
-            <img
-              className="w-full rounded-[1.25rem] shadow-[0_24px_45px_rgba(15,23,42,0.32)] md:min-h-[420px] lg:min-h-[470px]"
+          <div className="relative min-h-[340px] max-w-full md:min-h-[450px] lg:min-h-[500px]">
+            <Image
+              className=" md:min-h-[420px] lg:min-h-[470px] rounded-[1.25rem] shadow-[0_24px_45px_rgba(15,23,42,0.32)]"
               src="/image/nossa_evolucao.png"
               alt="Abstracao digital da evolucao tecnologica"
+              width={1200}
+              height={900}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              style={{ width: "100%", height: "auto" }}
             />
             <div className="absolute bottom-[-1.6rem] left-4 w-[min(280px,80%)] rounded-2xl bg-white px-4 py-[0.95rem] shadow-[0_16px_30px_rgba(15,23,42,0.16)] md:bottom-[-1.2rem] md:left-[-1.2rem]">
               <div className="flex items-center gap-2 text-[0.78rem] font-extrabold tracking-[0.1em] text-[#0f766e]">

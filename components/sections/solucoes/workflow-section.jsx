@@ -1,8 +1,10 @@
 ﻿'use client';
 
+import Image from "next/image";
 import { FaDiagramProject, FaWaveSquare } from "react-icons/fa6";
 import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
 import { useInView } from "@/hooks/useInView";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const workflowFeatures = [
   {
@@ -22,8 +24,17 @@ export default function SolucoesWorkflowSection() {
 
   return (
     <section className="container mx-auto grid gap-10 px-4 py-8 md:grid-cols-2 md:items-center md:py-16">
-      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} p-4 shadow-xl bg-white rounded-2xl`}>
-        <img className="rounded-2xl" src="/image/automacao.png" alt="" />
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} rounded-2xl bg-white p-4 shadow-xl`}>
+        <Image
+          className="max-w-full rounded-2xl"
+          src="/image/automacao.png"
+          alt="Fluxo de automação"
+          width={1200}
+          height={700}
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+          style={{ height: "auto" }}
+        />
       </div>
       <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"}`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 02</p>

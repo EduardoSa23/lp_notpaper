@@ -1,8 +1,10 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { FaFileSignature, FaMagnifyingGlass, FaShieldHalved } from "react-icons/fa6";
 import { useInView } from "@/hooks/useInView";
 import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const gedFeatures = [
   {
@@ -67,10 +69,18 @@ export default function SolucoesGedSection() {
         </div>
       </div>
 
-      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} order-1 md:order-2 p-4 shadow-xl bg-white rounded-2xl`}>
-        <img className="rounded-2xl" src="/image/ged.png" alt="" />
+      <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"} order-1 rounded-2xl bg-white p-4 shadow-xl md:order-2`}>
+        <Image
+          className="max-w-full rounded-2xl"
+          src="/image/ged.png"
+          alt="Interface do módulo GED"
+          width={1200}
+          height={700}
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+          style={{ height: "auto" }}
+        />
       </div>
     </section>
   );
 }
-

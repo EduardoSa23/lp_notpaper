@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import styles from "./comparativo-section.module.scss";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const overviewMetrics = [
   { label: "Facilidade de uso", key: "usabilidade" },
@@ -209,7 +211,15 @@ function OverviewCard({ logo, score, metrics, spotlight = false }) {
   return (
     <article className={`${styles.overviewCard} ${spotlight ? styles.overviewCardSpotlight : ""}`}>
       <header className={styles.overviewCardHeader}>
-        <img className="max-w-[100px]" src={logo ? `/image/concorrentes/${logo}` : "/image/Logo_notpaper.png"} alt="Logo" />
+        <Image
+          className="max-w-[100px] h-auto"
+          src={logo ? `/image/concorrentes/${logo}` : "/image/Logo_notpaper.png"}
+          alt="Logo"
+          width={100}
+          height={40}
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+        />
         {spotlight ? <span className={styles.bestPill}>Melhor escolha</span> : null}
       </header>
       <div className={styles.metricsList}>
@@ -268,7 +278,16 @@ export default function ComparativoSection() {
               className={`${styles.competitorButton} ${selectedCompetitor === competitor.id ? styles.competitorButtonActive : ""}`}
               onClick={() => setSelectedCompetitor(competitor.id)}
             >
-              <img className="max-w-[100px]" src={`/image/concorrentes/${competitor.logo}`} alt={competitor.name} />
+              <Image
+                className="max-w-[100px]"
+                src={`/image/concorrentes/${competitor.logo}`}
+                alt={competitor.name}
+                width={100}
+                height={40}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                style={{ height: "auto" }}
+              />
             </button>
           ))}
         </div>

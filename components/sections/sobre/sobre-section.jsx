@@ -1,4 +1,5 @@
 ﻿import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 const sobreData = {
   title: "Sobre a",
@@ -13,11 +14,20 @@ const sobreData = {
 
 export default function SobreSection() {
   return (
-    <section id="sobre" className="bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-12 pt-12 md:pb-16 md:pt-20 section-anchor">
+    <section id="sobre" className="section-anchor bg-gradient-to-br from-blue-50 to-[#d3dbf1] pb-12 pt-12 md:pb-16 md:pt-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse items-center gap-12 md:grid md:grid-cols-2">
           <div>
-            <Image src="/image/bg_sobre.jpg" alt="Equipe trabalhando" width={620} height={460} className="rounded-2xl shadow-2xl" />
+            <Image
+              src="/image/bg_sobre.jpg"
+              alt="Equipe trabalhando"
+              width={620}
+              height={460}
+              className="max-w-[620px] rounded-2xl shadow-2xl"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              style={{ height: "auto" }}
+            />
           </div>
           <div>
             <h2 className="mb-6 text-center text-2xl font-bold md:text-left md:text-3xl">

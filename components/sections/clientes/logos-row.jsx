@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
 export default function LogosRow({ logos }) {
   const repeated = useMemo(() => Array.from({ length: 5 }, () => logos).flat(), [logos]);
@@ -14,9 +15,12 @@ export default function LogosRow({ logos }) {
             <Image
               src={logo.img}
               alt={logo.alt}
-              width={160}
-              height={160}
-              className="max-h-16 w-auto object-contain grayscale transition duration-300 hover:grayscale-0"
+              width={120}
+              height={100}
+              className="max-w-[120px] object-contain grayscale transition duration-300 hover:grayscale-0"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              style={{ height: "auto" }}
             />
           </div>
         ))}
