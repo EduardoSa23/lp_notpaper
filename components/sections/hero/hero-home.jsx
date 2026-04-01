@@ -41,13 +41,10 @@ export default function HeroHome() {
           </div>
 
           <div className="mt-12 animate-zoom-in lg:mt-0">
-            <Image
+            <img
               src={heroData.heroImage}
               alt={heroData.heroImageAlt}
-              width={640}
-              height={500}
-              className="rounded-2xl shadow-2xl relative"
-              priority
+              className="relative h-auto w-full max-w-[640px] rounded-2xl shadow-2xl"
             />
             <div className="absolute -right-2 -top-4 flex animate-bounce items-center gap-2 rounded-full bg-yellow-400 px-4 py-2 font-bold text-black [animation-duration:1.2s] md:-right-4">
               <FaLightbulb />

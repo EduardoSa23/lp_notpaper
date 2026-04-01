@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-const routes = ["", "/comparacao", "/quem-somos", "/contato", "/servicos", "/solucoes"];
-
 export default function SiteLoading({ children }) {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -24,22 +22,12 @@ export default function SiteLoading({ children }) {
         "/videos/bg_recursos_poderosos.mp4",
       ];
 
-      total = routes.length + images.length + videos.length;
+      total = images.length + videos.length;
 
       function updateProgress() {
         loaded++;
         setProgress(Math.round((loaded / total) * 100));
       }
-
-      // 🔹 Pré-carregar rotas
-      await Promise.all(
-        routes.map(async (route) => {
-          try {
-            await fetch(route);
-          } catch (e) {}
-          updateProgress();
-        })
-      );
 
       // 🔹 Pré-carregar imagens
       await Promise.all(
@@ -52,7 +40,10 @@ export default function SiteLoading({ children }) {
                 updateProgress();
                 resolve();
               };
-              img.onerror = () => resolve();
+              img.onerror = () => {
+                updateProgress();
+                resolve();
+              };
             })
         )
       );
@@ -71,7 +62,10 @@ export default function SiteLoading({ children }) {
                 resolve();
               };
 
-              video.onerror = () => resolve();
+              video.onerror = () => {
+                updateProgress();
+                resolve();
+              };
             })
         )
       );

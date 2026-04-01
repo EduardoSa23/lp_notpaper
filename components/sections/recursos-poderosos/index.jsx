@@ -89,7 +89,7 @@ export default function RecursosPoderosos() {
               <article
                 id={card.id}
                 key={card.id}
-                className={`card rounded-2xl border border-gray-100 bg-white p-8 shadow-lg transition-shadow hover:shadow-xl ${
+                className={`card rounded-2xl border border-gray-100 bg-white px-2 py-4 md:p-8 shadow-lg transition-shadow hover:shadow-xl ${
                   animatedCards.includes(card.id) ? "animate-fade-in-up" : "opacity-0"
                 }`}
               >

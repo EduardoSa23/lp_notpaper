@@ -11,11 +11,16 @@ export default function LogosRow({ logos }) {
       <div className="logo-slider">
         {repeated.map((logo, index) => (
           <div key={`${logo.alt}-${index}`} className="flex items-center justify-center px-6">
-            <Image src={logo.img} alt={logo.alt} width={160} height={64} className="max-h-16 w-auto object-contain grayscale transition duration-300 hover:grayscale-0" />
+            <Image
+              src={logo.img}
+              alt={logo.alt}
+              width={160}
+              height={160}
+              className="max-h-16 w-auto object-contain grayscale transition duration-300 hover:grayscale-0"
+            />
           </div>
         ))}
       </div>
     </div>
   );
 }
-

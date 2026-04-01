@@ -138,12 +138,20 @@ export default function DiferencaSection() {
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
         >
-          {diferencas.map((card) => (
+          {diferencas.map((card, index) => (
             <article
               key={card.titulo}
               className="card-diferanca max-w-[100%] rounded-[30px] border border-gray-200 bg-white shadow md:max-w-5xl"
             >
-              <Image src={card.img} alt={card.titulo} width={500} height={250} className="mb-4 w-full" draggable={false} />
+              <Image
+                src={card.img}
+                alt={card.titulo}
+                width={500}
+                height={250}
+                className="mb-4 h-auto w-full"
+                priority={index === 0}
+                draggable={false}
+              />
               <h3 className="text-center text-lg font-bold">{card.titulo}</h3>
               <h4 className="my-4 text-center font-semibold">{card.subtitulo}</h4>
               <p className="p-6 text-sm text-gray-600">{card.descricao}</p>
