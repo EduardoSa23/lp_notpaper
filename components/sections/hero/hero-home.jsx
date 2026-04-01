@@ -28,12 +28,12 @@ export default function HeroHome() {
               <Link
                 href="https://api.whatsapp.com/send?phone=5511941398031&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20notPaper%20e%20gostaria%20de%20entender%20melhor%20as%20solu%C3%A7%C3%B5es.%20Pode%20me%20ajudar%3F"
                 target="_blank"
-                className="rounded-lg bg-[#0043FE] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#0135c5] md:text-lg"
+                className="rounded-lg text-center bg-[#0043FE] px-4 md:px-8 py-2 md:py-4 font-semibold text-white transition-colors hover:bg-[#0135c5] md:text-lg"
               >
                 Transformar minha gestão
               </Link>
               <Link href="/solucoes">
-                <button className="rounded-lg border-2 border-gray-300 px-8 py-4 font-semibold text-white transition-colors hover:border-[#ccc] hover:text-[#ccc] md:text-lg">
+                <button className="rounded-lg text-center border-2 border-gray-300 px-4 md:px-8 py-2 md:py-4 font-semibold text-white transition-colors hover:border-[#ccc] hover:text-[#ccc] md:text-lg">
                   Conhecer nossa solução
                 </button>
               </Link>

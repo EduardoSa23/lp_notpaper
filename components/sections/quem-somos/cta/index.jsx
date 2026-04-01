@@ -15,7 +15,7 @@ export default function QuemSomosCtaSection() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section className="py-16 w-full max-w-[1280px] mx-auto">
+    <section className="py-16 w-full max-w-[1280px] px-2 md:px-0 md:mx-auto">
       <div
         ref={ref}
         className={`${isVisible ? "animate-blur-in-up" : "opacity-0 translate-y-16 blur-md"}

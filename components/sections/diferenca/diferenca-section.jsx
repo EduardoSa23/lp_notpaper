@@ -86,6 +86,8 @@ export default function DiferencaSection() {
   };
 
   const onPointerDown = (event) => {
+    if (event.pointerType !== "mouse") return;
+
     const track = carouselRef.current;
     if (!track) return;
 
@@ -96,6 +98,8 @@ export default function DiferencaSection() {
   };
 
   const onPointerMove = (event) => {
+    if (event.pointerType !== "mouse") return;
+
     const track = carouselRef.current;
     if (!track || !dragState.current.isDragging) return;
 

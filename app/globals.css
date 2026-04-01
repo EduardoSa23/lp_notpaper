@@ -69,7 +69,7 @@ body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  touch-action: pan-x;
+  touch-action: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -82,7 +82,6 @@ body {
   width: min(450px, 85vw);
   flex-shrink: 0;
   scroll-snap-align: start;
-  overflow-y: auto;
 }
 
 .logo-slider {
