@@ -95,10 +95,11 @@ export default function ContatoSection() {
 
   return (
     <section id="contato" className="relative pb-12 pt-24 md:pb-16 md:pt-28 section-anchor">
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+      <video autoPlay loop muted playsInline aria-hidden="true" tabIndex={-1} className="absolute inset-0 w-full h-full object-cover">
         <source src="/videos/bg_contato.mp4" type="video/mp4" />
+        <track src="/videos/decorative-captions.vtt" kind="captions" srcLang="pt-BR" label="Português" />
       </video>
-      <div className="absolute inset-0 bg-black/40 -z-10" />
+      <div className="absolute inset-0 bg-black/55 -z-10" />
 
       <div
         ref={ref}
@@ -111,9 +112,9 @@ export default function ContatoSection() {
             <span className="inline-flex rounded-full bg-teal-300 px-4 py-1 text-xs font-bold uppercase tracking-[0.16em] text-teal-900">
               Inovação digital
             </span>
-            <h1 className="mt-5 max-w-3xl text-3xl md:text-5xl font-bold leading-tight">
-              Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
-            </h1>
+            <h2 className="mt-5 max-w-3xl text-3xl md:text-5xl font-bold leading-tight text-white">
+              Funcionalidades que redefinem a <span className="text-[#0043FE]">eficiência pública.</span>
+            </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed bg-white opacity-90 border border-blue-700 rounded-xl p-4">
               Descubra como a notPaper integra tecnologias de ponta para eliminar burocracia, aumentar produtividade e acelerar a
               transformação digital de ponta a ponta.
@@ -148,11 +149,14 @@ export default function ContatoSection() {
         </div>
         <div>
           <div className="rounded-2xl bg-white p-8 shadow-lg">
-            <h2 className="text-center text-2xl font-semibold">Solicitar Demonstração</h2>
+            <h3 className="text-center text-2xl font-semibold">Solicitar Demonstração</h3>
             <form className="space-y-6 mt-6" onSubmit={handleSubmit}>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">Nome</label>
+                <label htmlFor="contato-nome" className="mb-2 block text-sm font-medium text-gray-700">
+                  Nome
+                </label>
                 <input
+                  id="contato-nome"
                   type="text"
                   name="nome"
                   required
@@ -160,8 +164,11 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">Telefone</label>
+                <label htmlFor="contato-telefone" className="mb-2 block text-sm font-medium text-gray-700">
+                  Telefone
+                </label>
                 <input
+                  id="contato-telefone"
                   type="tel"
                   name="telefone"
                   required
@@ -169,8 +176,11 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">Email</label>
+                <label htmlFor="contato-email" className="mb-2 block text-sm font-medium text-gray-700">
+                  Email
+                </label>
                 <input
+                  id="contato-email"
                   type="email"
                   name="email"
                   required
@@ -178,8 +188,11 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">Mensagem</label>
+                <label htmlFor="contato-mensagem" className="mb-2 block text-sm font-medium text-gray-700">
+                  Mensagem
+                </label>
                 <textarea
+                  id="contato-mensagem"
                   rows="4"
                   name="mensagem"
                   required

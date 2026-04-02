@@ -25,6 +25,9 @@ export function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
+      type="button"
+      aria-label="Voltar ao topo"
+      title="Voltar ao topo"
       className={`
         fixed bottom-8 right-2 md:right-8 z-50
         md:w-14 md:h-14 w-10 h-10 rounded-full
@@ -37,7 +40,7 @@ export function BackToTop() {
         ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}
       `}
     >
-      <FaArrowUp />
+      <FaArrowUp aria-hidden="true" />
     </button>
   );
 }

@@ -37,7 +37,8 @@ export default function SiteHeader() {
           </div>
 
           <details className="relative md:hidden">
-            <summary className="list-none cursor-pointer" aria-label="Abrir menu">
+            <summary className="list-none cursor-pointer">
+              <span className="sr-only">Abrir menu principal</span>
               <svg className="h-7 w-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>

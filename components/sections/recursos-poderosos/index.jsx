@@ -57,10 +57,11 @@ export default function RecursosPoderosos() {
 
   return (
     <section id="services" className="relative pb-12 pt-12 md:pb-16 md:pt-20 section-anchor overflow-hidden">
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
+      <video autoPlay loop muted playsInline aria-hidden="true" tabIndex={-1} className="absolute inset-0 w-full h-full object-cover">
         <source src="/videos/bg_recursos_poderosos.mp4" type="video/mp4" />
+        <track src="/videos/decorative-captions.vtt" kind="captions" srcLang="pt-BR" label="Português" />
       </video>
-      <div className="absolute inset-0 bg-black/40 -z-10" />
+      <div className="absolute inset-0 bg-black/55 -z-10" />
 
       <div className="relative container mx-auto px-4">
         <div className="mb-8 text-center md:mb-16">

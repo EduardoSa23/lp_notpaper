@@ -7,8 +7,8 @@ export function BtnWhatsapp({
     "inline-flex items-center justify-center rounded-3xl bg-[#0043FE] px-3 py-2 md:px-4 font-semibold text-white transition-all duration-300 hover:bg-[#0135c5] hover:scale-[1.03]";
 
   return (
-    <a href={href} target="_blank" rel="noreferrer">
-      <button className={`${baseStyles} ${className}`}>{children}</button>
+    <a href={href} target="_blank" rel="noreferrer" className={`${baseStyles} ${className}`}>
+      {children}
     </a>
   );
 }
