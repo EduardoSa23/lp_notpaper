@@ -21,7 +21,7 @@ export default function SiteHeader() {
             <Link href="/quem-somos" className="text-gray-700 transition-colors hover:text-[#0043FE]">
               Quem Somos
             </Link>
-            <Link href="/comparacao" className="text-gray-700 transition-colors hover:text-[#0043FE]">
+            <Link href="/comparar-solucoes" className="text-gray-700 transition-colors hover:text-[#0043FE]">
               Comparar Soluções
             </Link>
             <Link href="/contato" className="text-gray-700 transition-colors hover:text-[#0043FE]">
@@ -47,14 +47,14 @@ export default function SiteHeader() {
               <Link href="/" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
                 Home
               </Link>
-              <Link href="/comparacao" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
-                Comparação
-              </Link>
               <Link href="/solucoes" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
                 Soluções
               </Link>
               <Link href="/quem-somos" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
                 Quem Somos
+              </Link>
+              <Link href="/comparar-solucoes" className="block border-b py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
+                Comparação
               </Link>
               <Link href="/contato" className="block py-2 text-gray-700 transition-colors hover:text-[#0043FE]">
                 Contato

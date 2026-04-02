@@ -28,7 +28,7 @@ export default function SolucoesCtaFinalSection() {
               Agendar demonstração
             </Link>
             <Link
-              href="/comparacao"
+              href="/comparar-solucoes"
               className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 transition-colors hover:border-blue-700 hover:text-blue-700"
             >
               Ver por que a NotPaper é diferente

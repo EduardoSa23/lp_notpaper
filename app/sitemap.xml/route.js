@@ -1,6 +1,6 @@
 const BASE_URL = "https://notpaper.com.br";
 
-const routes = ["", "/comparacao", "/quem-somos", "/contato", "/servicos", "/solucoes"];
+const routes = ["", "/comparar-solucoes", "/quem-somos", "/contato", "/solucoes"];
 
 export function GET() {
   const now = new Date().toISOString();

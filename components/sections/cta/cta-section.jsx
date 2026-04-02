@@ -38,7 +38,7 @@ export default function CtaFinalSection() {
 
           <div className="mt-6 flex flex-wrap justify-center gap-3 md:mt-8">
             <Link
-              href="/comparacao"
+              href="/comparar-solucoes"
               className="rounded-xl bg-white px-8 py-4 font-semibold text-slate-700 transition-colors hover:border-blue-700 hover:text-blue-700 md:text-lg"
             >
               Comparar com outros sistemas

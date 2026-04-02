@@ -36,7 +36,7 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/comparacao" className="transition-colors hover:text-white">
+                <Link href="/comparar-solucoes" className="transition-colors hover:text-white">
                   Comparação
                 </Link>
               </li>

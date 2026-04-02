@@ -8,7 +8,7 @@ export const metadata = {
   title: "Comparação | notPaper",
   description: "Veja os diferenciais da notPaper para transformar processos públicos com eficiência.",
   alternates: {
-    canonical: "/comparacao",
+    canonical: "/comparar-solucoes",
   },
 };
 

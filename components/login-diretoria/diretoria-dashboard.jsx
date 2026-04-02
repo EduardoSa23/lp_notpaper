@@ -103,7 +103,7 @@ export default function DiretoriaDashboard() {
                 type="text"
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="Buscar servicos..."
+                placeholder="Buscar serviços..."
                 className="w-full rounded-xl border border-transparent bg-white px-11 py-3 text-slate-800 shadow-sm outline-none transition focus:border-[#002073]"
               />
             </label>
