@@ -1,4 +1,4 @@
-﻿'use client';
+﻿"use client";
 
 import Image from "next/image";
 import { FaDiagramProject, FaWaveSquare } from "react-icons/fa6";
@@ -9,13 +9,13 @@ import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 const workflowFeatures = [
   {
     icon: FaDiagramProject,
-    title: "Modelagem visual",
-    text: "Estruture processos e aprovações com lógica clara e sem gargalos.",
+    title: "Estruturação inteligente de fluxos",
+    text: "Crie fluxos de trabalho com lógica clara, definindo etapas, responsáveis e regras. Visualize todo o processo e elimine gargalos antes que eles aconteçam.",
   },
   {
     icon: FaWaveSquare,
-    title: "Tracking de eficiência",
-    text: "Monitore tempos, status e metas para reduzir retrabalho contínuo.",
+    title: "Controle de processos e performance",
+    text: "Acompanhe prazos, status e desempenho em tempo real. Identifique atrasos e oportunidades de melhoria com dados confiáveis.",
   },
 ];
 
@@ -52,8 +52,8 @@ export default function SolucoesWorkflowSection() {
           textAlign="start"
         />
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
-          Modele processos complexos com facilidade visual. Transforme fluxos manuais em sequências digitais seguras, sem erros e com
-          aprovações rastreaveis.
+          Processos manuais geram atrasos, retrabalho e falta de controle. Com a NotPaper, você transforma fluxos complexos em operações
+          digitais ágeis, seguras e totalmente monitoradas.
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">

@@ -1,4 +1,4 @@
-﻿'use client';
+﻿"use client";
 
 import Image from "next/image";
 import { FaMobileScreenButton } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
 import { useInView } from "@/hooks/useInView";
 import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
-const citizenBadges = ["Alertas em tempo real", "Validacão via QR code"];
+const citizenBadges = ["Alertas em tempo real", "Validacão via QR code", "Carta de Serviços", "Ouvidoria integrada", "E-SIC digital", "Agendamento online", "Bolsa de empregos", "Marketplace da cidade", "Pontos turísticos", "Comunicação oficial"];
 
 export default function SolucoesCidadaniaSection() {
   const { ref, isVisible } = useInView();
@@ -53,7 +53,7 @@ export default function SolucoesCidadaniaSection() {
       <div ref={ref} className={`${isVisible ? "animate-blur-in-right" : "opacity-0"}`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Cidadania digital</p>
         <SplitText
-          text="Governo no bolso do cidadão"
+          text="A prefeitura na palma da mão do cidadão"
           className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
           delay={50}
           duration={1}
@@ -66,8 +66,8 @@ export default function SolucoesCidadaniaSection() {
           textAlign="start"
         />
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
-          Aproximamos a gestão pública das pessoas com mobilidade digital. O cidadão solicita serviços, acompanha processos e recebe
-          comunicados em tempo real.
+          Aproxime a gestão pública das pessoas com um app intuitivo, que permite solicitar serviços, acompanhar demandas e se manter
+          informado em tempo real.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           {citizenBadges.map((badge) => (

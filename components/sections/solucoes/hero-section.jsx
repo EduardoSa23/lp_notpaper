@@ -11,11 +11,10 @@
           Inovação digital
         </span>
         <h1 className="mt-5 max-w-3xl text-3xl text-white font-bold leading-tight md:text-5xl">
-          Funcionalidades que redefinem a <span className="text-blue-700">eficiência pública.</span>
+          Soluções completas para transformar a <span className="text-[#5a7ef2]">gestão da sua prefeitura.</span>
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white">
-          Descubra como a notPaper integra tecnologias de ponta para eliminar burocracia, aumentar produtividade e acelerar a transformação
-          digital de ponta a ponta.
+          Automatize processos, digitalize documentos e conecte sua gestão com tecnologia, segurança e eficiência.
         </p>
       </div>
     </section>

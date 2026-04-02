@@ -113,11 +113,11 @@ export default function ContatoSection() {
               Inovação digital
             </span>
             <h2 className="mt-5 max-w-3xl text-3xl md:text-5xl font-bold leading-tight text-white">
-              Funcionalidades que redefinem a <span className="text-[#0043FE]">eficiência pública.</span>
+              A transformação da sua <span className="text-[#0043FE]">gestão pública</span> começa aqui
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed bg-white opacity-90 border border-blue-700 rounded-xl p-4">
-              Descubra como a notPaper integra tecnologias de ponta para eliminar burocracia, aumentar produtividade e acelerar a
-              transformação digital de ponta a ponta.
+              Automatize processos, digitalize documentos e tenha controle total da sua prefeitura com uma solução completa e integrada.
+              Fale com nosso time e descubra como aplicar isso na realidade da sua cidade.
             </p>
           </div>
 
@@ -149,7 +149,7 @@ export default function ContatoSection() {
         </div>
         <div>
           <div className="rounded-2xl bg-white p-8 shadow-lg">
-            <h3 className="text-center text-2xl font-semibold">Solicitar Demonstração</h3>
+            <h3 className="text-center text-2xl font-semibold">Solicite uma demonstração personalizada.</h3>
             <form className="space-y-6 mt-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="contato-nome" className="mb-2 block text-sm font-medium text-gray-700">
@@ -165,7 +165,7 @@ export default function ContatoSection() {
               </div>
               <div>
                 <label htmlFor="contato-telefone" className="mb-2 block text-sm font-medium text-gray-700">
-                  Telefone
+                  Whatsapp
                 </label>
                 <input
                   id="contato-telefone"
@@ -196,9 +196,12 @@ export default function ContatoSection() {
                   rows="4"
                   name="mensagem"
                   required
+                  placeholder="Conte brevemente sua necessidade"
                   className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-[#0043FE]"
                 />
               </div>
+              <span className="flex justify-center !mt-2 text-[#6f6d6d]">Entraremos em contato em até 1 dia útil.</span>
+
               <button
                 type="submit"
                 disabled={formState.loading}

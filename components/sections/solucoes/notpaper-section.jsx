@@ -44,7 +44,8 @@ export default function SolucoesNotpaperSection() {
             textAlign="start"
           />
           <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            Tudo que sua gestão precisa para operar com eficiência, controle e transformação digital real.
+            Gerencie todos os processos administrativos da sua prefeitura de forma digital, organizada e rastreável. Cada etapa é
+            automatizada, com responsáveis definidos, prazos controlados e acompanhamento em tempo real.
           </p>
         </header>
 

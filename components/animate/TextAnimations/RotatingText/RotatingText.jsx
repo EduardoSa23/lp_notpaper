@@ -28,6 +28,7 @@ const RotatingText = forwardRef((props, ref) => {
     mainClassName,
     splitLevelClassName,
     elementLevelClassName,
+    cl: _cl,
     ...rest
   } = props;
 

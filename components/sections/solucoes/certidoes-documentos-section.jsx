@@ -1,43 +1,48 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { FaFileSignature, FaMagnifyingGlass, FaFolderTree, FaCloudArrowUp } from "react-icons/fa6";
+import { FaBolt, FaDatabase, FaFileLines, FaClock, FaShieldHalved } from "react-icons/fa6";
 import { useInView } from "@/hooks/useInView";
 import SplitText from "../../animate/TextAnimations/SplitText/SplitText";
 import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 
-const gedFeatures = [
+const certidoesFeatures = [
   {
-    icon: FaFileSignature,
-    title: "Digitalização ",
-    text: "Converta documentos físicos em digitais com segurança e conformidade legal, garantindo integridade, autenticidade e validade jurídica.",
+    icon: FaBolt,
+    title: "Emissão em tempo real ",
+    text: "Gere certidões e documentos instantaneamente, sem depender de etapas manuais ou retrabalho.",
   },
   {
-    icon: FaFolderTree,
-    title: "Organização inteligente (GED)",
-    text: "Classifique, indexe e armazene documentos com estrutura padronizada, facilitando o acesso e eliminando retrabalho.",
+    icon: FaDatabase,
+    title: "Integração com dados existentes",
+    text: "Aproveite informações já cadastradas no sistema para preencher automaticamente os documentos, evitando duplicidade e inconsistências.",
   },
   {
-    icon: FaMagnifyingGlass,
-    title: "Busca rápida e inteligente",
-    text: "Encontre qualquer documento em segundos com filtros avançados e pesquisa por palavras-chave. Saiba quem acessou, alterou e aprovou cada documento, com histórico completo e seguro.",
+    icon: FaFileLines,
+    title: "Padronização automática",
+    text: "Garanta que todos os documentos sigam o mesmo formato, linguagem e critérios institucionais. Elimine falhas humanas com geração automatizada e validação de dados em cada emissão.",
   },
   {
-    icon: FaCloudArrowUp,
-    title: "Armazenamento seguro em nuvem",
-    text: "Elimine arquivos físicos e tenha acesso aos documentos a qualquer momento, com proteção e backup automático.",
+    icon: FaClock,
+    title: "Agilidade no atendimento ao cidadão",
+    text: "Diminua filas, reduza prazos e entregue respostas muito mais rápidas à população.",
+  },
+  {
+    icon: FaShieldHalved,
+    title: "Rastreabilidade e segurança jurídica",
+    text: "Cada documento emitido possui registro, histórico e controle, garantindo transparência e validade.",
   },
 ];
 
-export default function SolucoesGedSection() {
+export default function SolucoesCertidoesDocumentosSection() {
   const { ref, isVisible } = useInView();
 
   return (
     <section className="container mx-auto grid gap-10 px-4 py-8 md:grid-cols-2 md:items-center md:py-16">
       <div ref={ref} className={`${isVisible ? "animate-blur-in-left" : "opacity-0"} order-2 md:order-1`}>
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 03</p>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Módulo 04</p>
         <SplitText
-          text="Gestão Eletrônica de Documentos (GED)"
+          text="Automação na emissão de certidões e documentos públicos"
           className="mt-3 text-4xl md:min-h-[105px] font-bold leading-tight md:text-5xl"
           delay={50}
           duration={1}
@@ -50,12 +55,12 @@ export default function SolucoesGedSection() {
           textAlign="start"
         />
         <p className="mt-5 text-lg leading-relaxed text-slate-600">
-          Digitalize documentos conforme o Decreto 10.278 e gerencie tudo com um sistema GED completo, com armazenamento seguro, indexação
-          inteligente e controle total.
+          Automatize a emissão de certidões com base em dados já existentes no sistema, garantindo agilidade, padronização e segurança em
+          cada documento gerado.
         </p>
 
         <div className="mt-8 space-y-4">
-          {gedFeatures.map((item) => {
+          {certidoesFeatures.map((item) => {
             const Icon = item.icon;
             return (
               <article
@@ -81,8 +86,8 @@ export default function SolucoesGedSection() {
       >
         <Image
           className="max-w-full rounded-2xl"
-          src="/image/ged.png"
-          alt="Interface do módulo GED"
+          src="/image/certidoes.png"
+          alt="Interface do módulo certidões e documentos"
           width={1200}
           height={700}
           placeholder="blur"

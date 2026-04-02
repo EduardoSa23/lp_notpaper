@@ -1,6 +1,5 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import { BackToTop } from "../ui/back-to-top";
 import { BtnWhatsapp } from "../ui/btn-whatsapp";
 
 export default function SiteHeader() {
@@ -64,8 +63,6 @@ export default function SiteHeader() {
           </details>
         </nav>
       </header>
-
-      <BackToTop />
     </div>
   );
 }

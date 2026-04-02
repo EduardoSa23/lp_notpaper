@@ -3,7 +3,7 @@ import SiteFooter from "@/components/layout/footer";
 import StructuredData from "@/components/seo/structured-data";
 import HeroHome from "@/components/sections/hero/hero-home";
 import DiferencaSection from "@/components/sections/diferenca/diferenca-section";
-import RecursosPoderosos from "@/components/sections/recursos-poderosos/index";
+import RecursosPoderosos from "@/components/sections/recursos-poderosos/recursos-poderosos";
 import ClientesSection from "@/components/sections/clientes/clientes-section";
 import StatsSection from "@/components/sections/stats/stats-section";
 import ContatoSection from "@/components/sections/contato/contato-section";

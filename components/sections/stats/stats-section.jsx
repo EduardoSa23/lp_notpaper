@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const stats = [
-  { label: "Projetos Concluídos", target: 500, suffix: "+", color: "text-[#0043FE]" },
+  { label: "Projetos Implementados", target: 500, suffix: "+", color: "text-[#0043FE]" },
   { label: "Satisfação do Cliente", target: 98, suffix: "%", color: "text-blue-500" },
   { label: "Especialistas", target: 50, suffix: "+", color: "text-purple-500" },
   { label: "Cidades atendidas", target: 20, suffix: "+", color: "text-yellow-500" },

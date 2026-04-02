@@ -8,38 +8,38 @@ import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 const diferencas = [
   {
     img: "/image/digitalizacao_documentos.png",
-    titulo: "Adeus ao Papel, Olá à Eficiência",
-    subtitulo: "Digitalização",
+    titulo: "Elimine o papel, organize sua gestão",
+    subtitulo: "Gestão eletrônica de documentos (GED)",
     descricao:
-      "A notPaper revoluciona a gestão pública, eliminando o uso de papel em todos os processos da sua prefeitura. Do protocolo à assinatura, tudo é digital, organizado e acessível, otimizando o fluxo de trabalho e reduzindo a burocracia.",
+      "Transforme documentos físicos em processos digitais organizados, com acesso rápido, versionamento e validação jurídica. Mais controle, menos extravio e zero dependência de papel.",
   },
   {
     img: "/image/agilidade_processos.png",
-    titulo: "Agilidade que Transforma o Serviço",
-    subtitulo: "Processos Ágeis",
+    titulo: "Processos que andam sozinhos",
+    subtitulo: "Automação de fluxos e protocolo digital",
     descricao:
-      "Reduza drasticamente o tempo de tramitação de documentos e processos. A notPaper acelera as etapas, permite o acompanhamento em tempo real e agiliza a tomada de decisões, resultando em um processo mais rápido e eficaz.",
+      "Crie, acompanhe e finalize processos em tempo real. Com fluxos automatizados, responsáveis definidos e rastreabilidade completa, sua gestão ganha velocidade e previsibilidade.",
   },
   {
     img: "/image/implementacao_suporte.png",
-    titulo: "Implantação Simples",
-    subtitulo: "Parceria Completa",
+    titulo: "Implantação rápida, sem travar a rotina",
+    subtitulo: "Onboarding completo para sua equipe",
     descricao:
-      "Nossa equipe garante uma implantação rápida e sem complicações, com treinamento completo para sua equipe. Conte com suporte técnico especializado e contínuo para que sua prefeitura aproveite ao máximo todos os recursos da notPaper.",
+      "Implementamos a NotPaper de forma simples e assistida, com treinamento e suporte contínuo. Sua equipe aprende rápido e começa a usar desde o primeiro dia.",
   },
   {
     img: "/image/dados_protegidos.png",
-    titulo: "Segurança e Conformidade Garantidas",
-    subtitulo: "Dados Protegidos",
+    titulo: "Segurança jurídica e proteção de dados",
+    subtitulo: "Conformidade com LGPD e validade legal",
     descricao:
-      "Com a notPaper, a segurança dos seus dados é prioridade. Nosso sistema garante a integridade e confidencialidade das informações, com trilhas de auditoria completas e conformidade com a LGPD, assegurando a validade jurídica de cada processo.",
+      "Todos os processos contam com assinatura eletrônica válida, trilha de auditoria e armazenamento seguro. Transparência e proteção para a gestão e para o cidadão.",
   },
   {
     img: "/image/economia_sustentabilidade.png",
-    titulo: "Economia e Sustentabilidade de Mãos Dadas",
-    subtitulo: "Sustentabilidade",
+    titulo: "Reduza custos e ganhe eficiência",
+    subtitulo: "Menos papel, menos desperdício",
     descricao:
-      "A notPaper revoluciona a gestão pública, eliminando o uso de papel em todos os processos da sua prefeitura. Do protocolo à assinatura, tudo é digital, organizado e acessível, otimizando o fluxo de trabalho e reduzindo a burocracia.",
+      "Diminua gastos com impressão, armazenamento e logística. Ganhe espaço, tempo e eficiência, enquanto contribui com a sustentabilidade da sua cidade.",
   },
 ];
 
