@@ -7,6 +7,7 @@
     "dev": "next dev",
     "dev:clean": "npm run clean:next && next dev --webpack",
     "build": "next build",
+    "build:static": "node scripts/build-static.js",
     "start": "next start",
     "lint": "next lint"
   },

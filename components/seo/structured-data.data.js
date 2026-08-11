@@ -7,7 +7,7 @@
   sameAs: ["https://www.linkedin.com/company/silo-tecnologia/"],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+55-11-4604-0000",
+    telephone: "+55-11-4604-0077",
     contactType: "customer service",
     areaServed: "BR",
     availableLanguage: "Portuguese",

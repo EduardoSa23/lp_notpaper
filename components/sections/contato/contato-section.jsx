@@ -1,7 +1,12 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { FaEnvelope, FaLocationDot, FaPhone, FaWhatsapp } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaLocationDot,
+  FaPhone,
+  FaWhatsapp,
+} from "react-icons/fa6";
 import Swal from "sweetalert2";
 
 import { useInView } from "@/hooks/useInView";
@@ -12,9 +17,9 @@ const contatoData = {
   subtitle: "Pronto para transformar seu negócio? Vamos conversar!",
   contactItems: [
     {
-      href: "tel:+551146040000",
+      href: "tel:+551146040077",
       title: "Telefone",
-      text: "(11) 4604-0000",
+      text: "(11) 4604-0077",
       icon: FaPhone,
       wrapperColor: "bg-orange-100",
       iconColor: "text-orange-600",
@@ -51,7 +56,11 @@ const contatoData = {
 export default function ContatoSection() {
   const { ref, isVisible } = useInView();
 
-  const [formState, setFormState] = useState({ loading: false, message: "", error: false });
+  const [formState, setFormState] = useState({
+    loading: false,
+    message: "",
+    error: false,
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,10 +103,26 @@ export default function ContatoSection() {
   };
 
   return (
-    <section id="contato" className="relative pb-12 pt-24 md:pb-16 md:pt-28 section-anchor">
-      <video autoPlay loop muted playsInline aria-hidden="true" tabIndex={-1} className="absolute inset-0 w-full h-full object-cover">
+    <section
+      id="contato"
+      className="relative pb-12 pt-24 md:pb-16 md:pt-28 section-anchor"
+    >
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        tabIndex={-1}
+        className="absolute inset-0 w-full h-full object-cover"
+      >
         <source src="/videos/bg_contato.mp4" type="video/mp4" />
-        <track src="/videos/decorative-captions.vtt" kind="captions" srcLang="pt-BR" label="Português" />
+        <track
+          src="/videos/decorative-captions.vtt"
+          kind="captions"
+          srcLang="pt-BR"
+          label="Português"
+        />
       </video>
       <div className="absolute inset-0 bg-black/55 -z-10" />
 
@@ -113,11 +138,14 @@ export default function ContatoSection() {
               Inovação digital
             </span>
             <h2 className="mt-5 max-w-3xl text-3xl md:text-5xl font-bold leading-tight text-white">
-              A transformação da sua <span className="text-[#0043FE]">gestão pública</span> começa aqui
+              A transformação da sua{" "}
+              <span className="text-[#0043FE]">gestão pública</span> começa aqui
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed bg-white opacity-90 border border-blue-700 rounded-xl p-4">
-              Automatize processos, digitalize documentos e tenha controle total da sua prefeitura com uma solução completa e integrada.
-              Fale com nosso time e descubra como aplicar isso na realidade da sua cidade.
+              Automatize processos, digitalize documentos e tenha controle total
+              da sua prefeitura com uma solução completa e integrada. Fale com
+              nosso time e descubra como aplicar isso na realidade da sua
+              cidade.
             </p>
           </div>
 
@@ -133,11 +161,15 @@ export default function ContatoSection() {
                     rel={item.external ? "noreferrer" : undefined}
                   >
                     <div className="animacao-faleConosco mb-4 flex items-center rounded-2xl border border-[#8daaff] bg-[#F0F3FF] p-3 opacity-90 shadow-lg">
-                      <div className={`mr-4 flex h-10 w-10 items-center justify-center rounded-lg ${item.wrapperColor}`}>
+                      <div
+                        className={`mr-4 flex h-10 w-10 items-center justify-center rounded-lg ${item.wrapperColor}`}
+                      >
                         <Icon className={`text-lg ${item.iconColor}`} />
                       </div>
                       <div className="flex gap-2">
-                        <div className="font-semibold text-gray-900">{item.title}:</div>
+                        <div className="font-semibold text-gray-900">
+                          {item.title}:
+                        </div>
                         <p className="text-gray-600">{item.text}</p>
                       </div>
                     </div>
@@ -149,10 +181,15 @@ export default function ContatoSection() {
         </div>
         <div>
           <div className="rounded-2xl bg-white p-8 shadow-lg">
-            <h3 className="text-center text-2xl font-semibold">Solicite uma demonstração personalizada.</h3>
+            <h3 className="text-center text-2xl font-semibold">
+              Solicite uma demonstração personalizada.
+            </h3>
             <form className="space-y-6 mt-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="contato-nome" className="mb-2 block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="contato-nome"
+                  className="mb-2 block text-sm font-medium text-gray-700"
+                >
                   Nome
                 </label>
                 <input
@@ -164,7 +201,10 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label htmlFor="contato-telefone" className="mb-2 block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="contato-telefone"
+                  className="mb-2 block text-sm font-medium text-gray-700"
+                >
                   Whatsapp
                 </label>
                 <input
@@ -176,7 +216,10 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label htmlFor="contato-email" className="mb-2 block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="contato-email"
+                  className="mb-2 block text-sm font-medium text-gray-700"
+                >
                   Email
                 </label>
                 <input
@@ -188,7 +231,10 @@ export default function ContatoSection() {
                 />
               </div>
               <div>
-                <label htmlFor="contato-mensagem" className="mb-2 block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="contato-mensagem"
+                  className="mb-2 block text-sm font-medium text-gray-700"
+                >
                   Mensagem
                 </label>
                 <textarea
@@ -200,7 +246,9 @@ export default function ContatoSection() {
                   className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-[#0043FE]"
                 />
               </div>
-              <span className="flex justify-center !mt-2 text-[#6f6d6d]">Entraremos em contato em até 1 dia útil.</span>
+              <span className="flex justify-center !mt-2 text-[#6f6d6d]">
+                Entraremos em contato em até 1 dia útil.
+              </span>
 
               <button
                 type="submit"

@@ -4,6 +4,7 @@
 # next.js
 /.next
 /out
+/.static-export-stash
 
 # production
 /build

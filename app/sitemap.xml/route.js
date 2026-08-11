@@ -2,6 +2,9 @@ const BASE_URL = "https://notpaper.com.br";
 
 const routes = ["", "/comparar-solucoes", "/quem-somos", "/contato", "/solucoes"];
 
+// Gerado uma unica vez no build para funcionar tambem no export estatico.
+export const dynamic = "force-static";
+
 export function GET() {
   const now = new Date().toISOString();
 
