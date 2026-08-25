@@ -11,7 +11,17 @@ html {
 body {
   width: 100%;
   max-width: 100%;
+  /* Fallback para navegador sem `clip`: corta o transbordo horizontal, mas
+     transforma o body em scroll container e quebra `position: sticky`. */
   overflow-x: hidden;
+}
+
+/* `clip` corta igual ao `hidden` sem criar scroll container - e o que permite
+   a trilha lateral do blog acompanhar o scroll. O html acima ja usa `clip`. */
+@supports (overflow: clip) {
+  body {
+    overflow-x: clip;
+  }
 }
 
 .section-anchor {

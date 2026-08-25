@@ -58,6 +58,11 @@ export default function SiteFooter() {
                   Soluções
                 </Link>
               </li>
+              <li>
+                <Link href="/blog" className="transition-colors hover:text-white">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -80,16 +85,11 @@ export default function SiteFooter() {
                   Contato
                 </Link>
               </li>
-              {process.env.NEXT_PUBLIC_STATIC_EXPORT !== "1" && (
-                <li>
-                  <Link
-                    href="/diretoria/login"
-                    className="transition-colors hover:text-white"
-                  >
-                    Login
-                  </Link>
-                </li>
-              )}
+              {/* O link de login saiu com a area da diretoria, que foi desativada
+                  (ver a decisao 7b do design). Ele era condicionado ao export
+                  estatico; sem a rota, sobraria um link para 404. Para reativar,
+                  devolva "app/_diretoria" ao nome sem sublinhado e traga este
+                  item de volta. */}
             </ul>
           </div>
 

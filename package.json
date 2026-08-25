@@ -7,14 +7,16 @@
     "dev": "next dev",
     "dev:clean": "npm run clean:next && next dev --webpack",
     "build": "next build",
-    "build:static": "node scripts/build-static.js",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "db:migrate": "node --env-file-if-exists=.env.local scripts/db-migrate.cjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "gsap": "^3.14.2",
     "motion": "^12.38.0",
+    "msnodesqlv8": "^5.2.3",
+    "mssql": "^12.7.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -22,7 +24,10 @@
     "sweetalert2": "^11.26.24"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.23",
     "postcss": "^8.4.38",
     "sass": "^1.98.0",
     "tailwindcss": "^3.4.4"
