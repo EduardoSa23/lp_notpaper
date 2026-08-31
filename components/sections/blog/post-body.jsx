@@ -3,17 +3,47 @@ import Image from "next/image";
 import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 import { buildHeadingIdMap } from "@/lib/blog/headings";
 import { isValidBlock } from "@/lib/blog/model";
+import { isRun, isSafeHref, normalizeRuns } from "@/lib/blog/rich-text";
+
+/**
+ * Texto de bloco: uma lista de trechos, em que o trecho com `href` e um link.
+ *
+ * Um endereco que nao passa por `isSafeHref` renderiza como TEXTO, nao
+ * desaparece: o leitor perde o link, nao a frase. A ingestao ja recusa endereco
+ * inseguro (`ingest-mapping.js`); esta guarda cobre o que ja estiver gravado.
+ */
+function RichText({ value }) {
+  return normalizeRuns(value).map((run, index) => {
+    if (!isRun(run)) return null;
+
+    if (!isSafeHref(run.href)) return run.text;
+
+    return (
+      <a
+        key={index}
+        href={run.href}
+        target="_blank"
+        // noreferrer junto com noopener: o destino e uma fonte externa citada
+        // pelo texto, nao um parceiro nosso.
+        rel="noopener noreferrer nofollow"
+        className="font-medium text-[#0043FE] underline decoration-[#0043FE]/40 underline-offset-2 transition-colors hover:decoration-[#0043FE]"
+      >
+        {run.text}
+      </a>
+    );
+  });
+}
 
 function Block({ block, headingId }) {
   switch (block.type) {
     case "paragraph":
-      return <p className="mb-6 text-lg leading-relaxed text-gray-700">{block.text}</p>;
+      return <p className="mb-6 text-lg leading-relaxed text-gray-700"><RichText value={block.text} /></p>;
 
     case "heading":
       return (
         // scroll-margin evita o header fixo cobrir o titulo ao vir do sumario.
         <h2 id={headingId} className="section-anchor mb-4 mt-12 text-2xl font-bold text-gray-900">
-          {block.text}
+          <RichText value={block.text} />
         </h2>
       );
 
@@ -29,7 +59,7 @@ function Block({ block, headingId }) {
         >
           {items.map((item, index) => (
             <li key={index} className="pl-1">
-              {item}
+              <RichText value={item} />
             </li>
           ))}
         </ListTag>
@@ -39,7 +69,7 @@ function Block({ block, headingId }) {
     case "quote":
       return (
         <blockquote className="mb-6 border-l-4 border-[#0043FE] bg-white px-6 py-5 shadow-sm">
-          <p className="text-lg italic leading-relaxed text-gray-800">{block.text}</p>
+          <p className="text-lg italic leading-relaxed text-gray-800"><RichText value={block.text} /></p>
           {block.cite ? <footer className="mt-3 text-sm font-medium text-gray-500">— {block.cite}</footer> : null}
         </blockquote>
       );

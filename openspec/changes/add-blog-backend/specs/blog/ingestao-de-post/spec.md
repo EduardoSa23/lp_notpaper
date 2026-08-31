@@ -27,9 +27,11 @@ O token SHALL vir de configuração do ambiente, nunca do código, e a aplicaç�
 
 ### Requirement: Payload traz conteudo, e so conteudo
 
-A ingestão SHALL aceitar, no corpo da requisição, exatamente seis campos: título, resumo, corpo em blocos de conteúdo, categoria, minutos de leitura e capa. A capa SHALL ser obrigatória, e SHALL trazer a imagem embutida, o formato dela e o texto alternativo — os três.
+A ingestão SHALL aceitar, no corpo da requisição, sete campos: título, resumo, corpo em blocos de conteúdo, categoria, minutos de leitura, capa e a indicação de destaque. A capa SHALL ser obrigatória, e SHALL trazer a imagem embutida, o formato dela e o texto alternativo — os três. A indicação de destaque SHALL ser opcional, e a ausência dela SHALL valer como não destacado.
 
-A ingestão NÃO SHALL exigir nem aceitar como autoridade os campos que são identidade do post no blog — slug, autor, destaque, situação de publicação e data de publicação. Esses são preenchidos pelo site, conforme `blog/persistencia-de-posts`.
+A ingestão NÃO SHALL exigir nem aceitar como autoridade os campos que são identidade do post no blog — slug, autor, situação de publicação e data de publicação. Esses são preenchidos pelo site, conforme `blog/persistencia-de-posts`.
+
+O destaque NÃO está nessa lista, e a diferença é deliberada: slug e data só o site pode gerar, porque só ele conhece o próprio acervo; a situação é dele porque é ele que serve a página; e o autor é identidade institucional, que o módulo não tem como saber. O destaque, ao contrário dos quatro, é julgamento editorial sobre o conteúdo — e o conteúdo é de quem entrega.
 
 Os minutos de leitura SHALL ser usados como recebidos, e NÃO SHALL ser recalculados pelo site — quem tem o texto integral é quem os envia.
 
@@ -49,6 +51,8 @@ Os blocos de conteúdo chegam com os nomes de tipo e de campo do módulo que os 
 
 A tradução SHALL cobrir todos os tipos que o módulo produz — parágrafo, subtítulo, citação e lista, esta com seus itens e a indicação de ordenada. Tipo de bloco fora do que o módulo produz SHALL ser recusado.
 
+O texto de cada bloco tem forma própria, tratada no requisito de trechos abaixo.
+
 #### Scenario: Blocos traduzidos
 
 - **WHEN** o payload traz blocos no vocabulário do módulo
@@ -63,6 +67,81 @@ A tradução SHALL cobrir todos os tipos que o módulo produz — parágrafo, su
 
 - **WHEN** o corpo do post não traz nenhum bloco
 - **THEN** a ingestão recusa o conteúdo, pois não há o que renderizar
+
+### Requirement: Texto de bloco como lista de trechos, com link
+
+O texto de um bloco — parágrafo, subtítulo, citação e cada item de lista — SHALL chegar como uma lista de trechos, em que cada trecho tem o seu texto e, opcionalmente, um endereço. Trecho com endereço SHALL ser renderizado como link; trecho sem endereço SHALL ser renderizado como texto.
+
+Enquanto quem entrega estiver migrando, a ingestão SHALL aceitar também o texto como valor único, tratando-o como um trecho sem endereço. Essa tolerância SHALL viver apenas na fronteira de entrada e na leitura do que já está armazenado, e NÃO SHALL alcançar a renderização: dentro do modelo o texto tem uma forma só, porque dois caminhos de renderização seriam dois caminhos para manter, e o menos exercitado apodrece.
+
+O site SHALL recusar endereço que não seja `http` nem `https`, em vez de armazená-lo — a renderização não pode ser o único ponto que decide se um endereço recebido de fora vira link. Endereço armazenado que não passe nessa checagem SHALL ser renderizado como texto, preservando a frase.
+
+A âncora de um subtítulo e o item correspondente no sumário SHALL usar o texto dos trechos sem os endereços. O item do sumário já é um link para a seção, e um link dentro dele seria um link dentro de outro.
+
+#### Scenario: Texto em trechos com link
+
+- **WHEN** o payload traz o texto de um bloco como lista de trechos, um deles com endereço
+- **THEN** a página renderiza esse trecho como link e os demais como texto, na ordem recebida
+
+#### Scenario: Texto como valor único
+
+- **WHEN** o payload traz o texto de um bloco como valor único, sem trechos
+- **THEN** a ingestão aceita e o trata como um trecho sem endereço, e a página o renderiza como texto
+
+#### Scenario: Post armazenado antes dos trechos
+
+- **WHEN** uma página é montada a partir de post armazenado com o texto como valor único
+- **THEN** ela renderiza normalmente, sem exigir reprocessamento do que já está armazenado
+
+#### Scenario: Endereco fora de http e https
+
+- **WHEN** um trecho traz endereço em outro esquema, como `javascript:` ou `data:`
+- **THEN** a ingestão recusa o conteúdo, informando o endereço recusado
+
+#### Scenario: Trecho sem texto
+
+- **WHEN** um trecho chega sem texto ou com texto vazio
+- **THEN** a ingestão recusa o conteúdo, em vez de armazenar um trecho que nada renderiza
+
+#### Scenario: Ancora do subtitulo com link
+
+- **WHEN** um subtítulo tem um trecho com endereço
+- **THEN** a âncora da seção e o item do sumário usam o texto concatenado dos trechos, sem o link
+
+### Requirement: Destaque editorial vem na entrega
+
+A indicação de destaque de um post SHALL ser decidida por quem revisa o conteúdo, no módulo de origem, e SHALL viajar na entrega. O site NÃO SHALL exigir intervenção no banco nem alteração de código para trocar o post em destaque.
+
+Quem sabe se um post merece destaque é quem acabou de lê-lo, com o texto na tela e a decisão de aprovar na mão — é o único momento do fluxo em que a informação e a decisão existem juntas.
+
+A indicação SHALL ser opcional, e a ausência dela SHALL valer como não destacado. Isso é o que permite o site aceitar o campo antes de o módulo passar a enviá-lo, sem que nada quebre no intervalo.
+
+A indicação SHALL ser aplicada também na reentrega de um post que já existe — diferente de slug, data de publicação e data de criação, que seguem intocados. Uma entrega que carrega destaque é a intenção de quem revisou, e descartá-la faria o painel mostrar uma coisa e o blog outra, sem nada denunciando.
+
+#### Scenario: Post entregue como destaque
+
+- **WHEN** a entrega de um post novo traz a indicação de destaque
+- **THEN** ele passa a ocupar a posição de destaque do índice, sem intervenção no banco
+
+#### Scenario: Post existente promovido a destaque
+
+- **WHEN** um post que já está publicado é reentregue com a indicação de destaque
+- **THEN** ele passa a ocupar a posição de destaque, e seu slug e sua data de publicação seguem os originais
+
+#### Scenario: Destaque retirado
+
+- **WHEN** um post que era o destaque é reentregue sem a indicação
+- **THEN** ele deixa de ser destaque, e a posição volta a ser resolvida pela regra única de destaque
+
+#### Scenario: Entrega sem o campo de destaque
+
+- **WHEN** a entrega não traz o campo de destaque
+- **THEN** a ingestão aceita a entrega e trata o post como não destacado
+
+#### Scenario: Indicacao de destaque com tipo errado
+
+- **WHEN** a indicação de destaque chega com valor que não é verdadeiro nem falso
+- **THEN** a ingestão recusa o conteúdo, em vez de adivinhar a intenção de quem revisou
 
 ### Requirement: Ingestao valida o payload contra o modelo
 

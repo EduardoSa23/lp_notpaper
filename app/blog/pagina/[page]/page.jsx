@@ -3,8 +3,9 @@ import { notFound, redirect } from "next/navigation";
 import SiteFooter from "@/components/layout/footer";
 import SiteHeader from "@/components/layout/header";
 import BlogPagination from "@/components/sections/blog/blog-pagination";
+import CategoryBar from "@/components/sections/blog/category-bar";
 import PostGrid from "@/components/sections/blog/post-grid";
-import { getPageCount, getPostsPage } from "@/lib/blog/content-source";
+import { getCategoryCounts, getPageCount, getPostsPage } from "@/lib/blog/content-source";
 import { BLOG_BASE_PATH } from "@/lib/blog/urls";
 
 // Gera 2..N: a pagina 1 e /blog e nao ganha endereco proprio.
@@ -36,12 +37,13 @@ export default async function BlogPaginaPage({ params }) {
   const pageCount = await getPageCount();
   if (!Number.isInteger(pageNumber) || pageNumber < 1 || pageNumber > pageCount) notFound();
 
-  const posts = await getPostsPage(pageNumber);
+  const [posts, counts] = await Promise.all([getPostsPage(pageNumber), getCategoryCounts()]);
 
   return (
     <>
       <SiteHeader />
       <main className="font-inter bg-[#eceff6] pt-32">
+        <CategoryBar activeSlug={null} counts={counts} />
         <PostGrid posts={posts} heading={`Artigos - página ${pageNumber}`} />
         <BlogPagination currentPage={pageNumber} pageCount={pageCount} />
       </main>

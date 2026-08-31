@@ -31,6 +31,20 @@ A regra do post em destaque — o marcado como destaque, ou o publicado mais rec
 
 NÃO SHALL haver duas expressões independentes dessa regra, que possam divergir e fazer o destaque aparecer duplicado ou desaparecer do índice.
 
+Marcar um post como destaque SHALL torná-lo o destaque, independentemente da data dele em relação aos demais. O armazenamento SHALL garantir isso desmarcando os outros no mesmo momento em que marca um, dentro da mesma transação.
+
+Medido no acervo real: a regra ordena por marcação e depois por data, então com dois posts marcados vence o mais recente. Sem a garantia acima, marcar um post antigo gravaria a marcação e não mudaria nada na página — o revisor veria o painel confirmar uma escolha que o blog ignora, que é a divergência silenciosa que a regra única existe para evitar. A alternativa seria fazer quem entrega gerir a exclusividade, o que exigiria dele conhecer o acervo do site.
+
+#### Scenario: Post antigo marcado como destaque
+
+- **WHEN** um post publicado há mais tempo é marcado como destaque, havendo um post mais recente marcado
+- **THEN** o post recém-marcado é o destaque exibido, e o anterior deixa de estar marcado
+
+#### Scenario: Marcacao e desmarcacao na mesma operacao
+
+- **WHEN** a marcação de um post como destaque é aplicada
+- **THEN** a desmarcação dos demais acontece na mesma transação, sem instante intermediário em que dois estejam marcados ou nenhum esteja
+
 #### Scenario: Nenhum post marcado como destaque
 
 - **WHEN** nenhum post publicado está marcado como destaque
@@ -101,7 +115,7 @@ O slug de um post SHALL permanecer o mesmo em reentregas do mesmo identificador 
 
 ### Requirement: Campos de identidade preenchidos pelo site
 
-O site SHALL preencher os campos que são identidade do post no blog e que a ingestão não traz: autor, indicação de destaque, situação de publicação e data de publicação.
+O site SHALL preencher os campos que são identidade do post no blog e que a ingestão não traz: autor, situação de publicação e data de publicação. A indicação de destaque NÃO está entre eles: ela vem na entrega, conforme `blog/ingestao-de-post`.
 
 O autor SHALL ser a voz institucional do blog, e NÃO SHALL identificar a pessoa que aprovou o conteúdo no módulo de origem.
 

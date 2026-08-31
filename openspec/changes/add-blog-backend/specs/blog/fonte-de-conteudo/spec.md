@@ -82,3 +82,19 @@ O contrato SHALL permanecer independente da origem dos dados: trocar a implement
 **Reason**: O banco existe e recebe conteúdo pela ingestão, então a fonte mock deixa de ser a origem do conteúdo. O requisito servia para validar a interface antes de haver backend, e essa validação já foi feita.
 
 **Migration**: `data/blog-posts.js` é removido e `lib/blog/content-source.js` passa a consultar o banco pela camada de dados. Os posts que existiam no mock, se ainda fizerem sentido como conteúdo, entram pela ingestão como qualquer outro post.
+
+### Requirement: Validacao cobre o conteudo do bloco, nao so o tipo dele
+
+A validação do modelo SHALL cobrir, para cada bloco, o conteúdo exigido pelo seu tipo — e não apenas o nome do tipo. Bloco de texto sem texto, lista sem itens e imagem sem origem ou sem texto alternativo SHALL ser recusados.
+
+Conferir só o tipo deixa um parágrafo vazio atravessar a ingestão inteira e aparecer como buraco na página publicada, sem nenhum erro em nenhum ponto do caminho.
+
+#### Scenario: Bloco de texto sem texto
+
+- **WHEN** um bloco de parágrafo, subtítulo ou citação não tem texto algum
+- **THEN** a validação recusa o post, nomeando a posição do bloco
+
+#### Scenario: Lista sem itens
+
+- **WHEN** um bloco de lista chega sem nenhum item
+- **THEN** a validação recusa o post

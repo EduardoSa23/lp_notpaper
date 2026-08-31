@@ -75,17 +75,40 @@ A ordem segue o Migration Plan do design: banco e camada de dados → blog lendo
 
 ## 8c. Verificação contra o módulo de verdade
 
-- [ ] 8c.1 Configurar `Blog__Token` e o endereço do site no módulo, e aprovar uma publicação de canal Blog de ponta a ponta — verificar que o post aparece no blog e que o módulo gravou a URL devolvida em `UrlPublicada`
-- [ ] 8c.2 Aprovar a mesma publicação duas vezes (ou forçar retentativa da fila) — verificar que existe um único post e que a URL devolvida é a mesma
+- [x] 8c.1 Configurar `Blog__Token` e o endereço do site no módulo, e aprovar uma publicação de canal Blog de ponta a ponta — verificar que o post aparece no blog e que o módulo gravou a URL devolvida em `UrlPublicada`
+- [x] 8c.2 Aprovar a mesma publicação duas vezes (ou forçar retentativa da fila) — verificar que existe um único post e que a URL devolvida é a mesma
 - [ ] 8c.3 Derrubar o site no meio de uma entrega — verificar que o trabalho volta pela fila do módulo e conclui na retentativa, sem post duplicado
-- [ ] 8c.4 Entregar um payload que o site recusa (categoria desconhecida) — verificar que o módulo registra recusa de conteúdo e **não** retenta
+- [x] 8c.4 Entregar um payload que o site recusa (categoria desconhecida) — verificar que o módulo registra recusa de conteúdo e **não** retenta
 - [ ] 8c.5 **Antes da integração inteira**, disparar um `PUT` qualquer com corpo `chunked` (sem `Content-Length`) contra o IIS de produção — verificar que o corpo chega íntegro ao Node, isolando a pergunta do proxy sem depender do módulo estar configurado
 - [ ] 8c.6 Rodar a verificação de ponta a ponta **pelo IIS**, não pela porta do Node — verificar que o caminho de produção é o exercitado, e não um atalho que o dublê do outro lado também tomava
 - [ ] 8c.7 Confirmar que o IIS proxia as leituras além da ingestão, e medir a capa passando por ele — verificar o carregamento de uma capa de 150 KB e decidir se `_next/static` passa a ser servido direto pelo IIS
 
+## 8d. Texto de bloco como trechos, com link
+
+- [x] 8d.1 Criar a definição de trecho com o que concatena o texto puro e o que decide se um endereço vira link — verificar que só `http` e `https` passam, e que endereço relativo, `javascript:` e `data:` não passam
+- [x] 8d.2 Fazer a validação do modelo cobrir o conteúdo de cada bloco por tipo, não só o nome do tipo — verificar que parágrafo sem texto, trecho vazio e lista sem itens são recusados nomeando a posição
+- [x] 8d.3 Aceitar na ingestão as duas formas de texto, a lista de trechos e o valor único — verificar que uma entrega misturando as duas no mesmo corpo é aceita e renderiza as duas
+- [x] 8d.4 Normalizar na leitura o texto dos posts já armazenados — verificar que os posts gravados antes desta mudança abrem sem reprocessar o banco
+- [x] 8d.5 Renderizar o trecho com endereço como link externo — verificar que sai com `rel` de segurança e que o texto ao redor mantém a ordem
+- [x] 8d.6 Derivar a âncora do subtítulo e o item do sumário do texto sem os endereços — verificar que o item do sumário não tem link dentro do link
+- [x] 8d.7 Recusar na ingestão endereço fora de `http` e `https` — verificar que a recusa é 422 e nomeia o endereço, e que a renderização também degrada para texto se algo assim já estiver armazenado
+- [x] 8d.8 Percorrer todos os posts publicados e o índice com a mudança aplicada — verificar que nenhum quebrou
+- [ ] 8d.9 **Depois que o módulo parar de enviar texto como valor único**, remover a tolerância das duas portas — a conversão em `ingest-mapping.js` e a normalização de leitura em `queries.js` — e verificar que nenhum post no banco ainda usa a forma antiga antes de remover
+
+## 8e. Destaque decidido por quem revisa
+
+- [x] 8e.1 Aceitar `destaque` no corpo da ingestão, opcional, com ausência valendo `false` — verificar que uma entrega sem o campo continua sendo aceita exatamente como hoje
+- [x] 8e.2 Recusar `destaque` com valor que não seja booleano — verificar que é 422 e que a mensagem nomeia o campo, em vez de o valor ser coagido
+- [x] 8e.3 Aplicar `featured` no `INSERT` e também no `MATCHED` do `MERGE` — verificar que `slug`, `published_at` e `created_at` seguem intocados na reentrega
+- [x] 8e.4 Desmarcar os outros posts na mesma transação em que um é marcado — verificar que marcar um post **antigo** como destaque o coloca no topo do índice, que é o caso que hoje falharia em silêncio
+- [x] 8e.5 Confirmar que `vw_post_destaque` não precisa mudar — verificar que ela continua sendo a única expressão da regra, e que a listagem paginada segue excluindo o destaque efetivo
+- [x] 8e.6 Reentregar o mesmo post com `destaque: true` e depois sem o campo — verificar que ele é promovido e depois despromovido, e que a posição volta a ser resolvida pela regra
+- [x] 8e.7 Rodar a validação do modelo sobre um corpo com o campo novo, como a fatia dos links fez — verificar que ela aceita, que é o sinal para o módulo começar o passo 2
+- [x] 8e.8 Registrar a fronteira movida onde ela está declarada — o comentário de `ingest.js` que lista o que o site preenche deixa de citar destaque, e passa a dizer por que ele é diferente dos outros quatro
+
 ## 9. Verificação final
 
-- [ ] 9.1 Recriar o banco do zero, aplicar migrações, ingerir alguns posts e percorrer o blog inteiro — verificar que o ciclo completo funciona sem passo manual
-- [ ] 9.2 Publicar um post pela ingestão com o site rodando e conferir que ele aparece no índice, tem página própria e entra no sitemap sem novo deploy — verificar os três
-- [ ] 9.3 Remover `data/blog-posts.js` e confirmar que nenhum conteúdo de post permanece no repositório — verificar que o blog continua funcionando só com o banco
-- [ ] 9.4 Rodar `npm run lint` e `npm run build` — verificar que terminam sem erro
+- [x] 9.1 Recriar o banco do zero, aplicar migrações, ingerir alguns posts e percorrer o blog inteiro — verificar que o ciclo completo funciona sem passo manual
+- [x] 9.2 Publicar um post pela ingestão com o site rodando e conferir que ele aparece no índice, tem página própria e entra no sitemap sem novo deploy — verificar os três
+- [x] 9.3 Remover `data/blog-posts.js` e confirmar que nenhum conteúdo de post permanece no repositório — verificar que o blog continua funcionando só com o banco
+- [x] 9.4 Rodar `npm run lint` e `npm run build` — verificar que terminam sem erro

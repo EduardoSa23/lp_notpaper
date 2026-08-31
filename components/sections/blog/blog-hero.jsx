@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BLUR_DATA_URL } from "@/lib/blur-data-url";
+import { categorySlug } from "@/lib/blog/categories";
 import { formatPublishedAt, formatReadingTime, toDateAttribute } from "@/lib/blog/format";
-import { blogPostPath } from "@/lib/blog/urls";
+import { blogCategoryPath, blogPostPath } from "@/lib/blog/urls";
 
 export default function BlogHero({ post }) {
+  const urlDaCategoria = post ? categorySlug(post.category) : null;
+
   return (
     <section className="pb-12 pt-32">
       <div className="container mx-auto px-4">
@@ -19,12 +22,10 @@ export default function BlogHero({ post }) {
           </p>
         </div>
 
+        {/* Mesma sobreposicao do card: o link do titulo cobre o bloco todo e o
+            link da categoria fica acima dele. Ver `post-card.jsx`. */}
         {post ? (
-          <article>
-            <Link
-              href={blogPostPath(post.slug)}
-              className="group grid overflow-hidden rounded-3xl bg-white shadow-xl transition-shadow duration-300 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0043FE] focus-visible:ring-offset-2 lg:grid-cols-2"
-            >
+          <article className="group relative grid overflow-hidden rounded-3xl bg-white shadow-xl transition-shadow duration-300 hover:shadow-2xl focus-within:ring-2 focus-within:ring-[#0043FE] focus-within:ring-offset-2 lg:grid-cols-2">
               <div className="relative aspect-[16/9] w-full overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[22rem]">
                 <Image
                   src={post.coverImage.src}
@@ -43,13 +44,27 @@ export default function BlogHero({ post }) {
                   <span className="rounded-full bg-[#0043FE] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
                     Destaque
                   </span>
-                  <span className="rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE]">
-                    {post.category}
-                  </span>
+                  {urlDaCategoria ? (
+                    <Link
+                      href={blogCategoryPath(urlDaCategoria)}
+                      className="relative z-10 rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE] transition-colors hover:bg-[#0043FE]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0043FE] focus-visible:ring-offset-1"
+                    >
+                      {post.category}
+                    </Link>
+                  ) : (
+                    <span className="rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE]">
+                      {post.category}
+                    </span>
+                  )}
                 </div>
 
                 <h2 className="mb-4 text-2xl font-bold text-gray-900 transition-colors group-hover:text-[#0043FE] md:text-3xl">
-                  {post.title}
+                  <Link
+                    href={blogPostPath(post.slug)}
+                    className="after:absolute after:inset-0 after:content-[''] focus:outline-none"
+                  >
+                    {post.title}
+                  </Link>
                 </h2>
 
                 <p className="mb-6 text-base leading-relaxed text-gray-600">{post.excerpt}</p>
@@ -69,7 +84,6 @@ export default function BlogHero({ post }) {
                   </span>
                 </span>
               </div>
-            </Link>
           </article>
         ) : null}
       </div>

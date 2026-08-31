@@ -3,7 +3,8 @@ import Link from "next/link";
 
 import { BLUR_DATA_URL } from "@/lib/blur-data-url";
 import { formatPublishedAt, formatReadingTime, toDateAttribute } from "@/lib/blog/format";
-import { blogIndexPath } from "@/lib/blog/urls";
+import { categorySlug } from "@/lib/blog/categories";
+import { blogCategoryPath, blogIndexPath } from "@/lib/blog/urls";
 
 /**
  * Cabecalho do post.
@@ -23,9 +24,19 @@ export default function PostHeader({ post }) {
             &larr; Voltar para o blog
           </Link>
 
-          <span className="inline-block rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE]">
-            {post.category}
-          </span>
+          {/* Aqui o rotulo nao estava dentro de link nenhum: troca direta. */}
+          {categorySlug(post.category) ? (
+            <Link
+              href={blogCategoryPath(categorySlug(post.category))}
+              className="inline-block rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE] transition-colors hover:bg-[#0043FE]/20"
+            >
+              {post.category}
+            </Link>
+          ) : (
+            <span className="inline-block rounded-full bg-[#0043FE]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0043FE]">
+              {post.category}
+            </span>
+          )}
         </div>
 
         <h1 className="mt-4 text-3xl font-bold leading-tight text-gray-900 md:text-4xl">{post.title}</h1>
