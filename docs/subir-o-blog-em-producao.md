@@ -406,6 +406,22 @@ variáveis), **início automático** no boot, **log em arquivo** (sem isso, o er
 Next é uma tela que ninguém vê — no dev, `service-err.log` foi onde se leu o
 primeiro erro) e **reinicia sozinho** se o processo morrer.
 
+> ### ⚠️ Para reinstalar dependências, PARE o serviço antes (mordeu no dev)
+>
+> Um redeploy que rode `npm ci` com o serviço no ar falha com
+> **`EPERM: operation not permitted, unlink ...\@img\sharp-win32-x64\...\libvips-42.dll`**:
+> o Next carrega o `sharp` (otimização de imagem), e o Windows trava um DLL em uso.
+> A sequência é sempre:
+>
+> ```powershell
+> Stop-Service notpaper_blog
+> npm ci
+> Start-Service notpaper_blog
+> ```
+>
+> (Se ainda travar no mesmo DLL com o serviço parado, é o antivírus escaneando —
+> espere e repita, ou exclua a pasta do app do scan em tempo real.)
+
 > ### ⚠️ O código tem que estar num DISCO LOCAL, não num drive mapeado
 >
 > A conta do serviço (e o pool do IIS) **não enxergam letra de drive mapeado** —
