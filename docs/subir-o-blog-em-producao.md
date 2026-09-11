@@ -11,6 +11,29 @@
 > [`backend-e-banco-de-dados.md`](backend-e-banco-de-dados.md) — leia a seção 10
 > dele **antes** de começar: ela tem um bloqueador (a versão do SQL Server) que,
 > se não for verificado, faz o passo 4.3 falhar.
+>
+> **O ambiente de desenvolvimento foi provado ponta a ponta em 10–11/09/2026** —
+> banco, build, serviço do Windows, proxy IIS/ARR e uma publicação real do módulo
+> renderizando em `blog.silodev.com.br`. Muito do que este guia aprendeu veio de
+> lá, marcado abaixo com «provado no dev».
+
+---
+
+> ## 🛑 O PONTO DE PARADA — leia antes de tudo
+>
+> **Uma única ação neste guia derruba os 45 sites: instalar o ARR (e o URL
+> Rewrite) — o instalador reinicia o serviço do IIS inteiro.** Ela está na
+> **fase 5 (seção 6.1)**, marcada com 🛑. Tudo antes dela — preparar, banco,
+> build, serviço, provar em `localhost:3000` — **não toca no IIS e pode ser feito
+> em horário comercial**.
+>
+> **NÃO execute a fase 5 em horário comercial.** Faça tudo até a fase 4, pare na
+> porta da 5, e execute a 5 em janela combinada.
+>
+> **Mas confira primeiro se o ARR já está instalado** (seção 1): no servidor de
+> dev ele **já estava**. Se em produção também estiver, **não há o que instalar — e
+> o passo que reinicia tudo deixa de existir.** Ligar o proxy e criar o site não
+> reiniciam o IIS.
 
 ---
 
@@ -38,6 +61,18 @@ interruptor no `applicationHost.config`, ou seja, servidor inteiro.
 **Consequência para o planejamento:** isso não é tarefa de tarde. É **janela de
 manutenção combinada**, e o resto do trabalho deve ser organizado para que a
 janela seja o mais curta possível — ver a seção 3.
+
+> ### ⚠️ Meça de novo antes de começar — a tabela acima é de 08/09/2026
+>
+> O estado real muda, e o do dev surpreendeu: aquele servidor **já tinha IIS e o
+> ARR instalados**, ao contrário do que se supunha. Rode o `verificar-servidor.ps1`
+> (na pasta de deploy) no servidor de produção e confira, em especial:
+>
+> - **ARR e URL Rewrite** — se já estiverem instalados, **a fase 5 não reinicia
+>   nada**: ligar o proxy e criar o site não derrubam o IIS. Todo o peso da
+>   «janela» está na *instalação* do ARR.
+> - **Versão do SQL Server** da empresa (o bloqueador — seção 4.3).
+> - **Node e ODBC 18** — o dev já os tinha; produção, na medição de 08/09, não.
 
 ---
 
@@ -130,8 +165,14 @@ de proxy e reapontar o site para ela. Segundos, não uma noite.
 
 ### 4.1 Node
 
-Instale o **LTS** (20 ou 22) pelo instalador oficial `.msi`. Next 15 exige 18.18
-ou mais.
+Instale um **LTS atual (22 ou 24)** pelo instalador oficial `.msi`. Next 15 exige
+18.18 ou mais, mas o dev rodou em **Node 24.15.0** sem problema — e é bom que
+produção seja o **mesmo major** do que foi provado.
+
+> **Provado no dev:** o `msnodesqlv8` tem binário pronto para o Node 24 (ABI 137),
+> então o `npm ci` **não** precisou de compilador C++. Se em produção o `npm ci`
+> pedir ferramentas de build, é porque a versão de Node não tem binário pronto —
+> troque a versão do Node, não instale o Visual Studio Build Tools.
 
 **A versão importa mais do que parece.** `msnodesqlv8` é **módulo nativo**: o
 binário `.node` é compilado por versão maior de Node e por arquitetura. Isso tem
@@ -153,6 +194,23 @@ Se você instalar o 17 em vez do 18, funciona — mas então `SQLSERVER_ODBC_DRI
 tem que dizer `ODBC Driver 17 for SQL Server`. O nome no ambiente e o nome
 instalado têm que ser **o mesmo texto**; é por isso que ele é variável de
 ambiente e não constante no código.
+
+> ### ⚠️ `sqlcmd` com o Driver 18 exige `-C` (provado no dev)
+>
+> O Driver 18 passou a **exigir criptografia por padrão** e a **validar o
+> certificado** — o que o 17 não fazia. Contra um SQL Server com certificado
+> autoassinado, `sqlcmd` falha com *"the certificate chain was issued by an
+> authority that is not trusted"*. A correção é **`-C`** (trust server
+> certificate):
+>
+> ```powershell
+> sqlcmd -S <servidor\instancia> -E -C -Q "SELECT SERVERPROPERTY('ProductMajorVersion')"
+> ```
+>
+> É o mesmo que `TrustServerCertificate=yes` faz na string do app
+> (`db-config.cjs`), e vale para toda query `sqlcmd` deste projeto. Também é o
+> lembrete vivo da pendência da seção 7: em produção, **sobre a rede**, "confiar em
+> qualquer certificado" deixa de ser inofensivo.
 
 ### 4.3 O banco
 
@@ -179,6 +237,29 @@ O aplicador de migrations **cria o banco se ele não existir** (`CREATE DATABASE
 via `master`), então quem roda o passo precisa de permissão para isso. Rode uma
 vez com a **sua** conta de administrador, e não com a conta do serviço — a conta
 do serviço só precisa ler e escrever.
+
+> ### ⚠️ "Login failed" pode não ser falta de permissão (provado no dev)
+>
+> No dev, a conta de administrador **não conseguia** logar no SQL, e a causa não
+> era óbvia. Duas armadilhas, em ordem:
+>
+> 1. **`BUILTIN\Administrators` pode ter sido tirado do `sysadmin`** numa instância
+>    endurecida — foi o caso no dev. E o **UAC filtra o SID de Administrators** numa
+>    sessão não elevada. Confirme com `whoami /groups | findstr /i Administrators`
+>    (elevado, tem que estar `Enabled group`, não `deny only`).
+> 2. **Se ainda falhar, o seu login não existe na instância.** Aí alguém com
+>    `sysadmin` cria — ou, se a instância aceitar autenticação SQL, você entra com
+>    `sa` e cria você mesmo:
+>
+>    ```sql
+>    CREATE LOGIN [DOMINIO\voce] FROM WINDOWS;
+>    ALTER SERVER ROLE dbcreator ADD MEMBER [DOMINIO\voce];
+>    ```
+>
+> `dbcreator` basta para o `CREATE DATABASE`, e quem cria o banco vira dono dele —
+> as migrations rodam. Não peça `sysadmin`. **Em produção isso é conversa com quem
+> administra o SQL da empresa:** peça o login da sua conta de migração com
+> `dbcreator`, e o da conta de serviço com `datareader`/`datawriter` (seção 4.4).
 
 ```powershell
 # no servidor, na pasta do site, com as variáveis já definidas
@@ -225,9 +306,31 @@ num servidor com 45 sites, é uma superfície a mais.
 | `SQLSERVER_DATABASE` | `notpaperBlog` |
 | `SQLSERVER_ODBC_DRIVER` | `ODBC Driver 18 for SQL Server` |
 | `BLOG_INGESTAO_TOKEN` | **um token NOVO** — ver abaixo |
-| `NEXT_PUBLIC_SITE_URL` | `https://notpaper.com.br` (é o padrão, mas explícito é melhor) |
 | `NODE_ENV` | `production` |
 | `PORT` | `3000` |
+
+> ### ⚠️ `NEXT_PUBLIC_SITE_URL` NÃO ENTRA NESSA TABELA, E O MOTIVO CUSTA UM DEPLOY
+>
+> Ela é o endereço público do site, e é **dela que sai a URL que a ingestão
+> devolve ao módulo** — a que ele grava como endereço publicado. Sem ela vale o
+> padrão de `lib/blog/urls.js`, que é `https://notpaper.com.br`.
+>
+> **`NEXT_PUBLIC_` é assado no pacote por `next build`, e não lido em tempo de
+> execução.** Medido em 10/09/2026: o domínio aparece **17 vezes dentro de
+> `.next/server`**, inclusive dentro da própria rota de ingestão. Pôr a variável
+> no ambiente do serviço **depois** do build não muda nada.
+>
+> Ela tem de estar no ambiente **ANTES** do `npm run build` (seção 5.2), e
+> **trocar de domínio exige reconstruir**:
+>
+> ```powershell
+> $env:NEXT_PUBLIC_SITE_URL = "http://blog.silodev.com.br"   # ou o de producao
+> npm run build
+> ```
+>
+> O sintoma de esquecer é silencioso e enganoso: a entrega dá **certo**, o post
+> entra no banco do ambiente certo, e o módulo grava um endereço de **outro**
+> ambiente — que abre, porque o site de lá existe, e mostra outro conteúdo.
 
 > ### ⚠️ O token de ingestão em produção tem que ser novo
 >
@@ -274,43 +377,138 @@ barata é trocar a versão do Node, não instalar um compilador C++ no servidor.
 de um reinício da máquina. A diferença entre um site que se recupera e um site
 que espera alguém notar é justamente essa.
 
-Use **NSSM** (ou `node-windows`). O que importa, seja qual for:
+Use **NSSM**. Os comandos abaixo são os que subiram o serviço no dev — em produção
+muda **só a conta** (no dev foi `LocalSystem` com banco local; aqui é a **conta de
+domínio** da seção 2, porque o banco é remoto):
 
-- **executa** `node node_modules/next/dist/bin/next start`, com a pasta do app
-  como diretório de trabalho;
-- **roda sob a conta de domínio** da seção 2;
-- **início automático**;
-- **redireciona stdout/stderr para arquivo** — sem isso, o único registro de um
-  erro do Next é a tela que ninguém está vendo;
-- **reinicia sozinho** se o processo morrer.
+```powershell
+$nssm = "C:\nssm\nssm-2.24\win64\nssm.exe"
+$node = (Get-Command node).Source            # ex.: C:\Program Files\nodejs\node.exe
+$app  = "E:\Notpaper_SITE_app"               # DISCO LOCAL — ver aviso abaixo
+New-Item -ItemType Directory -Force -Path "$app\logs" | Out-Null
+
+& $nssm install notpaper_blog $node "node_modules\next\dist\bin\next start"
+& $nssm set notpaper_blog AppDirectory $app
+& $nssm set notpaper_blog AppStdout "$app\logs\service-out.log"
+& $nssm set notpaper_blog AppStderr "$app\logs\service-err.log"
+& $nssm set notpaper_blog Start SERVICE_AUTO_START
+& $nssm set notpaper_blog AppExit Default Restart
+
+# A CONTA — a diferença de produção. Sem isto roda como LocalSystem, que NÃO se
+# autentica no banco remoto (seção 2a). Em produção, a conta de domínio:
+& $nssm set notpaper_blog ObjectName "DOMINIO\svc_notpaper_blog" "<senha>"
+
+& $nssm start notpaper_blog
+```
+
+O que cada peça garante: **roda da pasta do app** (é de lá que `next start` lê as
+variáveis), **início automático** no boot, **log em arquivo** (sem isso, o erro do
+Next é uma tela que ninguém vê — no dev, `service-err.log` foi onde se leu o
+primeiro erro) e **reinicia sozinho** se o processo morrer.
+
+> ### ⚠️ O código tem que estar num DISCO LOCAL, não num drive mapeado
+>
+> A conta do serviço (e o pool do IIS) **não enxergam letra de drive mapeado** —
+> ela é por sessão de usuário. No dev o app ficava em `H:`, e só funcionou porque
+> `H:` era **disco local**; de rede, o serviço nem acharia o app. Confirme:
+> `Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='E:'"` → `DriveType 3` é
+> local. Se for `4` (rede), o código tem de sair de lá antes do serviço.
+
+> ### As variáveis de ambiente vão no serviço, via NSSM
+>
+> Em vez de um `.env` na pasta (seção 5.1), grave-as no próprio serviço:
+>
+> ```powershell
+> & $nssm set notpaper_blog AppEnvironmentExtra `
+>     "SQLSERVER_SERVER=<servidor\instancia>" "SQLSERVER_DATABASE=notpaperBlog" `
+>     "SQLSERVER_ODBC_DRIVER=ODBC Driver 18 for SQL Server" `
+>     "BLOG_INGESTAO_TOKEN=<o token novo>" "NODE_ENV=production" "PORT=3000"
+> ```
+>
+> `NEXT_PUBLIC_SITE_URL` **não** entra aqui — é assada no build (seção 5.1). Se um
+> dia usar `.env.local` no lugar, grave-o **UTF-8 sem BOM**: o leitor de
+> `--env-file` do Node não remove o BOM, e a primeira variável fica ilegível
+> (mordeu no dev).
 
 ### 5.4 A prova que fecha esta fase
 
 No próprio servidor, num navegador ou com `curl`:
 
 ```powershell
-curl.exe -s -o NUL -w "%{http_code}`n" http://localhost:3000/
-curl.exe -s -o NUL -w "%{http_code}`n" http://localhost:3000/blog
-curl.exe -s http://localhost:3000/sitemap.xml | Select-String -Pattern "blog" | Select-Object -First 3
+curl.exe -s -o NUL -w "/            %{http_code}`n" http://localhost:3000/
+curl.exe -s -o NUL -w "/blog        %{http_code}`n" http://localhost:3000/blog
+curl.exe -s -o NUL -w "/solucoes    %{http_code}`n" http://localhost:3000/solucoes
+curl.exe -s -o NUL -w "/_diretoria  %{http_code}`n" http://localhost:3000/_diretoria
 ```
 
-Percorra o índice do blog, abra um post, veja a capa carregar. **Se algo estiver
-errado no banco, no driver ou no build, é aqui que aparece** — antes de a janela
-de manutenção existir, e sem ninguém ter caído.
+`200` nos três primeiros e **`404` no `/_diretoria`** (área privada, não vai ao ar
+— se der `200`, pare: há credencial fixa no código). Com o banco vazio, `/blog`
+mostra o estado vazio, que é o correto.
+
+E prove a **ingestão** — a rota que o módulo usa — com o token do serviço:
+
+```powershell
+# corpo via ARQUIVO: o PowerShell COME as aspas ao passar JSON para um .exe.
+# Provado no dev: `--data-binary $corpo` chega mutilado e vira 503. Sempre @arquivo.
+$corpo = '{"titulo":"teste","resumo":"x","categoria":"GED","conteudo":[]}'
+[System.IO.File]::WriteAllText("$PWD\corpo.json", $corpo, (New-Object System.Text.UTF8Encoding($false)))
+
+# com token, corpo invalido de proposito -> espera 422 nomeando o campo
+curl.exe -X PUT "http://localhost:3000/api/blog/posts/00000000-0000-0000-0000-000000000001" `
+  -H "X-Ingestao-Token: <o token>" -H "Content-Type: application/json" --data-binary "@corpo.json" -i
+# sem token -> espera 401
+curl.exe -X PUT "http://localhost:3000/api/blog/posts/00000000-0000-0000-0000-000000000001" `
+  -H "Content-Type: application/json" --data-binary "{}" -i
+Remove-Item corpo.json
+```
+
+`422` (conteúdo recusado) e `401` (sem token) provam o contrato de resposta.
+Percorra o índice, abra um post, veja a capa carregar. **Se algo estiver errado no
+banco, no driver ou no build, é aqui que aparece** — antes de a janela existir, e
+sem ninguém ter caído.
 
 ---
 
 ## 6. Fase 5 e 6 — a janela, e a verificação que importa
 
-### 6.1 O que fazer na janela
+### 6.1 O que fazer na janela — e o que exatamente derruba os 45 sites
 
-1. Instalar o **ARR** (ele exige URL Rewrite, que já está lá).
-2. Ligar o proxy: *Application Request Routing Cache → Server Proxy Settings →
-   Enable proxy*.
-3. Pôr o `web.config` de proxy no `notpaper_site`.
-4. Conferir `https://notpaper.com.br` **de fora**.
+**Só uma ação reinicia o IIS inteiro: instalar o ARR (e o URL Rewrite).** O resto
+não. Separe os dois.
 
-A regra mínima:
+> ## 🛑 PARE AQUI se for horário comercial
+>
+> ```powershell
+> # baixar (URL Rewrite primeiro; o ARR depende dele)
+> $ProgressPreference = 'SilentlyContinue'
+> Invoke-WebRequest "https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi" -OutFile "$env:TEMP\rewrite.msi"
+> Invoke-WebRequest "https://go.microsoft.com/fwlink/?LinkID=615136" -OutFile "$env:TEMP\arr.msi"
+> # instalar — ISTO REINICIA O W3SVC: OS 45 SITES CAEM POR SEGUNDOS
+> Start-Process msiexec.exe -ArgumentList '/i',"`"$env:TEMP\rewrite.msi`"",'/qn','/norestart' -Wait
+> Start-Process msiexec.exe -ArgumentList '/i',"`"$env:TEMP\arr.msi`"",'/qn','/norestart' -Wait
+> ```
+>
+> **Se a seção 1 mostrou o ARR já instalado, pule este bloco inteiro** — não há o
+> que instalar, e nada reinicia. Foi o caso no dev.
+
+O que **não** derruba ninguém, e pode preceder ou seguir a janela:
+
+```powershell
+# 1. ligar o proxy do ARR (interruptor global) — nao reinicia o IIS
+& "$env:windir\system32\inetsrv\appcmd.exe" set config -section:system.webServer/proxy /enabled:"True" /commit:apphost
+
+# 2. a pasta VAZIA que recebe SO o web.config (o IIS nunca aponta para o codigo)
+$proxy = "C:\inetpub\notpaper_proxy"
+New-Item -ItemType Directory -Force -Path $proxy | Out-Null
+#    (grave aqui o web.config abaixo)
+
+# 3. apontar o notpaper_site para essa pasta — afeta SO notpaper.com.br, nao os 45
+& "$env:windir\system32\inetsrv\appcmd.exe" set vdir "notpaper_site/" /physicalPath:"$proxy"
+```
+
+Depois, conferir `https://notpaper.com.br` **de fora**.
+
+A regra mínima (a mesma que subiu no dev):
 
 ```xml
 <configuration>
@@ -323,9 +521,21 @@ A regra mínima:
         </rule>
       </rules>
     </rewrite>
+    <httpErrors existingResponse="PassThrough" />
   </system.webServer>
 </configuration>
 ```
+
+O `httpErrors existingResponse="PassThrough"` não é enfeite: sem ele, um `503` do
+Node (banco fora) é trocado pela página de erro do IIS, e você perde a resposta que
+o Node escreveu — que o módulo também lê.
+
+> ### ⚠️ A armadilha do loop (mordeu no dev)
+>
+> O `url` do rewrite aponta para **`http://localhost:3000`**, nunca para o domínio
+> público. Apontar para `notpaper.com.br` faz o ARR proxiar para si mesmo: o
+> sintoma é **`400 Bad Request` com corpo vazio e uma pilha de cabeçalhos
+> `X-Powered-By: ASP.NET` repetidos** — a assinatura de um laço.
 
 Deliberadamente mínima. Os ajustes finos — preservar o host, `X-Forwarded-Proto`,
 servir `_next/static` direto pelo IIS — **são decididos pelo que a seção 6.2
@@ -353,13 +563,16 @@ Disparar isso isolado, **contra o IIS e não contra a porta 3000**, separa a
 pergunta do proxy da pergunta da integração:
 
 ```powershell
-# corpo chunked de verdade: sem Content-Length
+# corpo via ARQUIVO (o PowerShell come as aspas em $corpo — provado no dev), e
+# chunked de verdade: o header força chunked, sem Content-Length
 $corpo = '{"titulo":"teste de proxy","resumo":"x","categoria":"GED","conteudo":[]}'
+[System.IO.File]::WriteAllText("$PWD\corpo.json", $corpo, (New-Object System.Text.UTF8Encoding($false)))
 curl.exe -k -X PUT "https://notpaper.com.br/api/blog/posts/00000000-0000-0000-0000-000000000001" `
   -H "X-Ingestao-Token: <o token>" `
   -H "Content-Type: application/json" `
   -H "Transfer-Encoding: chunked" `
-  --data-binary $corpo -i
+  --data-binary "@corpo.json" -i
+Remove-Item corpo.json
 ```
 
 O que importa **não é** o post entrar — este corpo é inválido de propósito, e
@@ -370,6 +583,10 @@ O que importa **não é** o post entrar — este corpo é inválido de propósit
 | **422** nomeando o campo | ✅ o corpo atravessou o proxy inteiro e chegou à validação |
 | **5xx** de corpo ilegível | ❌ o proxy comeu o corpo — é o defeito que se veio procurar |
 | **413** ou timeout | ❌ o proxy bufferizou e travou |
+
+> **Provado no dev (11/09/2026):** este teste deu **`422`** através do ARR, com
+> `X-Powered-By: ARR/3.0` na resposta — o corpo `chunked` atravessou o proxy
+> íntegro, sem nenhum ajuste. É o maior risco da produção, e ele já passou uma vez.
 
 Se der errado, o conserto é do **lado do módulo** e é barato: bufferizar o corpo
 antes de enviar dá `Content-Length`. Não se faz preventivamente.
