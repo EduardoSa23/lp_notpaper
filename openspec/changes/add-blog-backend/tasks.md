@@ -93,7 +93,13 @@ A ordem segue o Migration Plan do design: banco e camada de dados → blog lendo
 - [x] 8d.6 Derivar a âncora do subtítulo e o item do sumário do texto sem os endereços — verificar que o item do sumário não tem link dentro do link
 - [x] 8d.7 Recusar na ingestão endereço fora de `http` e `https` — verificar que a recusa é 422 e nomeia o endereço, e que a renderização também degrada para texto se algo assim já estiver armazenado
 - [x] 8d.8 Percorrer todos os posts publicados e o índice com a mudança aplicada — verificar que nenhum quebrou
-- [ ] 8d.9 **Depois que o módulo parar de enviar texto como valor único**, remover a tolerância das duas portas — a conversão em `ingest-mapping.js` e a normalização de leitura em `queries.js` — e verificar que nenhum post no banco ainda usa a forma antiga antes de remover
+- [x] 8d.9 **Depois que o módulo parar de enviar texto como valor único**, remover a tolerância das duas portas — a conversão em `ingest-mapping.js` e a normalização de leitura em `queries.js` — e verificar que nenhum post no banco ainda usa a forma antiga antes de remover
+
+      ⚠️ **A pré-condição desta tarefa NÃO estava satisfeita, e foi a própria verificação que ela pede que mostrou.** Dos 28 posts, **15 ainda usavam a forma antiga** — todos de 25/08, o dia anterior à fatia dos trechos. As duas portas tinham condições DIFERENTES: a da ingestão dependia do módulo (satisfeita desde 26/08, e conferida por tipo — ele declara `IReadOnlyList<TrechoParaOSite>`), e a da leitura dependia do banco.
+
+      A migração `003_trechos_nos_posts_antigos.sql` converteu os 15, e os valores dela foram **gerados pela própria função da leitura** (`scripts/gerar-migracao-de-trechos.cjs`): o que ficou gravado é, por construção, o que a página já renderizava. Conferido antes de remover as portas — **28 idênticos para quem lê, 0 diferentes** — e depois: **0 posts na forma antiga**.
+
+      `normalizeRuns` perdeu a conversão de string junto: com as duas portas fechadas ela ficou sem alcance, e mantê-la faria quem a lesse concluir que string ainda é entrada válida — que foi como a tolerância entrou da primeira vez.
 
 ## 8e. Destaque decidido por quem revisa
 

@@ -1,9 +1,11 @@
-﻿export default function SolucoesHeroSection() {
+﻿import Image from "next/image";
+
+export default function SolucoesHeroSection() {
   return (
     <section className="container mx-auto px-4 pb-12 pt-24 md:pb-16 md:pt-28">
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full max-h-[450px] md:max-h-[430px] object-cover">
-        <source src="/videos/bg_hero.mp4" type="video/mp4" />
-      </video>
+      <div aria-hidden="true" className="absolute inset-0 w-full h-full max-h-[450px] md:max-h-[430px]">
+        <Image src="/image/bg_hero.png" alt="" fill priority sizes="100vw" className="object-cover" />
+      </div>
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
       <div className="relative">

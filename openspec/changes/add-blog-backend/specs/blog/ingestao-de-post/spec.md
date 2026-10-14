@@ -72,7 +72,11 @@ O texto de cada bloco tem forma própria, tratada no requisito de trechos abaixo
 
 O texto de um bloco — parágrafo, subtítulo, citação e cada item de lista — SHALL chegar como uma lista de trechos, em que cada trecho tem o seu texto e, opcionalmente, um endereço. Trecho com endereço SHALL ser renderizado como link; trecho sem endereço SHALL ser renderizado como texto.
 
-Enquanto quem entrega estiver migrando, a ingestão SHALL aceitar também o texto como valor único, tratando-o como um trecho sem endereço. Essa tolerância SHALL viver apenas na fronteira de entrada e na leitura do que já está armazenado, e NÃO SHALL alcançar a renderização: dentro do modelo o texto tem uma forma só, porque dois caminhos de renderização seriam dois caminhos para manter, e o menos exercitado apodrece.
+A lista de trechos SHALL ser a única forma aceita, e texto como valor único MUST ser recusado nomeando a posição do bloco. Quem entrega precisa saber que o formato mudou, e não descobrir que metade do texto sumiu da página.
+
+Houve uma tolerância a valor único enquanto quem entrega migrava, em duas portas: a fronteira de entrada e a leitura do que já estava armazenado. As duas SHALL fechar juntas — e a condição de cada uma é diferente. A da entrada depende de quem entrega ter parado de enviar valor único; a da leitura depende de **não haver mais post armazenado naquela forma**, o que exige converter os que houver.
+
+Fechar só a primeira deixaria a segunda sustentando peso sem ninguém perceber, e fechar só a segunda quebraria toda entrega que ainda usasse a forma antiga. Depois das duas, o texto tem uma forma só da entrada ao render — dois caminhos de renderização seriam dois caminhos para manter, e o menos exercitado apodrece.
 
 O site SHALL recusar endereço que não seja `http` nem `https`, em vez de armazená-lo — a renderização não pode ser o único ponto que decide se um endereço recebido de fora vira link. Endereço armazenado que não passe nessa checagem SHALL ser renderizado como texto, preservando a frase.
 
@@ -86,12 +90,18 @@ A âncora de um subtítulo e o item correspondente no sumário SHALL usar o text
 #### Scenario: Texto como valor único
 
 - **WHEN** o payload traz o texto de um bloco como valor único, sem trechos
-- **THEN** a ingestão aceita e o trata como um trecho sem endereço, e a página o renderiza como texto
+- **THEN** a entrega é recusada como conteúdo inválido, nomeando a posição do bloco e o campo
 
-#### Scenario: Post armazenado antes dos trechos
+#### Scenario: Converter o que está armazenado antes de fechar a leitura
 
-- **WHEN** uma página é montada a partir de post armazenado com o texto como valor único
-- **THEN** ela renderiza normalmente, sem exigir reprocessamento do que já está armazenado
+- **WHEN** ainda há post armazenado com o texto como valor único
+- **THEN** ele é convertido para a lista de trechos antes de a tolerância da leitura sair
+- **AND** a conversão não muda o que a página mostra
+
+#### Scenario: Post armazenado depois da conversão
+
+- **WHEN** uma página é montada a partir de qualquer post armazenado
+- **THEN** o texto já está na lista de trechos, e nenhuma normalização acontece na leitura
 
 #### Scenario: Endereco fora de http e https
 

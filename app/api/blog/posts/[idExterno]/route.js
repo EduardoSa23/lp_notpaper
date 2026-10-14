@@ -3,10 +3,11 @@ import { timingSafeEqual } from "node:crypto";
 
 import { TAG_BLOG, tagForPost } from "@/lib/blog/cache-tags";
 import { BlogModelError, IngestContentError, ingestPost } from "@/lib/blog/ingest";
+import { unpublishPost } from "@/lib/blog/unpublish";
 import { blogPostUrl } from "@/lib/blog/urls";
 
 /**
- * Ingestao de post do modulo de marketing autonomo.
+ * Ingestao e despublicacao de post do modulo de marketing autonomo.
  *
  * Contrato definido pelo lado que chama (`PublicadorDeBlogNoSite.cs`):
  *   PUT /api/blog/posts/{Publicacao.Id}
@@ -26,6 +27,28 @@ import { blogPostUrl } from "@/lib/blog/urls";
  * Errar isso e o defeito mais caro possivel aqui: validar mal e responder 5xx
  * faria a fila retentar um post que nunca vai passar; falhar o banco e
  * responder 4xx faria o modulo desistir de uma falha passageira.
+ *
+ * ── A RETIRADA DO AR TEM DE PASSAR POR AQUI ─────────────────────────────────
+ *
+ *   DELETE /api/blog/posts/{Publicacao.Id}
+ *   X-Ingestao-Token: <token>
+ *   -> { slug, situacao: "rascunho" }
+ *
+ * O blog NAO consulta o banco a cada visita: `content-source.js` embrulha as
+ * leituras em `unstable_cache` com a tag `blog`, e as entradas nao expiram. Uma
+ * escrita direta no banco - um DELETE no SSMS, um UPDATE de `status` a mao - e
+ * invisivel para o cache, e o post continua no ar por tempo indeterminado, sem
+ * erro nenhum denunciando. Foi assim que dois posts apagados do banco em
+ * 15/09/2026 continuaram aparecendo.
+ *
+ * Esta rota e o caminho que fecha esse buraco: despublica e revalida na mesma
+ * operacao. Quem tira post do ar por fora dela volta a ter o problema.
+ *
+ * Codigos, na mesma leitura de retentativa do PUT:
+ *   200 -> em rascunho. IDEMPOTENTE: repetir devolve 200 de novo.
+ *   404 -> nenhum post com esse `id_externo`. Nao ha o que retentar.
+ *   422 -> identificador malformado.
+ *   503 -> banco indisponivel. RETENTA.
  */
 
 const GUID = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
@@ -51,7 +74,14 @@ function tokenConfere(recebido, esperado) {
   return timingSafeEqual(a, b);
 }
 
-export async function PUT(request, { params }) {
+/**
+ * Porta de entrada comum aos dois verbos: token e formato do identificador.
+ *
+ * Devolve uma Response quando a requisicao para aqui, e `null` quando pode
+ * seguir. Os dois verbos MESMO tem de recusar igual - uma sondagem que
+ * distinguisse os caminhos pelo codigo de resposta saberia por qual insistir.
+ */
+function barrar(request, idExterno) {
   const esperado = process.env.BLOG_INGESTAO_TOKEN;
 
   if (!esperado) {
@@ -65,11 +95,18 @@ export async function PUT(request, { params }) {
     return json({ erro: "Nao autorizado" }, 401);
   }
 
-  const { idExterno } = await params;
-
   if (!GUID.test(idExterno ?? "")) {
     return json({ erro: "Identificador da publicacao invalido" }, 422);
   }
+
+  return null;
+}
+
+export async function PUT(request, { params }) {
+  const { idExterno } = await params;
+
+  const barrado = barrar(request, idExterno);
+  if (barrado) return barrado;
 
   // Corpo ilegivel, vazio ou truncado e TRANSPORTE, nao conteudo ruim.
   //
@@ -111,4 +148,43 @@ export async function PUT(request, { params }) {
     console.error("[blog] falha na ingestao:", error.message);
     return json({ erro: "Ingestao indisponivel" }, 503);
   }
+}
+
+/**
+ * Tira o post do ar: marca como rascunho e revalida.
+ *
+ * Nao apaga a linha - ver `lib/blog/unpublish.js` para o motivo. Para o
+ * visitante a diferenca nao existe: as paginas e a capa passam a responder 404.
+ */
+export async function DELETE(request, { params }) {
+  const { idExterno } = await params;
+
+  const barrado = barrar(request, idExterno);
+  if (barrado) return barrado;
+
+  let resultado;
+
+  try {
+    resultado = await unpublishPost(idExterno);
+  } catch (error) {
+    // Infraestrutura: quem chama deve retentar.
+    console.error("[blog] falha ao despublicar:", error.message);
+    return json({ erro: "Despublicacao indisponivel" }, 503);
+  }
+
+  if (!resultado) {
+    return json({ erro: "Nenhum post com esse identificador" }, 404);
+  }
+
+  // Revalida ANTES de responder, pela mesma razao do PUT invertida: quem
+  // recebeu o 200 vai conferir que o post saiu. Revalidar depois deixaria uma
+  // janela em que a resposta ja disse "fora do ar" e o cache ainda serve a
+  // pagina - e a confianca nessa resposta e o que faz esta rota valer a pena.
+  //
+  // As duas tags, mesmo quando a linha JA estava em rascunho: e justamente o
+  // caso de quem mexeu no banco a mao e veio aqui consertar o cache.
+  revalidateTag(TAG_BLOG);
+  revalidateTag(tagForPost(resultado.slug));
+
+  return json({ slug: resultado.slug, situacao: "rascunho", jaEraRascunho: resultado.jaEraRascunho }, 200);
 }

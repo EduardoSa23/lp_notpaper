@@ -1,4 +1,5 @@
-﻿import { FaBrain, FaBuildingColumns } from "react-icons/fa6";
+﻿import Image from "next/image";
+import { FaBrain, FaBuildingColumns } from "react-icons/fa6";
 import RotatingText from "../../animate/TextAnimations/RotatingText/RotatingText";
 
 const customSolutions = [
@@ -20,9 +21,9 @@ export default function SolucoesSobMedidaSection() {
   return (
     <section className="container mx-auto px-4 py-12 md:py-16">
       <div className="relative rounded-[2rem] p-6 md:p-10 shadow-lg">
-        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover rounded-[2rem]">
-          <source src="/videos/bg_recursos_poderosos.mp4" type="video/mp4" />
-        </video>
+        <div aria-hidden="true" className="absolute inset-0 w-full h-full overflow-hidden rounded-[2rem]">
+          <Image src="/image/bg_recursos_poderosos.png" alt="" fill sizes="(min-width: 768px) 90vw, 100vw" className="object-cover" />
+        </div>
         <div className="absolute inset-0 bg-black/40 -z-10" />
 
         <div className="relative">
