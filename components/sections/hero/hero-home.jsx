@@ -14,10 +14,9 @@ const heroData = {
 export default function HeroHome() {
   return (
     <section id="home" className="section-anchor pb-16 pt-20 lg:pt-32">
-      <video autoPlay loop muted playsInline aria-hidden="true" tabIndex={-1} className="absolute inset-0 w-full h-full max-h-[780px] lg:max-h-[626px] object-cover">
-        <source src="/videos/bg_hero.mp4" type="video/mp4" />
-        <track src="/videos/decorative-captions.vtt" kind="captions" srcLang="pt-BR" label="Português" />
-      </video>
+      <div aria-hidden="true" className="absolute inset-0 w-full h-full max-h-[780px] lg:max-h-[626px]">
+        <Image src="/image/bg_hero.png" alt="" fill priority sizes="100vw" className="object-cover" />
+      </div>
       <div className="absolute inset-0 -z-10 bg-black/60" />
       <div className="container mx-auto px-4">
         <div className="items-center md:grid md:justify-between lg:grid-cols-[auto_auto]">

@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaCity, FaFileInvoiceDollar, FaRobot } from "react-icons/fa6";
 import RotatingText from "../../animate/TextAnimations/RotatingText/RotatingText";
@@ -57,10 +58,9 @@ export default function RecursosPoderosos() {
 
   return (
     <section id="services" className="relative pb-12 pt-12 md:pb-16 md:pt-20 section-anchor overflow-hidden">
-      <video autoPlay loop muted playsInline aria-hidden="true" tabIndex={-1} className="absolute inset-0 w-full h-full object-cover">
-        <source src="/videos/bg_recursos_poderosos.mp4" type="video/mp4" />
-        <track src="/videos/decorative-captions.vtt" kind="captions" srcLang="pt-BR" label="Português" />
-      </video>
+      <div aria-hidden="true" className="absolute inset-0 w-full h-full">
+        <Image src="/image/bg_recursos_poderosos.png" alt="" fill sizes="100vw" className="object-cover" />
+      </div>
       <div className="absolute inset-0 bg-black/55 -z-10" />
 
       <div className="relative container mx-auto px-4">

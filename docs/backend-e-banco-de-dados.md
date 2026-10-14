@@ -503,6 +503,58 @@ A URL devolvida vem de **`NEXT_PUBLIC_SITE_URL`**, e não do host da requisiçã
 como** fazer o módulo gravar `http://localhost:3000/blog/...` como endereço
 publicado.
 
+### 6.7 Tirar um post do ar
+
+```
+DELETE /api/blog/posts/{Publicacao.Id}
+X-Ingestao-Token: <token>
+-> 200 { slug, situacao: "rascunho", jaEraRascunho }
+```
+
+**Despublica, não apaga**: `status = 'draft'`, `featured = 0`, e revalida as duas
+tags antes de responder. Para o visitante o efeito é o de apagar — todas as
+leituras filtram `status = 'published'`, então o post sai do índice, da
+paginação, da categoria, dos relacionados, do sitemap e das rotas geradas, e a
+capa passa a responder `404`. O que se ganha em manter a linha está em
+`lib/blog/unpublish.js`: o texto e os bytes da capa continuam existindo, e o
+`id_externo` segue reconhecido, então uma reentrega do módulo volta a ser
+atualização do **mesmo** post, com o **mesmo** slug.
+
+**Por que a rota existe.** O blog não consulta o banco a cada visita (seção
+5.2), e as entradas do `unstable_cache` **não expiram**. Uma escrita direta no
+banco — um `DELETE` no SSMS, um `UPDATE status` à mão — é invisível para o
+cache: o post continua no ar por tempo indeterminado, sem erro nenhum
+denunciando. Foi assim que dois posts apagados do banco em **15/09/2026**
+continuaram aparecendo. Quem tira post do ar por fora desta rota volta a ter o
+problema.
+
+Códigos, na mesma leitura de retentativa do `PUT` (seção 6.1):
+
+| código | significado |
+|---|---|
+| `200` | em rascunho. **Idempotente**: repetir devolve `200`, com `jaEraRascunho: true` |
+| `401` | token ausente ou incorreto — resposta idêntica para os dois |
+| `404` | nenhum post com esse `id_externo`. Não há o que retentar |
+| `422` | identificador malformado |
+| `503` | banco indisponível, ou token não configurado. **Retenta** |
+
+Exercitado de ponta a ponta em 15/09/2026 contra o banco de desenvolvimento: os
+cinco códigos, a idempotência, e o desaparecimento imediato do índice e da capa
+sem novo build.
+
+> **Se a linha JÁ foi apagada do banco à mão**, esta rota responde `404` e não
+> resolve — não há mais o que despublicar, e o cache continua servindo o post. A
+> saída é build limpo com o serviço parado, e o `clean` não é opcional:
+> `.next/cache` **sobrevive** a um `npm run build`, e o build reaproveitaria a
+> lista velha.
+>
+> ```powershell
+> Stop-Service notpaper_blog
+> npm run clean:next
+> npm run build
+> Start-Service notpaper_blog
+> ```
+
 ---
 
 ## 7. A capa na saída
@@ -676,6 +728,7 @@ a versão que motivou a escolha.
 | 8 | **Credencial versionada** em `lib/mock-directoria-auth.js` (seção 8). Inalcançável hoje pelo prefixo `_`. | Nenhum hoje. Deve sair do repositório de qualquer forma. |
 | 9 | **O deploy mudou de natureza.** Era gerar build e copiar pasta; passa a ser copiar fonte → `npm ci` → `npm run build` → migrar → reiniciar serviço. Não é mais difícil — são mais passos, e passos manuais que ninguém escreveu se esquecem. | Médio, e cresce com o tempo. O guia de subida é o remédio; mantenha-o. |
 | 10 | **`tags` existe no esquema e não é usada.** `DEFAULT '[]'`, a ingestão grava `N'[]'` fixo, nada lê. | Nenhum. Deixe — remover coluna custa mais que ignorá-la. |
+| 11 | **Slug inexistente responde `200`, e não `404`.** `page.jsx:78` chama `notFound()`, a página de conteúdo não encontrado é a que sai — mas com status `200`. Medido em 15/09/2026 em desenvolvimento, inclusive para slug que nunca existiu e para post que já estava em rascunho. Para o buscador é *soft 404*: ele mantém a URL indexada. | Baixo hoje; passa a doer quando post sai do ar. **Conferir primeiro em `npm run build && npm start`** — pode ser artefato do modo de desenvolvimento. |
 
 ### O que já está resolvido e vale registrar como tal
 

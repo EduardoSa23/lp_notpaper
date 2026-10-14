@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import {
   FaEnvelope,
@@ -107,23 +108,9 @@ export default function ContatoSection() {
       id="contato"
       className="relative pb-12 pt-24 md:pb-16 md:pt-28 section-anchor"
     >
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/bg_contato.mp4" type="video/mp4" />
-        <track
-          src="/videos/decorative-captions.vtt"
-          kind="captions"
-          srcLang="pt-BR"
-          label="Português"
-        />
-      </video>
+      <div aria-hidden="true" className="absolute inset-0 w-full h-full">
+        <Image src="/image/bg_contato.png" alt="" fill sizes="100vw" className="object-cover" />
+      </div>
       <div className="absolute inset-0 bg-black/55 -z-10" />
 
       <div
